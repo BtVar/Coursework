@@ -5,7 +5,7 @@ build_F411RE/main.o: Core/Src/main.c Core/Inc/init.h \
  CMSIS/Include/mpu_armv7.h CMSIS/Devices/STM32F4xx/Inc/system_stm32f4xx.h \
  Core/Inc/..\..\CMSIS\Devices\STM32F4xx\Inc\stm32f4xx.h \
  CMSIS/Devices/STM32F4xx/Inc/STM32F411xE/stm32f411xe.h \
- Core/Inc/it_handlers.h
+ Core/Inc/it_handlers.h Core/Inc/utils.h
 Core/Inc/init.h:
 Core/Inc/..\..\CMSIS\Devices\STM32F4xx\Inc\STM32F411xE\stm32f411xe.h:
 CMSIS/Include/core_cm4.h:
@@ -17,3 +17,4 @@ CMSIS/Devices/STM32F4xx/Inc/system_stm32f4xx.h:
 Core/Inc/..\..\CMSIS\Devices\STM32F4xx\Inc\stm32f4xx.h:
 CMSIS/Devices/STM32F4xx/Inc/STM32F411xE/stm32f411xe.h:
 Core/Inc/it_handlers.h:
+Core/Inc/utils.h:
