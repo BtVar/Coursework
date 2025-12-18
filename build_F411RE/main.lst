@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\parni\AppData\Local\Temp\ccI4AHnY.s 			page 1
+ARM GAS  C:\Users\parni\AppData\Local\Temp\ccNYj3uE.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -38,15 +38,16 @@ ARM GAS  C:\Users\parni\AppData\Local\Temp\ccI4AHnY.s 			page 1
    8:Core/Src/main.c **** uint16_t right_encoder_ticks = 0;
    9:Core/Src/main.c **** uint32_t left_delay_counter = 0;
   10:Core/Src/main.c **** uint32_t right_delay_counter = 0;
-  11:Core/Src/main.c **** 
-  12:Core/Src/main.c **** uint32_t millis_counter = 0;
-  13:Core/Src/main.c **** 
-  14:Core/Src/main.c **** uint16_t button_delay_counter = 0;
-  15:Core/Src/main.c **** bool status_button = 0;
-  16:Core/Src/main.c **** 
-  17:Core/Src/main.c **** int main(void)
-  18:Core/Src/main.c **** {
-  29              		.loc 1 18 1 view -0
+  11:Core/Src/main.c **** volatile uint32_t sys_tick = 0;
+  12:Core/Src/main.c **** 
+  13:Core/Src/main.c **** uint32_t millis_counter = 0;
+  14:Core/Src/main.c **** 
+  15:Core/Src/main.c **** uint16_t button_delay_counter = 0;
+  16:Core/Src/main.c **** bool status_button = 0;
+  17:Core/Src/main.c **** 
+  18:Core/Src/main.c **** int main(void)
+  19:Core/Src/main.c **** {
+  29              		.loc 1 19 1 view -0
   30              		.cfi_startproc
   31              		@ Volatile: function does not return.
   32              		@ args = 0, pretend = 0, frame = 0
@@ -56,170 +57,185 @@ ARM GAS  C:\Users\parni\AppData\Local\Temp\ccI4AHnY.s 			page 1
   36              		.cfi_def_cfa_offset 8
   37              		.cfi_offset 3, -8
   38              		.cfi_offset 14, -4
-  19:Core/Src/main.c ****     SET_BIT(RCC->AHB1ENR, RCC_AHB1ENR_GPIOBEN | RCC_AHB1ENR_GPIOCEN);
-  39              		.loc 1 19 5 view .LVU1
-ARM GAS  C:\Users\parni\AppData\Local\Temp\ccI4AHnY.s 			page 2
+  20:Core/Src/main.c ****     SET_BIT(RCC->AHB1ENR, RCC_AHB1ENR_GPIOBEN | RCC_AHB1ENR_GPIOCEN);
+ARM GAS  C:\Users\parni\AppData\Local\Temp\ccNYj3uE.s 			page 2
 
 
-  40 0002 114A     		ldr	r2, .L4
+  39              		.loc 1 20 5 view .LVU1
+  40 0002 134A     		ldr	r2, .L4
   41 0004 136B     		ldr	r3, [r2, #48]
   42 0006 43F00603 		orr	r3, r3, #6
   43 000a 1363     		str	r3, [r2, #48]
-  20:Core/Src/main.c ****     SET_BIT(GPIOC->PUPDR, GPIO_PUPDR_PUPDR12_0);
-  44              		.loc 1 20 5 view .LVU2
+  21:Core/Src/main.c ****     SET_BIT(GPIOC->PUPDR, GPIO_PUPDR_PUPDR12_0);
+  44              		.loc 1 21 5 view .LVU2
   45 000c A2F54052 		sub	r2, r2, #12288
   46 0010 D368     		ldr	r3, [r2, #12]
   47 0012 43F08073 		orr	r3, r3, #16777216
   48 0016 D360     		str	r3, [r2, #12]
-  21:Core/Src/main.c **** 
-  22:Core/Src/main.c ****     GPIO_Init_Ports();
-  49              		.loc 1 22 5 view .LVU3
+  22:Core/Src/main.c **** 
+  23:Core/Src/main.c ****     GPIO_Init_Ports();
+  49              		.loc 1 23 5 view .LVU3
   50 0018 FFF7FEFF 		bl	GPIO_Init_Ports
   51              	.LVL0:
-  23:Core/Src/main.c **** 
-  24:Core/Src/main.c ****     // Инициализируем прерывания
-  25:Core/Src/main.c ****     ITR_Init();
-  52              		.loc 1 25 5 view .LVU4
+  24:Core/Src/main.c **** 
+  25:Core/Src/main.c ****     // Инициализируем прерывания
+  26:Core/Src/main.c ****     ITR_Init();
+  52              		.loc 1 26 5 view .LVU4
   53 001c FFF7FEFF 		bl	ITR_Init
   54              	.LVL1:
-  26:Core/Src/main.c ****     // Инициализируем тактирование системы (RCC)
-  27:Core/Src/main.c ****     RCC_Init();            // Настраивает тактовую частоту 96 МГц
-  55              		.loc 1 27 5 view .LVU5
+  27:Core/Src/main.c ****     // Инициализируем тактирование системы (RCC)
+  28:Core/Src/main.c ****     RCC_Init();            // Настраивает тактовую частоту 96 МГц
+  55              		.loc 1 28 5 view .LVU5
   56 0020 FFF7FEFF 		bl	RCC_Init
   57              	.LVL2:
-  28:Core/Src/main.c ****     
-  29:Core/Src/main.c ****     // Инициализируем SysTick (опционально, для задержек)
-  30:Core/Src/main.c ****     SysTick_Init();        // Настраивает системный таймер на 1 кГц
-  58              		.loc 1 30 5 view .LVU6
+  29:Core/Src/main.c ****     
+  30:Core/Src/main.c ****     // Инициализируем SysTick (опционально, для задержек)
+  31:Core/Src/main.c ****     SysTick_Init();        // Настраивает системный таймер на 1 кГц
+  58              		.loc 1 31 5 view .LVU6
   59 0024 FFF7FEFF 		bl	SysTick_Init
   60              	.LVL3:
-  31:Core/Src/main.c ****     
-  32:Core/Src/main.c ****     // Инициализируем ШИМ
-  33:Core/Src/main.c ****     TIM1_PWM_Init();       // Настраивает TIM1 для ШИМ на PA8 и PA9
-  61              		.loc 1 33 5 view .LVU7
+  32:Core/Src/main.c ****     
+  33:Core/Src/main.c ****     // Инициализируем ШИМ
+  34:Core/Src/main.c ****     TIM1_PWM_Init();       // Настраивает TIM1 для ШИМ на PA8 и PA9
+  61              		.loc 1 34 5 view .LVU7
   62 0028 FFF7FEFF 		bl	TIM1_PWM_Init
   63              	.LVL4:
-  34:Core/Src/main.c ****     
+  64              	.L2:
   35:Core/Src/main.c ****     
-  36:Core/Src/main.c ****     left_wheel_direction(2);
-  64              		.loc 1 36 5 view .LVU8
-  65 002c 0220     		movs	r0, #2
-  66 002e FFF7FEFF 		bl	left_wheel_direction
-  67              	.LVL5:
-  37:Core/Src/main.c ****     right_wheel_direction(2);
-  68              		.loc 1 37 5 view .LVU9
-  69 0032 0220     		movs	r0, #2
-  70 0034 FFF7FEFF 		bl	right_wheel_direction
-  71              	.LVL6:
-  38:Core/Src/main.c ****     Set_PWM_Left_DutyCycle(65);
-  72              		.loc 1 38 5 view .LVU10
-  73 0038 4120     		movs	r0, #65
-  74 003a FFF7FEFF 		bl	Set_PWM_Left_DutyCycle
-  75              	.LVL7:
-  39:Core/Src/main.c ****     Set_PWM_Right_DutyCycle(65);
-  76              		.loc 1 39 5 view .LVU11
-ARM GAS  C:\Users\parni\AppData\Local\Temp\ccI4AHnY.s 			page 3
+  36:Core/Src/main.c ****     /*
+  37:Core/Src/main.c ****     left_wheel_direction(2);
+  38:Core/Src/main.c ****     right_wheel_direction(2);
+  39:Core/Src/main.c ****     Set_PWM_Left_DutyCycle(65);
+  40:Core/Src/main.c ****     Set_PWM_Right_DutyCycle(65);
+  41:Core/Src/main.c ****     */
+  42:Core/Src/main.c ****     
+  43:Core/Src/main.c ****     //moveForward(49); // Двигаемся вперед на 100 см
+  44:Core/Src/main.c ****     //turnLeft(90);
+  45:Core/Src/main.c ****     //turnRight(90);
+  46:Core/Src/main.c **** 
+  47:Core/Src/main.c ****     //turnLeft(120);
+  48:Core/Src/main.c ****     while(1)
+  65              		.loc 1 48 5 view .LVU8
+  49:Core/Src/main.c ****     {
+  50:Core/Src/main.c ****         moveForward(50);
+ARM GAS  C:\Users\parni\AppData\Local\Temp\ccNYj3uE.s 			page 3
 
 
-  77 003e 4120     		movs	r0, #65
-  78 0040 FFF7FEFF 		bl	Set_PWM_Right_DutyCycle
-  79              	.LVL8:
-  80              	.L2:
-  40:Core/Src/main.c ****     
-  41:Core/Src/main.c ****    // moveForward(12.0); // Двигаемся вперед на 100 см
-  42:Core/Src/main.c ****     while(1)
-  81              		.loc 1 42 5 view .LVU12
-  43:Core/Src/main.c ****     {
-  44:Core/Src/main.c ****    
-  45:Core/Src/main.c ****     }
-  82              		.loc 1 45 5 view .LVU13
-  42:Core/Src/main.c ****     {
-  83              		.loc 1 42 10 view .LVU14
-  84 0044 FEE7     		b	.L2
-  85              	.L5:
-  86 0046 00BF     		.align	2
-  87              	.L4:
-  88 0048 00380240 		.word	1073887232
-  89              		.cfi_endproc
-  90              	.LFE130:
-  92              		.global	status_button
-  93              		.section	.bss.status_button,"aw",%nobits
-  96              	status_button:
-  97 0000 00       		.space	1
-  98              		.global	button_delay_counter
-  99              		.section	.bss.button_delay_counter,"aw",%nobits
- 100              		.align	1
- 103              	button_delay_counter:
- 104 0000 0000     		.space	2
- 105              		.global	millis_counter
- 106              		.section	.bss.millis_counter,"aw",%nobits
- 107              		.align	2
- 110              	millis_counter:
- 111 0000 00000000 		.space	4
- 112              		.global	right_delay_counter
- 113              		.section	.bss.right_delay_counter,"aw",%nobits
- 114              		.align	2
- 117              	right_delay_counter:
- 118 0000 00000000 		.space	4
- 119              		.global	left_delay_counter
- 120              		.section	.bss.left_delay_counter,"aw",%nobits
- 121              		.align	2
- 124              	left_delay_counter:
- 125 0000 00000000 		.space	4
- 126              		.global	right_encoder_ticks
- 127              		.section	.bss.right_encoder_ticks,"aw",%nobits
- 128              		.align	1
- 131              	right_encoder_ticks:
- 132 0000 0000     		.space	2
- 133              		.global	left_encoder_ticks
- 134              		.section	.bss.left_encoder_ticks,"aw",%nobits
- 135              		.align	1
- 138              	left_encoder_ticks:
- 139 0000 0000     		.space	2
- 140              		.global	pwm_state_pa9
- 141              		.section	.bss.pwm_state_pa9,"aw",%nobits
-ARM GAS  C:\Users\parni\AppData\Local\Temp\ccI4AHnY.s 			page 4
+  66              		.loc 1 50 9 view .LVU9
+  67 002c 9FED090A 		vldr.32	s0, .L4+4
+  68 0030 FFF7FEFF 		bl	moveForward
+  69              	.LVL5:
+  51:Core/Src/main.c ****         delay_ms(1000);
+  70              		.loc 1 51 9 view .LVU10
+  71 0034 4FF47A70 		mov	r0, #1000
+  72 0038 FFF7FEFF 		bl	delay_ms
+  73              	.LVL6:
+  52:Core/Src/main.c ****         turnLeft(90);
+  74              		.loc 1 52 9 view .LVU11
+  75 003c 9FED060A 		vldr.32	s0, .L4+8
+  76 0040 FFF7FEFF 		bl	turnLeft
+  77              	.LVL7:
+  53:Core/Src/main.c ****         delay_ms(1000);
+  78              		.loc 1 53 9 discriminator 1 view .LVU12
+  79 0044 4FF47A70 		mov	r0, #1000
+  80 0048 FFF7FEFF 		bl	delay_ms
+  81              	.LVL8:
+  48:Core/Src/main.c ****     {
+  82              		.loc 1 48 10 view .LVU13
+  83 004c EEE7     		b	.L2
+  84              	.L5:
+  85 004e 00BF     		.align	2
+  86              	.L4:
+  87 0050 00380240 		.word	1073887232
+  88 0054 00004842 		.word	1112014848
+  89 0058 0000B442 		.word	1119092736
+  90              		.cfi_endproc
+  91              	.LFE130:
+  93              		.global	status_button
+  94              		.section	.bss.status_button,"aw",%nobits
+  97              	status_button:
+  98 0000 00       		.space	1
+  99              		.global	button_delay_counter
+ 100              		.section	.bss.button_delay_counter,"aw",%nobits
+ 101              		.align	1
+ 104              	button_delay_counter:
+ 105 0000 0000     		.space	2
+ 106              		.global	millis_counter
+ 107              		.section	.bss.millis_counter,"aw",%nobits
+ 108              		.align	2
+ 111              	millis_counter:
+ 112 0000 00000000 		.space	4
+ 113              		.global	sys_tick
+ 114              		.section	.bss.sys_tick,"aw",%nobits
+ 115              		.align	2
+ 118              	sys_tick:
+ 119 0000 00000000 		.space	4
+ 120              		.global	right_delay_counter
+ 121              		.section	.bss.right_delay_counter,"aw",%nobits
+ 122              		.align	2
+ 125              	right_delay_counter:
+ 126 0000 00000000 		.space	4
+ 127              		.global	left_delay_counter
+ 128              		.section	.bss.left_delay_counter,"aw",%nobits
+ 129              		.align	2
+ARM GAS  C:\Users\parni\AppData\Local\Temp\ccNYj3uE.s 			page 4
 
 
- 144              	pwm_state_pa9:
- 145 0000 00       		.space	1
- 146              		.global	pwm_state_pa8
- 147              		.section	.bss.pwm_state_pa8,"aw",%nobits
- 150              	pwm_state_pa8:
- 151 0000 00       		.space	1
- 152              		.text
- 153              	.Letext0:
- 154              		.file 2 "C:/SysGCC/arm-eabi/arm-none-eabi/include/machine/_default_types.h"
- 155              		.file 3 "C:/SysGCC/arm-eabi/arm-none-eabi/include/sys/_stdint.h"
- 156              		.file 4 "Core/Inc/..\\..\\CMSIS\\Devices\\STM32F4xx\\Inc\\STM32F411xE\\stm32f411xe.h"
- 157              		.file 5 "Core/Inc/utils.h"
- 158              		.file 6 "Core/Inc/init.h"
-ARM GAS  C:\Users\parni\AppData\Local\Temp\ccI4AHnY.s 			page 5
+ 132              	left_delay_counter:
+ 133 0000 00000000 		.space	4
+ 134              		.global	right_encoder_ticks
+ 135              		.section	.bss.right_encoder_ticks,"aw",%nobits
+ 136              		.align	1
+ 139              	right_encoder_ticks:
+ 140 0000 0000     		.space	2
+ 141              		.global	left_encoder_ticks
+ 142              		.section	.bss.left_encoder_ticks,"aw",%nobits
+ 143              		.align	1
+ 146              	left_encoder_ticks:
+ 147 0000 0000     		.space	2
+ 148              		.global	pwm_state_pa9
+ 149              		.section	.bss.pwm_state_pa9,"aw",%nobits
+ 152              	pwm_state_pa9:
+ 153 0000 00       		.space	1
+ 154              		.global	pwm_state_pa8
+ 155              		.section	.bss.pwm_state_pa8,"aw",%nobits
+ 158              	pwm_state_pa8:
+ 159 0000 00       		.space	1
+ 160              		.text
+ 161              	.Letext0:
+ 162              		.file 2 "C:/SysGCC/arm-eabi/arm-none-eabi/include/machine/_default_types.h"
+ 163              		.file 3 "C:/SysGCC/arm-eabi/arm-none-eabi/include/sys/_stdint.h"
+ 164              		.file 4 "Core/Inc/..\\..\\CMSIS\\Devices\\STM32F4xx\\Inc\\STM32F411xE\\stm32f411xe.h"
+ 165              		.file 5 "Core/Inc/utils.h"
+ 166              		.file 6 "Core/Inc/init.h"
+ARM GAS  C:\Users\parni\AppData\Local\Temp\ccNYj3uE.s 			page 5
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 main.c
-C:\Users\parni\AppData\Local\Temp\ccI4AHnY.s:21     .text.main:00000000 $t
-C:\Users\parni\AppData\Local\Temp\ccI4AHnY.s:27     .text.main:00000000 main
-C:\Users\parni\AppData\Local\Temp\ccI4AHnY.s:88     .text.main:00000048 $d
-C:\Users\parni\AppData\Local\Temp\ccI4AHnY.s:96     .bss.status_button:00000000 status_button
-C:\Users\parni\AppData\Local\Temp\ccI4AHnY.s:97     .bss.status_button:00000000 $d
-C:\Users\parni\AppData\Local\Temp\ccI4AHnY.s:103    .bss.button_delay_counter:00000000 button_delay_counter
-C:\Users\parni\AppData\Local\Temp\ccI4AHnY.s:100    .bss.button_delay_counter:00000000 $d
-C:\Users\parni\AppData\Local\Temp\ccI4AHnY.s:110    .bss.millis_counter:00000000 millis_counter
-C:\Users\parni\AppData\Local\Temp\ccI4AHnY.s:107    .bss.millis_counter:00000000 $d
-C:\Users\parni\AppData\Local\Temp\ccI4AHnY.s:117    .bss.right_delay_counter:00000000 right_delay_counter
-C:\Users\parni\AppData\Local\Temp\ccI4AHnY.s:114    .bss.right_delay_counter:00000000 $d
-C:\Users\parni\AppData\Local\Temp\ccI4AHnY.s:124    .bss.left_delay_counter:00000000 left_delay_counter
-C:\Users\parni\AppData\Local\Temp\ccI4AHnY.s:121    .bss.left_delay_counter:00000000 $d
-C:\Users\parni\AppData\Local\Temp\ccI4AHnY.s:131    .bss.right_encoder_ticks:00000000 right_encoder_ticks
-C:\Users\parni\AppData\Local\Temp\ccI4AHnY.s:128    .bss.right_encoder_ticks:00000000 $d
-C:\Users\parni\AppData\Local\Temp\ccI4AHnY.s:138    .bss.left_encoder_ticks:00000000 left_encoder_ticks
-C:\Users\parni\AppData\Local\Temp\ccI4AHnY.s:135    .bss.left_encoder_ticks:00000000 $d
-C:\Users\parni\AppData\Local\Temp\ccI4AHnY.s:144    .bss.pwm_state_pa9:00000000 pwm_state_pa9
-C:\Users\parni\AppData\Local\Temp\ccI4AHnY.s:145    .bss.pwm_state_pa9:00000000 $d
-C:\Users\parni\AppData\Local\Temp\ccI4AHnY.s:150    .bss.pwm_state_pa8:00000000 pwm_state_pa8
-C:\Users\parni\AppData\Local\Temp\ccI4AHnY.s:151    .bss.pwm_state_pa8:00000000 $d
+C:\Users\parni\AppData\Local\Temp\ccNYj3uE.s:21     .text.main:00000000 $t
+C:\Users\parni\AppData\Local\Temp\ccNYj3uE.s:27     .text.main:00000000 main
+C:\Users\parni\AppData\Local\Temp\ccNYj3uE.s:87     .text.main:00000050 $d
+C:\Users\parni\AppData\Local\Temp\ccNYj3uE.s:97     .bss.status_button:00000000 status_button
+C:\Users\parni\AppData\Local\Temp\ccNYj3uE.s:98     .bss.status_button:00000000 $d
+C:\Users\parni\AppData\Local\Temp\ccNYj3uE.s:104    .bss.button_delay_counter:00000000 button_delay_counter
+C:\Users\parni\AppData\Local\Temp\ccNYj3uE.s:101    .bss.button_delay_counter:00000000 $d
+C:\Users\parni\AppData\Local\Temp\ccNYj3uE.s:111    .bss.millis_counter:00000000 millis_counter
+C:\Users\parni\AppData\Local\Temp\ccNYj3uE.s:108    .bss.millis_counter:00000000 $d
+C:\Users\parni\AppData\Local\Temp\ccNYj3uE.s:118    .bss.sys_tick:00000000 sys_tick
+C:\Users\parni\AppData\Local\Temp\ccNYj3uE.s:115    .bss.sys_tick:00000000 $d
+C:\Users\parni\AppData\Local\Temp\ccNYj3uE.s:125    .bss.right_delay_counter:00000000 right_delay_counter
+C:\Users\parni\AppData\Local\Temp\ccNYj3uE.s:122    .bss.right_delay_counter:00000000 $d
+C:\Users\parni\AppData\Local\Temp\ccNYj3uE.s:132    .bss.left_delay_counter:00000000 left_delay_counter
+C:\Users\parni\AppData\Local\Temp\ccNYj3uE.s:129    .bss.left_delay_counter:00000000 $d
+C:\Users\parni\AppData\Local\Temp\ccNYj3uE.s:139    .bss.right_encoder_ticks:00000000 right_encoder_ticks
+C:\Users\parni\AppData\Local\Temp\ccNYj3uE.s:136    .bss.right_encoder_ticks:00000000 $d
+C:\Users\parni\AppData\Local\Temp\ccNYj3uE.s:146    .bss.left_encoder_ticks:00000000 left_encoder_ticks
+C:\Users\parni\AppData\Local\Temp\ccNYj3uE.s:143    .bss.left_encoder_ticks:00000000 $d
+C:\Users\parni\AppData\Local\Temp\ccNYj3uE.s:152    .bss.pwm_state_pa9:00000000 pwm_state_pa9
+C:\Users\parni\AppData\Local\Temp\ccNYj3uE.s:153    .bss.pwm_state_pa9:00000000 $d
+C:\Users\parni\AppData\Local\Temp\ccNYj3uE.s:158    .bss.pwm_state_pa8:00000000 pwm_state_pa8
+C:\Users\parni\AppData\Local\Temp\ccNYj3uE.s:159    .bss.pwm_state_pa8:00000000 $d
 
 UNDEFINED SYMBOLS
 GPIO_Init_Ports
@@ -227,7 +243,6 @@ ITR_Init
 RCC_Init
 SysTick_Init
 TIM1_PWM_Init
-left_wheel_direction
-right_wheel_direction
-Set_PWM_Left_DutyCycle
-Set_PWM_Right_DutyCycle
+moveForward
+delay_ms
+turnLeft

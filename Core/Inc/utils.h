@@ -12,3 +12,7 @@ void stopMotors();
 void calculatePID(uint16_t leftCount, uint16_t rightCount, int baseSpeed);
 void moveForward(float distance_cm);
 uint32_t calculatePulsesForDistance(float distance_cm);
+long calculatePulsesForAngle(float angle);
+void turnLeft(float angle);
+void turnRight(float angle);
+void delay_ms(uint32_t ms);

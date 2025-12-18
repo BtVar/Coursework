@@ -2,12 +2,12 @@
 #include "utils.h"
 
 #define WHEEL_DIAMETER 65       // Диаметр колеса в мм
-#define PULSES_PER_REVOLUTION 20 // Количество импульсов на один оборот колеса
+#define PULSES_PER_REVOLUTION 40 // Количество импульсов на один оборот колеса
 #define WHEEL_BASE 225 // Расстояние между колесами в мм
 
 // Параметры управления поворотом
-int turnSpeed = 50;        // Скорость поворота (0-100)
-int moveSpeed = 75;        // Скорость движения прямо (0-100)
+int turnSpeed = 65;        // Скорость поворота (0-100)
+int moveSpeed = 65;        // Скорость движения прямо (0-100)
 float wheelCircumference = 3.14159 * WHEEL_DIAMETER;   // Длина окружности колеса
 float robotCircumference = 3.14159 * WHEEL_BASE;   // Длина окружности поворота робота
 float robotCircumference;   // Длина окружности поворота робота
@@ -16,14 +16,16 @@ float robotCircumference;   // Длина окружности поворота 
 extern uint16_t left_encoder_ticks;
 extern uint16_t right_encoder_ticks;
 
+extern volatile uint32_t sys_tick;
+
 // Переменные для движения
 int8_t leftSpeed = 0;
 int8_t rightSpeed = 0;
 
 // ПИД параметры для синхронизации моторов при повороте
-float kp = 3.0;             // Пропорциональный коэффициент
-float ki = 0.5;             // Интегральный коэффициент  
-float kd = 0.1;             // Дифференциальный коэффициент
+float kp = 1.0;             // Пропорциональный коэффициент
+float ki = 0.0;             // Интегральный коэффициент  
+float kd = 0.0;             // Дифференциальный коэффициент
 
 // Переменные ПИД регулятора
 float lastError = 0;
@@ -31,11 +33,18 @@ float integral = 0;
 uint32_t lastTime = 0;
 
 // Параметры для ПИД регулятора
-float maxSpeed = 100;         // Максимальная скорость
-float minSpeed = 0;          // Минимальная скорость
+float maxSpeed = 70;         // Максимальная скорость
+float minSpeed = 60;          // Минимальная скорость
 
 extern uint32_t millis_counter;
 
+
+
+void delay_ms(uint32_t ms)
+{
+    uint32_t start = sys_tick;
+    while ((uint32_t)(sys_tick - start) < ms);
+}
 
 // Сброс показаний энкодеров
 void resetEncoders() {
@@ -116,6 +125,13 @@ void Set_PWM_Left_DutyCycle(uint8_t percent)
         SET_BIT(GPIOB->BSRR, GPIO_BSRR_BR10);
         SET_BIT(GPIOB->BSRR, GPIO_BSRR_BS6);
     }
+    if (direction == 3)
+    {
+        // Колесо движется назад
+        SET_BIT(GPIOB->BSRR, GPIO_BSRR_BS10);
+        SET_BIT(GPIOB->BSRR, GPIO_BSRR_BS6);
+    }
+
  }
 
  // Настройка драйвера (IN1 и IN2)
@@ -137,6 +153,12 @@ void Set_PWM_Left_DutyCycle(uint8_t percent)
     {
         // Колесо движется назад
         SET_BIT(GPIOB->BSRR, GPIO_BSRR_BR5);
+        SET_BIT(GPIOB->BSRR, GPIO_BSRR_BS8);
+    }
+    if (direction == 3)
+    {
+        // Колесо движется назад
+        SET_BIT(GPIOB->BSRR, GPIO_BSRR_BS5);
         SET_BIT(GPIOB->BSRR, GPIO_BSRR_BS8);
     }
  }
@@ -224,8 +246,8 @@ void moveForward(float distance_cm) {
         calculatePID(left_encoder_ticks, right_encoder_ticks, moveSpeed);
     
         // Оба мотора вперед
-        left_wheel_direction(1);
-        right_wheel_direction(1);
+        left_wheel_direction(2);
+        right_wheel_direction(2);
     
         // Применяем скорости с ПИД коррекцией
         Set_PWM_Left_DutyCycle(leftSpeed);
@@ -235,3 +257,99 @@ void moveForward(float distance_cm) {
   stopMotors();
 }
 
+// Вычисление необходимого количества импульсов для поворота на заданный угол
+long calculatePulsesForAngle(float angle) {
+  // Длина дуги, которую должно пройти колесо при повороте
+  float arcLength = (angle / 360.0) * robotCircumference;
+  
+  // Количество оборотов колеса
+  float wheelRotations = arcLength / wheelCircumference;
+  
+  // Количество импульсов энкодера
+  long pulses = (long)(wheelRotations * PULSES_PER_REVOLUTION);
+  
+  return pulses;
+}
+
+// Поворот влево на заданный угол с ПИД регулятором
+void turnLeft(float angle) {
+  resetEncoders();
+  resetPID();
+
+  long targetPulses = calculatePulsesForAngle(angle);
+  if (targetPulses <= 0) return;
+  
+  
+  uint32_t lastUpdate = millis();
+  // Двигаемся до достижения нужного расстояния
+  while (1) 
+  {
+    uint16_t currentPulses;
+    if (left_encoder_ticks > right_encoder_ticks)
+        currentPulses = left_encoder_ticks;
+    else
+        currentPulses = right_encoder_ticks;
+
+    if (currentPulses >= targetPulses)
+        break;
+
+    uint32_t now = millis();
+    if (now - lastUpdate >= 10) // Обновляем каждые 10 мс
+    {
+        lastUpdate = now;
+        // Вычисляем скорости с ПИД коррекцией для синхронизации моторов
+        calculatePID(left_encoder_ticks, right_encoder_ticks, moveSpeed);
+    
+        // Левый мотор назад, правый вперед
+        left_wheel_direction(1);
+        right_wheel_direction(2);
+    
+        // Применяем скорости с ПИД коррекцией
+        Set_PWM_Left_DutyCycle(leftSpeed);
+        Set_PWM_Right_DutyCycle(rightSpeed);
+    }
+  }
+  stopMotors();
+}
+
+// Поворот вправо на заданный угол с ПИД регулятором
+void turnRight(float angle) {
+  resetEncoders();
+  resetPID();
+
+  long targetPulses = calculatePulsesForAngle(angle);
+  if (targetPulses <= 0) return;
+  
+  
+  uint32_t lastUpdate = millis();
+  // Двигаемся до достижения нужного расстояния
+  while (1) 
+  {
+    uint16_t currentPulses;
+    if (left_encoder_ticks > right_encoder_ticks)
+        currentPulses = left_encoder_ticks;
+    else
+        currentPulses = right_encoder_ticks;
+
+    if (currentPulses >= targetPulses)
+        break;
+
+    uint32_t now = millis();
+    if (now - lastUpdate >= 10) // Обновляем каждые 10 мс
+    {
+        lastUpdate = now;
+        // Вычисляем скорости с ПИД коррекцией для синхронизации моторов
+        calculatePID(left_encoder_ticks, right_encoder_ticks, moveSpeed);
+    
+        // Левый мотор вперед, правый назад
+        left_wheel_direction(2);
+        right_wheel_direction(1);
+    
+        // Применяем скорости с ПИД коррекцией
+        Set_PWM_Left_DutyCycle(leftSpeed);
+        Set_PWM_Right_DutyCycle(rightSpeed);
+    }
+  }
+  
+  stopMotors();
+}
