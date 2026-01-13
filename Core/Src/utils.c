@@ -451,15 +451,13 @@ void motionLoop(uint8_t dirLeft, uint8_t dirRight, uint32_t targetPulses)
 
 uint32_t calculatePulsesForDistance(float cm)
 {
-    return (uint32_t)((cm * 10.0f / wheelCircumference)
-                      * PULSES_PER_REVOLUTION);
+    return (uint32_t)((cm * 10.0f / wheelCircumference)* PULSES_PER_REVOLUTION);
 }
 
 uint32_t calculatePulsesForAngle(float deg)
 {
     float arc = (deg / 360.0f) * robotCircumference;
-    return (uint32_t)((arc / wheelCircumference)
-                      * PULSES_PER_REVOLUTION);
+    return (uint32_t)((arc / wheelCircumference)* PULSES_PER_REVOLUTION);
 }
 
 void moveForward(float cm)

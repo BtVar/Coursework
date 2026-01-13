@@ -3,12 +3,9 @@
 #include <stdio.h>
 extern uint32_t millis_counter; // переменная времени
 
-/* ===== local ===== */
 static MPU_t mpu;               // структура данных MPU6050
 static float gyro_offset_z = 0.0f;      // смещение гироскопа по оси Z
 static uint32_t last_time = 0;          // время последнего обновления
-
-/* ================= I2C LOW LEVEL ================= */
 
 #define I2C_TIMEOUT 10000       // таймаут ожидания флага I2C
 
@@ -101,7 +98,7 @@ static int MPU_Read(uint8_t reg, uint8_t *buf, uint8_t len)     // чтение 
     return I2C_Read(buf, len);
 }
 
-static int MPU_Write(uint8_t reg, uint8_t data)
+static int MPU_Write(uint8_t reg, uint8_t data) // запись регистра MPU6050
 {
     if (I2C_Start()) return -1;
     if (I2C_Address(MPU_ADDR << 1)) return -1;
@@ -111,9 +108,8 @@ static int MPU_Write(uint8_t reg, uint8_t data)
     return 0;
 }
 
-/* ================= MPU API ================= */
-
-bool MPU_Init(void)
+// API для MPU6050
+bool MPU_Init(void)// инициализация MPU6050
 {
     I2C_Init_HW();
 
@@ -136,7 +132,7 @@ bool MPU_Init(void)
     return true;
 }
 
-void MPU_Calibrate(void)
+void MPU_Calibrate(void)        // калибровка гироскопа MPU6050
 {
     float sum = 0;
     for (int i = 0; i < 1000; i++) {
@@ -148,7 +144,7 @@ void MPU_Calibrate(void)
     gyro_offset_z = sum / 1000.0f;
 }
 
-void MPU_Update(void)
+void MPU_Update(void)       // обновление данных MPU6050
 {
     uint32_t now = millis_counter;
     float dt = (now - last_time) / 1000.0f;
@@ -167,17 +163,17 @@ void MPU_Update(void)
     if (mpu.yaw < -180) mpu.yaw += 360;
 }
 
-float MPU_GetYaw(void)
+float MPU_GetYaw(void)      // получение интегрированного угла
 {
     return mpu.yaw;
 }
 
-float MPU_GetYawRate(void)
+float MPU_GetYawRate(void)          // получение угловой скорости
 {
     return mpu.yaw_rate;
 }
 
-void MPU_Debug_Print(void)
+void MPU_Debug_Print(void)          // вывод данных MPU6050 в UART
 {
     static uint32_t last_print = 0;
 
@@ -187,9 +183,7 @@ void MPU_Debug_Print(void)
     last_print = millis_counter;
 
     char buf[128];
-    snprintf(buf, sizeof(buf),
-             "Yaw: %7.2f deg | Rate: %7.2f deg/s\r\n",
-             mpu.yaw, mpu.yaw_rate);
+    snprintf(buf, sizeof(buf),"Yaw: %7.2f deg | Rate: %7.2f deg/s\r\n",mpu.yaw, mpu.yaw_rate);
 
     UART_SendString(buf);
 }
