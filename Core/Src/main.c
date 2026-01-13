@@ -17,12 +17,10 @@ bool status_button = 0;
 
 int main(void)
 {
-    SET_BIT(RCC->AHB1ENR, RCC_AHB1ENR_GPIOBEN | RCC_AHB1ENR_GPIOCEN);
-    SET_BIT(GPIOC->PUPDR, GPIO_PUPDR_PUPDR12_0);
-
+    RCC_Init();
     GPIO_Init_Ports();
-
-    // Инициализируем прерывания
+    SysTick_Init();
+    TIM1_PWM_Init();
     ITR_Init();
     // Инициализируем тактирование системы (RCC)
     RCC_Init(); // Настраивает тактовую частоту 96 МГц

@@ -1,4 +1,5 @@
-#include "..\Inc\init.h"
+#include "it_handlers.h"
+#include "gyrocoptercopter.h"
 
 extern volatile uint16_t left_encoder_ticks;
 extern volatile uint16_t right_encoder_ticks;
@@ -15,19 +16,7 @@ extern bool status_button;
 void SysTick_Handler(void)
 {
     sys_tick++;
-    millis_counter++;
-    if (left_delay_counter > 0)
-    {
-        left_delay_counter--;
-    }
-    if (right_delay_counter > 0)
-    {
-        right_delay_counter--;
-    }
-    if (button_delay_counter > 0)
-    {
-        button_delay_counter--;
-    }
+    gyrocoptercopter_Update();      // обновление данных гироскопа
 }
 
 void EXTI15_10_IRQHandler(void)
