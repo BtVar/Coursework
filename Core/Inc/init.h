@@ -1,3 +1,7 @@
+#ifndef INIT_H
+#define INIT_H
+
+
 #include <stdbool.h>
 #include <stdint.h>
 
@@ -12,3 +16,5 @@ void SysTick_Init(void);
 void RCC_Init(void);
 void TIM1_PWM_Init(void);
 void GPIO_Init_Ports(void);
+
+#endif

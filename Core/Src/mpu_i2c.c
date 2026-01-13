@@ -1,6 +1,7 @@
 #include "mpu_i2c.h"
 #include "uart_debug.h"
 #include <stdio.h>
+
 extern uint32_t millis_counter; // переменная времени
 
 static MPU_t mpu;               // структура данных MPU6050
@@ -25,7 +26,7 @@ static void I2C_Init_HW(void)
     GPIOB->MODER &= ~(GPIO_MODER_MODER8 | GPIO_MODER_MODER9);   //очищаю настройку пинов PB8 и PB9
     GPIOB->MODER |=  (GPIO_MODER_MODER8_1 | GPIO_MODER_MODER9_1);       // Установка альтернативной функции для PB8 и PB9
 
-    GPIOB->OTYPER |= GPIO_OTYPER_OT8 | GPIO_OTYPER_OT9;     // Установка открытого стока для PB8 и PB9
+    GPIOB->OTYPER |= GPIO_OTYPER_OT8 | GPIO_OTYPER_OT9;                     // Установка открытого стока для PB8 и PB9
     GPIOB->OSPEEDR |= GPIO_OSPEEDER_OSPEEDR8 | GPIO_OSPEEDER_OSPEEDR9;      //установка высокой скорости для PB8 и PB9
 
     GPIOB->PUPDR &= ~(GPIO_PUPDR_PUPDR8 | GPIO_PUPDR_PUPDR9);       // Очистка настроек подтягивающих резисторов для PB8 и PB9
@@ -108,7 +109,7 @@ static int MPU_Write(uint8_t reg, uint8_t data) // запись регистра
     return 0;
 }
 
-// API для MPU6050
+
 bool MPU_Init(void)// инициализация MPU6050
 {
     I2C_Init_HW();

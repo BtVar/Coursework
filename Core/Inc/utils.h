@@ -1,5 +1,7 @@
-#include <stdint.h>
+#ifndef UTILS_H
+#define UTILS_H
 
+#include <stdint.h>
 /* ===== PID ===== */
 typedef struct {
     float kp, ki, kd;
@@ -40,3 +42,5 @@ void turnLeft(float angle);
 void turnRight(float angle);
 void delay_ms(uint32_t ms);
 void motionLoop(uint8_t dirLeft, uint8_t dirRight, uint32_t targetPulses);
+
+#endif 
