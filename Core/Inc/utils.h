@@ -26,5 +26,17 @@ uint32_t calculatePulsesForAngle(float deg);
 uint32_t millis(void);
 void delay_ms(uint32_t ms);
 
-/* ===== УТИЛИТЫ ===== */
+uint32_t millis();
 float constrainf(float x, float min, float max);
+int constrain(int x, int min, int max);
+void resetPID();
+void resetEncoders();
+void stopMotors();
+void calculatePID(uint16_t leftCount, uint16_t rightCount, int baseSpeed);
+void moveForward(float distance_cm);
+uint32_t calculatePulsesForDistance(float distance_cm);
+uint32_t calculatePulsesForAngle(float angle);
+void turnLeft(float angle);
+void turnRight(float angle);
+void delay_ms(uint32_t ms);
+void motionLoop(uint8_t dirLeft, uint8_t dirRight, uint32_t targetPulses);

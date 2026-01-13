@@ -2,10 +2,31 @@
 
 void GPIO_Init_Ports(void)
 {
-    RCC->AHB1ENR |= RCC_AHB1ENR_GPIOBEN | RCC_AHB1ENR_GPIOCEN;      // включаю тактирование портов B и C
-    GPIOB->MODER |= GPIO_MODER_MODE10_0 | GPIO_MODER_MODE6_0;       // левый мотор
-    GPIOB->MODER |= GPIO_MODER_MODE5_0 | GPIO_MODER_MODE4_0;        // правый мотор
-    GPIOC->PUPDR |= GPIO_PUPDR_PUPDR13_0;                       // кнопка
+    SET_BIT(RCC->AHB1ENR, RCC_AHB1ENR_GPIOBEN);             // Включение тактирования GPIOB
+    
+    SET_BIT(GPIOB->MODER, GPIO_MODER_MODE10_0);             // Настройка пина PB10 на выход, регистр GPIOx_MODER
+    CLEAR_BIT(GPIOB->OTYPER, GPIO_OTYPER_OT_10);            // Установление PB10 в режим pull-push, регистр OTYPER
+    SET_BIT(GPIOB->OSPEEDR, GPIO_OSPEEDER_OSPEEDR10_0);     // Устанавливаем скорость бита PB10 (средняя), регистр OSPEEDR
+    CLEAR_BIT(GPIOB->PUPDR, GPIO_PUPDR_PUPD10_0);           // Отключаем подтягивающий резистор PB10, регистр PUPDR
+    SET_BIT(GPIOB->BSRR, GPIO_BSRR_BR10);                   // Установление на пине PB10 0, регистр GPIOx_BSRR
+
+    SET_BIT(GPIOB->MODER, GPIO_MODER_MODE6_0);              // Настройка пина PB4 на выход, регистр GPIOx_MODER
+    CLEAR_BIT(GPIOB->OTYPER, GPIO_OTYPER_OT_6);             // Установление PB4 в режим pull-push, регистр OTYPER
+    SET_BIT(GPIOB->OSPEEDR, GPIO_OSPEEDER_OSPEEDR6_0);      // Устанавливаем скорость бита PB4 (средняя), регистр OSPEEDR
+    CLEAR_BIT(GPIOB->PUPDR, GPIO_PUPDR_PUPD6_0);            // Отключаем подтягивающий резистор PB4, регистр PUPDR
+    SET_BIT(GPIOB->BSRR, GPIO_BSRR_BR6);                    // Установление на пине PB4 0, регистр GPIOx_BSRR
+        
+    SET_BIT(GPIOB->MODER, GPIO_MODER_MODE5_0);             // Настройка пина PB10 на выход, регистр GPIOx_MODER
+    CLEAR_BIT(GPIOB->OTYPER, GPIO_OTYPER_OT_5);            // Установление PB10 в режим pull-push, регистр OTYPER
+    SET_BIT(GPIOB->OSPEEDR, GPIO_OSPEEDER_OSPEEDR5_0);     // Устанавливаем скорость бита PB10 (средняя), регистр OSPEEDR
+    CLEAR_BIT(GPIOB->PUPDR, GPIO_PUPDR_PUPD5_0);           // Отключаем подтягивающий резистор PB10, регистр PUPDR
+    SET_BIT(GPIOB->BSRR, GPIO_BSRR_BR5);                   // Установление на пине PB10 0, регистр GPIOx_BSRR
+
+    SET_BIT(GPIOB->MODER, GPIO_MODER_MODE7_0);              // Настройка пина PB4 на выход, регистр GPIOx_MODER
+    CLEAR_BIT(GPIOB->OTYPER, GPIO_OTYPER_OT_7);             // Установление PB4 в режим pull-push, регистр OTYPER
+    SET_BIT(GPIOB->OSPEEDR, GPIO_OSPEEDER_OSPEEDR7_0);      // Устанавливаем скорость бита PB4 (средняя), регистр OSPEEDR
+    CLEAR_BIT(GPIOB->PUPDR, GPIO_PUPDR_PUPD7_0);            // Отключаем подтягивающий резистор PB4, регистр PUPDR
+    SET_BIT(GPIOB->BSRR, GPIO_BSRR_BR7);                    // Установление на пине PB4 0, регистр GPIOx_BSRR
 }
 
 void SysTick_Init(void)
@@ -23,7 +44,42 @@ void RCC_Init(void)
     RCC->CR |= RCC_CR_PLLON;       // включаю PLL
     while (!(RCC->CR & RCC_CR_PLLRDY));     // жду готовности PLL
 
-    RCC->CFGR |= RCC_CFGR_SW_PLL;   // переключаю системный тактовый сигнал на PLL
+    // настройка EXTI регистров
+    SET_BIT(EXTI->IMR, EXTI_IMR_MR12); //Настройка маскирования 12 линии 
+    SET_BIT(EXTI->RTSR, EXTI_RTSR_TR12); //Настройка детектирования нарастающего фронта 12 линии 
+    //SET_BIT(EXTI->FTSR, EXTI_FTSR_TR12); //Настройка детектирования спадающего фронта 12 линии 
+    NVIC_SetPriority(EXTI15_10_IRQn, 
+    NVIC_EncodePriority(NVIC_GetPriorityGrouping(), 0, 0)); //Установка 0 приоритета прерывания для вектора EXTI15_10 
+    NVIC_EnableIRQ(EXTI15_10_IRQn); //Включение прерывания по вектору EXTI15_10
+    
+    //==================================================================================================
+
+    // Настройка прерываний на PC8 (левый энкодер)
+    MODIFY_REG(SYSCFG->EXTICR[2], SYSCFG_EXTICR3_EXTI8_Msk, 
+    SYSCFG_EXTICR3_EXTI8_PC); //Настройка мультиплексора на вывод линии прерывания EXTI8 на PC8 
+
+    // настройка EXTI регистров
+    SET_BIT(EXTI->IMR, EXTI_IMR_MR8); //Настройка маскирования 8 линии 
+    SET_BIT(EXTI->RTSR, EXTI_RTSR_TR8); //Настройка детектирования нарастающего фронта 8 линии 
+    SET_BIT(EXTI->FTSR, EXTI_FTSR_TR12); //Настройка детектирования спадающего фронта 8 линии 
+    NVIC_SetPriority(EXTI9_5_IRQn, 
+    NVIC_EncodePriority(NVIC_GetPriorityGrouping(), 0, 0)); //Установка 0 приоритета прерывания для вектора EXTI9_5 
+    NVIC_EnableIRQ(EXTI9_5_IRQn); //Включение прерывания по вектору EXTI15_10
+
+    //==================================================================================================
+
+    // Настройка прерываний на PC13 (кнопка)
+    MODIFY_REG(SYSCFG->EXTICR[3], SYSCFG_EXTICR4_EXTI13_Msk, 
+    SYSCFG_EXTICR4_EXTI13_PC); //Настройка мультиплексора на вывод линии прерывания EXTI13 на PC13 
+
+    // настройка EXTI регистров
+    SET_BIT(EXTI->IMR, EXTI_IMR_MR13); //Настройка маскирования 13 линии 
+    SET_BIT(EXTI->RTSR, EXTI_RTSR_TR13); //Настройка детектирования нарастающего фронта 13 линии 
+    SET_BIT(EXTI->FTSR, EXTI_FTSR_TR13); //Настройка детектирования спадающего фронта 13 линии 
+    NVIC_SetPriority(EXTI15_10_IRQn, 
+    NVIC_EncodePriority(NVIC_GetPriorityGrouping(), 0, 0)); //Установка 0 приоритета прерывания для вектора EXTI15_10 
+    NVIC_EnableIRQ(EXTI15_10_IRQn); //Включение прерывания по вектору EXTI15_10
+    
 }
 
 void TIM1_PWM_Init(void)        // инициализация ШИМ на TIM1 CH1 и CH2 (PA8 и PA9)
@@ -50,9 +106,3 @@ void ITR_Init(void)     // инициализация прерываний по 
     SYSCFG->EXTICR[2] |= SYSCFG_EXTICR3_EXTI8_PC;       // настраиваю EXTI8 на PC8
     SYSCFG->EXTICR[3] |= SYSCFG_EXTICR4_EXTI12_PC;      // настраиваю EXTI12 на PC12
 
-    EXTI->IMR |= EXTI_IMR_MR8 | EXTI_IMR_MR12;          // разрешаю прерывания по EXTI8 и EXTI12
-    EXTI->RTSR |= EXTI_RTSR_TR8 | EXTI_RTSR_TR12;       // настраиваю прерывания по Rising edge
-
-    NVIC_EnableIRQ(EXTI9_5_IRQn);                       // разрешаю прерывания в NVIC для EXTI8
-    NVIC_EnableIRQ(EXTI15_10_IRQn);                 // разрешаю прерывания в NVIC для EXTI12
-}
