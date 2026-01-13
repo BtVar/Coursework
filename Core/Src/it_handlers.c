@@ -1,70 +1,28 @@
-#include "..\Inc\init.h"
+#include "it_handlers.h"
+#include "gyrocoptercopter.h"
 
+uint32_t sys_tick = 0;
 extern uint16_t left_encoder_ticks;
 extern uint16_t right_encoder_ticks;
 
-extern uint32_t left_delay_counter;
-extern uint32_t right_delay_counter;
-extern uint16_t button_delay_counter;
-
-extern uint32_t millis_counter;
-extern volatile uint32_t sys_tick;
-
-extern bool status_button;
-
-
-
-void SysTick_Handler(void)
+void SysTick_Handler(void)      // прерывание системного таймера
 {
     sys_tick++;
-    millis_counter++;
-    if (left_delay_counter > 0)
-    {
-        left_delay_counter--;
-    }
-    if (right_delay_counter > 0)
-    {
-        right_delay_counter--;
-    }
-    if (button_delay_counter > 0)
-    {
-        button_delay_counter--;
-    }
+    gyrocoptercopter_Update();      // обновление данных гироскопа
 }
 
-
-void EXTI15_10_IRQHandler(void)
+void EXTI9_5_IRQHandler(void)       //обработчик прерываний левого энкодера
 {
-    // Обработчик прерываний с правого энкодера PC12
-    if (READ_BIT(EXTI->PR, EXTI_PR_PR12))
-    {
-        if (right_delay_counter == 0)
-        {
-            right_encoder_ticks++;
-            right_delay_counter = 10;
-        }
-        SET_BIT(EXTI->PR, EXTI_PR_PR12);
-    }
-
-    // Обработчик прерываний с кнопки PC13
-    if (READ_BIT(EXTI->PR, EXTI_PR_PR13))
-    {
-        if (((READ_BIT(GPIOC->IDR, GPIO_IDR_ID13) != 0)) && (button_delay_counter == 0))
-        {
-            button_delay_counter = 100;
-            status_button = !status_button;
-        }
-        SET_BIT(EXTI->PR, EXTI_PR_PR13);
+    if (EXTI->PR & EXTI_PR_PR8) {
+        left_encoder_ticks++;
+        EXTI->PR = EXTI_PR_PR8;
     }
 }
 
-    // Обработчик прерываний с левого энкодера PC8
-    void EXTI9_5_IRQHandler(void)
-    {
-        SET_BIT(EXTI->PR, EXTI_PR_PR12);
-        if (left_delay_counter == 0)
-        {
-            left_encoder_ticks++;
-            left_delay_counter = 10;
-        }
+void EXTI15_10_IRQHandler(void)     //обработчик прерываний правого энкодера
+{
+    if (EXTI->PR & EXTI_PR_PR12) {
+        right_encoder_ticks++;
+        EXTI->PR = EXTI_PR_PR12;
     }
+}
