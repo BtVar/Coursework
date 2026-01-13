@@ -106,3 +106,5 @@ void ITR_Init(void)     // инициализация прерываний по 
     SYSCFG->EXTICR[2] |= SYSCFG_EXTICR3_EXTI8_PC;       // настраиваю EXTI8 на PC8
     SYSCFG->EXTICR[3] |= SYSCFG_EXTICR4_EXTI12_PC;      // настраиваю EXTI12 на PC12
 
+}
+

@@ -1,4 +1,5 @@
 #include "utils.h"
+#include "init.h"
 #include <math.h>
 #include <stdlib.h>
 
@@ -88,12 +89,6 @@ void stopMotors(void)
 }
 
 /* ===================== PID ===================== */
-
-typedef struct {
-    float kp, ki, kd;
-    float integral;
-    float lastError;
-} PID_t;
 
 float PID_Update(PID_t *pid, float error, float dt)
 {

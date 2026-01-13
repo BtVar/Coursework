@@ -1,6 +1,6 @@
 #include <stdint.h>
 
-extern uint32_t sys_tick;
+extern volatile uint32_t sys_tick;
 
 void SysTick_Handler(void);
 void EXTI9_5_IRQHandler(void);
