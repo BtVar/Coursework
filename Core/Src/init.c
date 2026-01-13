@@ -22,11 +22,11 @@ void GPIO_Init_Ports(void)
     CLEAR_BIT(GPIOB->PUPDR, GPIO_PUPDR_PUPD5_0);           // Отключаем подтягивающий резистор PB10, регистр PUPDR
     SET_BIT(GPIOB->BSRR, GPIO_BSRR_BR5);                   // Установление на пине PB10 0, регистр GPIOx_BSRR
 
-    SET_BIT(GPIOB->MODER, GPIO_MODER_MODE8_0);              // Настройка пина PB4 на выход, регистр GPIOx_MODER
-    CLEAR_BIT(GPIOB->OTYPER, GPIO_OTYPER_OT_8);             // Установление PB4 в режим pull-push, регистр OTYPER
-    SET_BIT(GPIOB->OSPEEDR, GPIO_OSPEEDER_OSPEEDR8_0);      // Устанавливаем скорость бита PB4 (средняя), регистр OSPEEDR
-    CLEAR_BIT(GPIOB->PUPDR, GPIO_PUPDR_PUPD8_0);            // Отключаем подтягивающий резистор PB4, регистр PUPDR
-    SET_BIT(GPIOB->BSRR, GPIO_BSRR_BR8);                    // Установление на пине PB4 0, регистр GPIOx_BSRR
+    SET_BIT(GPIOB->MODER, GPIO_MODER_MODE7_0);              // Настройка пина PB4 на выход, регистр GPIOx_MODER
+    CLEAR_BIT(GPIOB->OTYPER, GPIO_OTYPER_OT_7);             // Установление PB4 в режим pull-push, регистр OTYPER
+    SET_BIT(GPIOB->OSPEEDR, GPIO_OSPEEDER_OSPEEDR7_0);      // Устанавливаем скорость бита PB4 (средняя), регистр OSPEEDR
+    CLEAR_BIT(GPIOB->PUPDR, GPIO_PUPDR_PUPD7_0);            // Отключаем подтягивающий резистор PB4, регистр PUPDR
+    SET_BIT(GPIOB->BSRR, GPIO_BSRR_BR7);                    // Установление на пине PB4 0, регистр GPIOx_BSRR
 }
 
 
@@ -67,7 +67,7 @@ void ITR_Init(void)
     // настройка EXTI регистров
     SET_BIT(EXTI->IMR, EXTI_IMR_MR8); //Настройка маскирования 8 линии 
     SET_BIT(EXTI->RTSR, EXTI_RTSR_TR8); //Настройка детектирования нарастающего фронта 8 линии 
-    //SET_BIT(EXTI->FTSR, EXTI_FTSR_TR12); //Настройка детектирования спадающего фронта 8 линии 
+    SET_BIT(EXTI->FTSR, EXTI_FTSR_TR12); //Настройка детектирования спадающего фронта 8 линии 
     NVIC_SetPriority(EXTI9_5_IRQn, 
     NVIC_EncodePriority(NVIC_GetPriorityGrouping(), 0, 0)); //Установка 0 приоритета прерывания для вектора EXTI9_5 
     NVIC_EnableIRQ(EXTI9_5_IRQn); //Включение прерывания по вектору EXTI15_10
@@ -81,7 +81,7 @@ void ITR_Init(void)
     // настройка EXTI регистров
     SET_BIT(EXTI->IMR, EXTI_IMR_MR13); //Настройка маскирования 13 линии 
     SET_BIT(EXTI->RTSR, EXTI_RTSR_TR13); //Настройка детектирования нарастающего фронта 13 линии 
-    //SET_BIT(EXTI->FTSR, EXTI_FTSR_TR13); //Настройка детектирования спадающего фронта 13 линии 
+    SET_BIT(EXTI->FTSR, EXTI_FTSR_TR13); //Настройка детектирования спадающего фронта 13 линии 
     NVIC_SetPriority(EXTI15_10_IRQn, 
     NVIC_EncodePriority(NVIC_GetPriorityGrouping(), 0, 0)); //Установка 0 приоритета прерывания для вектора EXTI15_10 
     NVIC_EnableIRQ(EXTI15_10_IRQn); //Включение прерывания по вектору EXTI15_10
@@ -185,6 +185,5 @@ void TIM1_PWM_Init(void)
     SET_BIT(TIM1->EGR, TIM_EGR_UG);               // Генерируем update event (загружаем PSC и ARR)
     SET_BIT(TIM1->CR1, TIM_CR1_CEN);              // Запускаем таймер
 }
-
 
 
