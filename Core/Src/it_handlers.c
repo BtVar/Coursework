@@ -7,8 +7,8 @@ extern volatile uint16_t right_encoder_ticks;
 extern uint32_t left_delay_counter;
 extern uint32_t right_delay_counter;
 extern uint16_t button_delay_counter;
+extern uint32_t mpu_delay_counter;
 
-extern uint32_t millis_counter;
 extern volatile uint32_t sys_tick;
 
 extern bool status_button;
@@ -16,6 +16,17 @@ extern bool status_button;
 void SysTick_Handler(void)
 {
     sys_tick++;
+
+    if (left_delay_counter > 0)
+        left_delay_counter--;
+
+    if (right_delay_counter > 0)
+        right_delay_counter--;
+
+    if (mpu_delay_counter > 0)
+        button_delay_counter--;
+
+    
 }
 
 void EXTI15_10_IRQHandler(void)

@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\parni\AppData\Local\Temp\cclzDryd.s 			page 1
+ARM GAS  C:\Users\parni\AppData\Local\Temp\ccgSpq3G.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -20,20 +20,47 @@ ARM GAS  C:\Users\parni\AppData\Local\Temp\cclzDryd.s 			page 1
   17              	.Ltext0:
   18              		.cfi_sections	.debug_frame
   19              		.file 1 "Core/Src/main.c"
-  20              		.section	.text.main,"ax",%progbits
-  21              		.align	1
-  22              		.global	main
-  23              		.syntax unified
-  24              		.thumb
-  25              		.thumb_func
-  27              	main:
-  28              	.LFB130:
+  20              		.section	.rodata.main.str1.4,"aMS",%progbits,1
+  21              		.align	2
+  22              	.LC0:
+  23 0000 55415254 		.ascii	"UART OK\015\012\000"
+  23      204F4B0D 
+  23      0A00
+  24 000a 0000     		.align	2
+  25              	.LC1:
+  26 000c 4D505520 		.ascii	"MPU NOT FOUND\015\012\000"
+  26      4E4F5420 
+  26      464F554E 
+  26      440D0A00 
+  27              		.align	2
+  28              	.LC2:
+  29 001c 4D505520 		.ascii	"MPU OK\015\012\000"
+  29      4F4B0D0A 
+  29      00
+  30 0025 000000   		.align	2
+  31              	.LC3:
+  32 0028 4D505520 		.ascii	"MPU CALIBRATED\015\012\000"
+  32      43414C49 
+  32      42524154 
+  32      45440D0A 
+  32      00
+  33              		.section	.text.main,"ax",%progbits
+  34              		.align	1
+  35              		.global	main
+  36              		.syntax unified
+  37              		.thumb
+  38              		.thumb_func
+  40              	main:
+  41              	.LFB130:
    1:Core/Src/main.c **** #include "init.h" // Подключаем заголовочный файл с объявления
    2:Core/Src/main.c **** #include "utils.h"
    3:Core/Src/main.c **** #include "uart_debug.h"
    4:Core/Src/main.c **** #include "mpu_i2c.h"
    5:Core/Src/main.c **** 
    6:Core/Src/main.c **** #define WHO_AM_I_REG        0x75
+ARM GAS  C:\Users\parni\AppData\Local\Temp\ccgSpq3G.s 			page 2
+
+
    7:Core/Src/main.c **** 
    8:Core/Src/main.c **** uint8_t pwm_state_pa8 = 0;
    9:Core/Src/main.c **** uint8_t pwm_state_pa9 = 0;
@@ -43,175 +70,214 @@ ARM GAS  C:\Users\parni\AppData\Local\Temp\cclzDryd.s 			page 1
   13:Core/Src/main.c **** uint32_t right_delay_counter = 0;
   14:Core/Src/main.c **** volatile uint32_t sys_tick = 0;
   15:Core/Src/main.c **** 
-  16:Core/Src/main.c **** uint32_t millis_counter = 0;
-  17:Core/Src/main.c **** 
-  18:Core/Src/main.c **** uint16_t button_delay_counter = 0;
-  19:Core/Src/main.c **** bool status_button = 0;
-  20:Core/Src/main.c **** 
-  21:Core/Src/main.c **** uint8_t z;
-  22:Core/Src/main.c **** 
-  23:Core/Src/main.c **** int main(void)
-  24:Core/Src/main.c **** {
-  29              		.loc 1 24 1 view -0
-  30              		.cfi_startproc
-  31              		@ Volatile: function does not return.
-  32              		@ args = 0, pretend = 0, frame = 0
-  33              		@ frame_needed = 0, uses_anonymous_args = 0
-  34 0000 08B5     		push	{r3, lr}
-ARM GAS  C:\Users\parni\AppData\Local\Temp\cclzDryd.s 			page 2
-
-
-  35              	.LCFI0:
-  36              		.cfi_def_cfa_offset 8
-  37              		.cfi_offset 3, -8
-  38              		.cfi_offset 14, -4
-  25:Core/Src/main.c **** 
-  26:Core/Src/main.c ****     RCC_Init();
-  39              		.loc 1 26 5 view .LVU1
-  40 0002 FFF7FEFF 		bl	RCC_Init
-  41              	.LVL0:
-  27:Core/Src/main.c ****     GPIO_Init_Ports();
-  42              		.loc 1 27 5 view .LVU2
-  43 0006 FFF7FEFF 		bl	GPIO_Init_Ports
-  44              	.LVL1:
-  28:Core/Src/main.c ****     SysTick_Init();
-  45              		.loc 1 28 5 view .LVU3
-  46 000a FFF7FEFF 		bl	SysTick_Init
-  47              	.LVL2:
-  29:Core/Src/main.c ****     TIM1_PWM_Init();
-  48              		.loc 1 29 5 view .LVU4
-  49 000e FFF7FEFF 		bl	TIM1_PWM_Init
-  50              	.LVL3:
-  30:Core/Src/main.c ****     ITR_Init();
-  51              		.loc 1 30 5 view .LVU5
-  52 0012 FFF7FEFF 		bl	ITR_Init
-  53              	.LVL4:
+  16:Core/Src/main.c **** 
+  17:Core/Src/main.c **** uint16_t button_delay_counter = 0;
+  18:Core/Src/main.c **** bool status_button = 0;
+  19:Core/Src/main.c **** 
+  20:Core/Src/main.c **** uint8_t z;
+  21:Core/Src/main.c **** 
+  22:Core/Src/main.c **** int main(void)
+  23:Core/Src/main.c **** {
+  42              		.loc 1 23 1 view -0
+  43              		.cfi_startproc
+  44              		@ Volatile: function does not return.
+  45              		@ args = 0, pretend = 0, frame = 0
+  46              		@ frame_needed = 0, uses_anonymous_args = 0
+  47 0000 08B5     		push	{r3, lr}
+  48              	.LCFI0:
+  49              		.cfi_def_cfa_offset 8
+  50              		.cfi_offset 3, -8
+  51              		.cfi_offset 14, -4
+  24:Core/Src/main.c **** 
+  25:Core/Src/main.c ****     RCC_Init();
+  52              		.loc 1 25 5 view .LVU1
+  53 0002 FFF7FEFF 		bl	RCC_Init
+  54              	.LVL0:
+  26:Core/Src/main.c ****     GPIO_Init_Ports();
+  55              		.loc 1 26 5 view .LVU2
+  56 0006 FFF7FEFF 		bl	GPIO_Init_Ports
+  57              	.LVL1:
+  27:Core/Src/main.c ****     SysTick_Init();
+  58              		.loc 1 27 5 view .LVU3
+  59 000a FFF7FEFF 		bl	SysTick_Init
+  60              	.LVL2:
+  28:Core/Src/main.c ****     TIM1_PWM_Init();
+  61              		.loc 1 28 5 view .LVU4
+  62 000e FFF7FEFF 		bl	TIM1_PWM_Init
+  63              	.LVL3:
+  29:Core/Src/main.c ****     ITR_Init();
+  64              		.loc 1 29 5 view .LVU5
+  65 0012 FFF7FEFF 		bl	ITR_Init
+  66              	.LVL4:
+  30:Core/Src/main.c ****     I2C_Init_HW();
+  67              		.loc 1 30 5 view .LVU6
+  68 0016 FFF7FEFF 		bl	I2C_Init_HW
+  69              	.LVL5:
   31:Core/Src/main.c ****     UART_Init();
-  54              		.loc 1 31 5 view .LVU6
-  55 0016 FFF7FEFF 		bl	UART_Init
-  56              	.LVL5:
-  57              	.L2:
-  32:Core/Src/main.c ****     /*
-  33:Core/Src/main.c ****     if (!MPU_Init()) {
-  34:Core/Src/main.c ****         UART_SendString("MPU NOT FOUND\r\n");
-  35:Core/Src/main.c ****         while (1);
-  36:Core/Src/main.c ****     }
-  37:Core/Src/main.c **** 
-  38:Core/Src/main.c ****     UART_SendString("MPU OK\r\n");
-  39:Core/Src/main.c **** 
-  40:Core/Src/main.c ****     MPU_Calibrate();
-  41:Core/Src/main.c ****     UART_SendString("MPU CALIBRATED\r\n");
-  42:Core/Src/main.c ****     */
-  43:Core/Src/main.c ****     while (1)
-  58              		.loc 1 43 5 view .LVU7
-  44:Core/Src/main.c ****     {
-  45:Core/Src/main.c ****         MPU_Update();
-  59              		.loc 1 45 9 view .LVU8
-  60 001a FFF7FEFF 		bl	MPU_Update
-  61              	.LVL6:
-  46:Core/Src/main.c ****         MPU_Debug_Print();
-  62              		.loc 1 46 9 discriminator 1 view .LVU9
-  63 001e FFF7FEFF 		bl	MPU_Debug_Print
-  64              	.LVL7:
-  43:Core/Src/main.c ****     {
-  65              		.loc 1 43 11 view .LVU10
-  66 0022 FAE7     		b	.L2
-  67              		.cfi_endproc
-  68              	.LFE130:
-ARM GAS  C:\Users\parni\AppData\Local\Temp\cclzDryd.s 			page 3
+  70              		.loc 1 31 5 view .LVU7
+  71 001a FFF7FEFF 		bl	UART_Init
+  72              	.LVL6:
+  32:Core/Src/main.c **** 
+ARM GAS  C:\Users\parni\AppData\Local\Temp\ccgSpq3G.s 			page 3
 
 
-  70              		.global	z
-  71              		.section	.bss.z,"aw",%nobits
-  74              	z:
-  75 0000 00       		.space	1
-  76              		.global	status_button
-  77              		.section	.bss.status_button,"aw",%nobits
-  80              	status_button:
-  81 0000 00       		.space	1
-  82              		.global	button_delay_counter
-  83              		.section	.bss.button_delay_counter,"aw",%nobits
-  84              		.align	1
-  87              	button_delay_counter:
-  88 0000 0000     		.space	2
-  89              		.global	millis_counter
-  90              		.section	.bss.millis_counter,"aw",%nobits
-  91              		.align	2
-  94              	millis_counter:
-  95 0000 00000000 		.space	4
-  96              		.global	sys_tick
-  97              		.section	.bss.sys_tick,"aw",%nobits
-  98              		.align	2
- 101              	sys_tick:
- 102 0000 00000000 		.space	4
- 103              		.global	right_delay_counter
- 104              		.section	.bss.right_delay_counter,"aw",%nobits
- 105              		.align	2
- 108              	right_delay_counter:
- 109 0000 00000000 		.space	4
- 110              		.global	left_delay_counter
- 111              		.section	.bss.left_delay_counter,"aw",%nobits
- 112              		.align	2
- 115              	left_delay_counter:
- 116 0000 00000000 		.space	4
- 117              		.global	right_encoder_ticks
- 118              		.section	.bss.right_encoder_ticks,"aw",%nobits
- 119              		.align	1
- 122              	right_encoder_ticks:
- 123 0000 0000     		.space	2
- 124              		.global	left_encoder_ticks
- 125              		.section	.bss.left_encoder_ticks,"aw",%nobits
- 126              		.align	1
- 129              	left_encoder_ticks:
- 130 0000 0000     		.space	2
- 131              		.global	pwm_state_pa9
- 132              		.section	.bss.pwm_state_pa9,"aw",%nobits
- 135              	pwm_state_pa9:
+  33:Core/Src/main.c ****     UART_SendString("UART OK\r\n");
+  73              		.loc 1 33 5 view .LVU8
+  74 001e 0C48     		ldr	r0, .L6
+  75 0020 FFF7FEFF 		bl	UART_SendString
+  76              	.LVL7:
+  34:Core/Src/main.c ****     if (MPU_Init() != 0) {
+  77              		.loc 1 34 5 view .LVU9
+  78              		.loc 1 34 9 is_stmt 0 view .LVU10
+  79 0024 FFF7FEFF 		bl	MPU_Init
+  80              	.LVL8:
+  81              		.loc 1 34 8 discriminator 1 view .LVU11
+  82 0028 18B1     		cbz	r0, .L2
+  35:Core/Src/main.c ****         UART_SendString("MPU NOT FOUND\r\n");
+  83              		.loc 1 35 9 is_stmt 1 view .LVU12
+  84 002a 0A48     		ldr	r0, .L6+4
+  85 002c FFF7FEFF 		bl	UART_SendString
+  86              	.LVL9:
+  87              	.L3:
+  36:Core/Src/main.c ****         while (1);
+  88              		.loc 1 36 9 view .LVU13
+  89              		.loc 1 36 15 view .LVU14
+  90 0030 FEE7     		b	.L3
+  91              	.L2:
+  37:Core/Src/main.c ****     }
+  38:Core/Src/main.c **** 
+  39:Core/Src/main.c ****     UART_SendString("MPU OK\r\n");
+  92              		.loc 1 39 5 view .LVU15
+  93 0032 0948     		ldr	r0, .L6+8
+  94 0034 FFF7FEFF 		bl	UART_SendString
+  95              	.LVL10:
+  40:Core/Src/main.c **** 
+  41:Core/Src/main.c ****     MPU_Calibrate();
+  96              		.loc 1 41 5 view .LVU16
+  97 0038 FFF7FEFF 		bl	MPU_Calibrate
+  98              	.LVL11:
+  42:Core/Src/main.c ****     UART_SendString("MPU CALIBRATED\r\n");
+  99              		.loc 1 42 5 view .LVU17
+ 100 003c 0748     		ldr	r0, .L6+12
+ 101 003e FFF7FEFF 		bl	UART_SendString
+ 102              	.LVL12:
+  43:Core/Src/main.c ****     //moveStraight(50.0f);
+  44:Core/Src/main.c ****     turnByAngle(90.0f);
+ 103              		.loc 1 44 5 view .LVU18
+ 104 0042 9FED070A 		vldr.32	s0, .L6+16
+ 105 0046 FFF7FEFF 		bl	turnByAngle
+ 106              	.LVL13:
+ 107              	.L4:
+  45:Core/Src/main.c ****     while (1)
+ 108              		.loc 1 45 5 view .LVU19
+  46:Core/Src/main.c ****     {
+  47:Core/Src/main.c ****         MPU_Debug_Print();
+ 109              		.loc 1 47 9 discriminator 1 view .LVU20
+ 110 004a FFF7FEFF 		bl	MPU_Debug_Print
+ 111              	.LVL14:
+  45:Core/Src/main.c ****     while (1)
+ 112              		.loc 1 45 11 view .LVU21
+ 113 004e FCE7     		b	.L4
+ARM GAS  C:\Users\parni\AppData\Local\Temp\ccgSpq3G.s 			page 4
+
+
+ 114              	.L7:
+ 115              		.align	2
+ 116              	.L6:
+ 117 0050 00000000 		.word	.LC0
+ 118 0054 0C000000 		.word	.LC1
+ 119 0058 1C000000 		.word	.LC2
+ 120 005c 28000000 		.word	.LC3
+ 121 0060 0000B442 		.word	1119092736
+ 122              		.cfi_endproc
+ 123              	.LFE130:
+ 125              		.global	z
+ 126              		.section	.bss.z,"aw",%nobits
+ 129              	z:
+ 130 0000 00       		.space	1
+ 131              		.global	status_button
+ 132              		.section	.bss.status_button,"aw",%nobits
+ 135              	status_button:
  136 0000 00       		.space	1
- 137              		.global	pwm_state_pa8
- 138              		.section	.bss.pwm_state_pa8,"aw",%nobits
- 141              	pwm_state_pa8:
- 142 0000 00       		.space	1
- 143              		.text
- 144              	.Letext0:
- 145              		.file 2 "C:/SysGCC/arm-eabi/arm-none-eabi/include/machine/_default_types.h"
- 146              		.file 3 "C:/SysGCC/arm-eabi/arm-none-eabi/include/sys/_stdint.h"
- 147              		.file 4 "Core/Inc/it_handlers.h"
- 148              		.file 5 "Core/Inc/mpu_i2c.h"
-ARM GAS  C:\Users\parni\AppData\Local\Temp\cclzDryd.s 			page 4
+ 137              		.global	button_delay_counter
+ 138              		.section	.bss.button_delay_counter,"aw",%nobits
+ 139              		.align	1
+ 142              	button_delay_counter:
+ 143 0000 0000     		.space	2
+ 144              		.global	sys_tick
+ 145              		.section	.bss.sys_tick,"aw",%nobits
+ 146              		.align	2
+ 149              	sys_tick:
+ 150 0000 00000000 		.space	4
+ 151              		.global	right_delay_counter
+ 152              		.section	.bss.right_delay_counter,"aw",%nobits
+ 153              		.align	2
+ 156              	right_delay_counter:
+ 157 0000 00000000 		.space	4
+ 158              		.global	left_delay_counter
+ 159              		.section	.bss.left_delay_counter,"aw",%nobits
+ 160              		.align	2
+ 163              	left_delay_counter:
+ 164 0000 00000000 		.space	4
+ 165              		.global	right_encoder_ticks
+ 166              		.section	.bss.right_encoder_ticks,"aw",%nobits
+ 167              		.align	1
+ 170              	right_encoder_ticks:
+ 171 0000 0000     		.space	2
+ 172              		.global	left_encoder_ticks
+ 173              		.section	.bss.left_encoder_ticks,"aw",%nobits
+ 174              		.align	1
+ 177              	left_encoder_ticks:
+ 178 0000 0000     		.space	2
+ 179              		.global	pwm_state_pa9
+ 180              		.section	.bss.pwm_state_pa9,"aw",%nobits
+ 183              	pwm_state_pa9:
+ 184 0000 00       		.space	1
+ 185              		.global	pwm_state_pa8
+ 186              		.section	.bss.pwm_state_pa8,"aw",%nobits
+ 189              	pwm_state_pa8:
+ 190 0000 00       		.space	1
+ 191              		.text
+ARM GAS  C:\Users\parni\AppData\Local\Temp\ccgSpq3G.s 			page 5
 
 
- 149              		.file 6 "Core/Inc/uart_debug.h"
- 150              		.file 7 "Core/Inc/init.h"
-ARM GAS  C:\Users\parni\AppData\Local\Temp\cclzDryd.s 			page 5
+ 192              	.Letext0:
+ 193              		.file 2 "C:/SysGCC/arm-eabi/arm-none-eabi/include/machine/_default_types.h"
+ 194              		.file 3 "C:/SysGCC/arm-eabi/arm-none-eabi/include/sys/_stdint.h"
+ 195              		.file 4 "Core/Inc/it_handlers.h"
+ 196              		.file 5 "Core/Inc/mpu_i2c.h"
+ 197              		.file 6 "Core/Inc/utils.h"
+ 198              		.file 7 "Core/Inc/uart_debug.h"
+ 199              		.file 8 "Core/Inc/init.h"
+ARM GAS  C:\Users\parni\AppData\Local\Temp\ccgSpq3G.s 			page 6
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 main.c
-C:\Users\parni\AppData\Local\Temp\cclzDryd.s:21     .text.main:00000000 $t
-C:\Users\parni\AppData\Local\Temp\cclzDryd.s:27     .text.main:00000000 main
-C:\Users\parni\AppData\Local\Temp\cclzDryd.s:74     .bss.z:00000000 z
-C:\Users\parni\AppData\Local\Temp\cclzDryd.s:75     .bss.z:00000000 $d
-C:\Users\parni\AppData\Local\Temp\cclzDryd.s:80     .bss.status_button:00000000 status_button
-C:\Users\parni\AppData\Local\Temp\cclzDryd.s:81     .bss.status_button:00000000 $d
-C:\Users\parni\AppData\Local\Temp\cclzDryd.s:87     .bss.button_delay_counter:00000000 button_delay_counter
-C:\Users\parni\AppData\Local\Temp\cclzDryd.s:84     .bss.button_delay_counter:00000000 $d
-C:\Users\parni\AppData\Local\Temp\cclzDryd.s:94     .bss.millis_counter:00000000 millis_counter
-C:\Users\parni\AppData\Local\Temp\cclzDryd.s:91     .bss.millis_counter:00000000 $d
-C:\Users\parni\AppData\Local\Temp\cclzDryd.s:101    .bss.sys_tick:00000000 sys_tick
-C:\Users\parni\AppData\Local\Temp\cclzDryd.s:98     .bss.sys_tick:00000000 $d
-C:\Users\parni\AppData\Local\Temp\cclzDryd.s:108    .bss.right_delay_counter:00000000 right_delay_counter
-C:\Users\parni\AppData\Local\Temp\cclzDryd.s:105    .bss.right_delay_counter:00000000 $d
-C:\Users\parni\AppData\Local\Temp\cclzDryd.s:115    .bss.left_delay_counter:00000000 left_delay_counter
-C:\Users\parni\AppData\Local\Temp\cclzDryd.s:112    .bss.left_delay_counter:00000000 $d
-C:\Users\parni\AppData\Local\Temp\cclzDryd.s:122    .bss.right_encoder_ticks:00000000 right_encoder_ticks
-C:\Users\parni\AppData\Local\Temp\cclzDryd.s:119    .bss.right_encoder_ticks:00000000 $d
-C:\Users\parni\AppData\Local\Temp\cclzDryd.s:129    .bss.left_encoder_ticks:00000000 left_encoder_ticks
-C:\Users\parni\AppData\Local\Temp\cclzDryd.s:126    .bss.left_encoder_ticks:00000000 $d
-C:\Users\parni\AppData\Local\Temp\cclzDryd.s:135    .bss.pwm_state_pa9:00000000 pwm_state_pa9
-C:\Users\parni\AppData\Local\Temp\cclzDryd.s:136    .bss.pwm_state_pa9:00000000 $d
-C:\Users\parni\AppData\Local\Temp\cclzDryd.s:141    .bss.pwm_state_pa8:00000000 pwm_state_pa8
-C:\Users\parni\AppData\Local\Temp\cclzDryd.s:142    .bss.pwm_state_pa8:00000000 $d
+C:\Users\parni\AppData\Local\Temp\ccgSpq3G.s:21     .rodata.main.str1.4:00000000 $d
+C:\Users\parni\AppData\Local\Temp\ccgSpq3G.s:34     .text.main:00000000 $t
+C:\Users\parni\AppData\Local\Temp\ccgSpq3G.s:40     .text.main:00000000 main
+C:\Users\parni\AppData\Local\Temp\ccgSpq3G.s:117    .text.main:00000050 $d
+C:\Users\parni\AppData\Local\Temp\ccgSpq3G.s:129    .bss.z:00000000 z
+C:\Users\parni\AppData\Local\Temp\ccgSpq3G.s:130    .bss.z:00000000 $d
+C:\Users\parni\AppData\Local\Temp\ccgSpq3G.s:135    .bss.status_button:00000000 status_button
+C:\Users\parni\AppData\Local\Temp\ccgSpq3G.s:136    .bss.status_button:00000000 $d
+C:\Users\parni\AppData\Local\Temp\ccgSpq3G.s:142    .bss.button_delay_counter:00000000 button_delay_counter
+C:\Users\parni\AppData\Local\Temp\ccgSpq3G.s:139    .bss.button_delay_counter:00000000 $d
+C:\Users\parni\AppData\Local\Temp\ccgSpq3G.s:149    .bss.sys_tick:00000000 sys_tick
+C:\Users\parni\AppData\Local\Temp\ccgSpq3G.s:146    .bss.sys_tick:00000000 $d
+C:\Users\parni\AppData\Local\Temp\ccgSpq3G.s:156    .bss.right_delay_counter:00000000 right_delay_counter
+C:\Users\parni\AppData\Local\Temp\ccgSpq3G.s:153    .bss.right_delay_counter:00000000 $d
+C:\Users\parni\AppData\Local\Temp\ccgSpq3G.s:163    .bss.left_delay_counter:00000000 left_delay_counter
+C:\Users\parni\AppData\Local\Temp\ccgSpq3G.s:160    .bss.left_delay_counter:00000000 $d
+C:\Users\parni\AppData\Local\Temp\ccgSpq3G.s:170    .bss.right_encoder_ticks:00000000 right_encoder_ticks
+C:\Users\parni\AppData\Local\Temp\ccgSpq3G.s:167    .bss.right_encoder_ticks:00000000 $d
+C:\Users\parni\AppData\Local\Temp\ccgSpq3G.s:177    .bss.left_encoder_ticks:00000000 left_encoder_ticks
+C:\Users\parni\AppData\Local\Temp\ccgSpq3G.s:174    .bss.left_encoder_ticks:00000000 $d
+C:\Users\parni\AppData\Local\Temp\ccgSpq3G.s:183    .bss.pwm_state_pa9:00000000 pwm_state_pa9
+C:\Users\parni\AppData\Local\Temp\ccgSpq3G.s:184    .bss.pwm_state_pa9:00000000 $d
+C:\Users\parni\AppData\Local\Temp\ccgSpq3G.s:189    .bss.pwm_state_pa8:00000000 pwm_state_pa8
+C:\Users\parni\AppData\Local\Temp\ccgSpq3G.s:190    .bss.pwm_state_pa8:00000000 $d
 
 UNDEFINED SYMBOLS
 RCC_Init
@@ -219,6 +285,10 @@ GPIO_Init_Ports
 SysTick_Init
 TIM1_PWM_Init
 ITR_Init
+I2C_Init_HW
 UART_Init
-MPU_Update
+UART_SendString
+MPU_Init
+MPU_Calibrate
+turnByAngle
 MPU_Debug_Print

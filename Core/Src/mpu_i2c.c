@@ -147,14 +147,14 @@ int MPU_Write(uint8_t reg, uint8_t data) // запись регистра MPU605
 
 bool MPU_Init(void)// инициализация MPU6050
 {
-    I2C_Init_HW();
+
 
     uint8_t who;
     MPU_Read(MPU_WHO_AM_I, &who, 1);
 
     /* защита от подделки */
     if (who != 0x68 && who != 0x98)
-        return false;
+        return 1;
 
 
     // Ждём 100 мс
@@ -174,7 +174,7 @@ bool MPU_Init(void)// инициализация MPU6050
 
     last_time = millis();
 
-    return 1;
+    return 0;
 }
 
 void MPU_Calibrate(void)        // калибровка гироскопа MPU6050
@@ -182,6 +182,7 @@ void MPU_Calibrate(void)        // калибровка гироскопа MPU60
 
 
     float sum = 0.0f;
+    uint16_t samples = 0;
 
     for (int i = 0; i < 1000; i++) 
     {
@@ -190,14 +191,17 @@ void MPU_Calibrate(void)        // калибровка гироскопа MPU60
         MPU_Read(MPU_GYRO_ZOUT_H, data_z, 2);
         int16_t raw = (int16_t)((data_z[0] << 8) | data_z[1]);
         sum += (raw / GYRO_SCALE_250DPS);
+        samples++;
 
         // Небольшая задержка
         uint32_t wait_start = millis();
-        while ((uint32_t)(millis() - wait_start) < 1);  // 1 мс
+        while ((uint32_t)(millis() - wait_start) < 5);  // 1 мс
 
     }
 
-    gyro_offset_z = sum / 1000.0f;
+    if (samples > 0) {
+        gyro_offset_z = sum / samples;
+    }
 
     // Сброс фильтра
     gz_filtered = 0.0f;
@@ -225,7 +229,6 @@ void MPU_Update(void)       // обновление данных MPU6050
     // Среднее из 3 значений
     gz_filtered = (buffer[0] + buffer[1] + buffer[2]) / 3.0f;
 
-    gz_filtered = -gz_filtered;
 
     // Сохраняем отфильтрованное
     mpu.yaw_rate = gz_filtered;

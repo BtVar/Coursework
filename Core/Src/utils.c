@@ -2,6 +2,7 @@
 #include "init.h"
 #include <math.h>
 #include <stdlib.h>
+#include "mpu_i2c.h"
 
 /* ===================== КОНСТАНТЫ ===================== */
 
@@ -14,9 +15,9 @@
 #define POSITION_EPS 2
 #define ANGLE_EPS    1.0f
 
-#define PWM_MAX (TIM1->ARR)
-#define PWM_MIN 0
-#define PWM_DEADZONE 80
+#define PWM_MAX 650
+#define PWM_MIN 620
+#define PWM_DEADZONE 620
 
 // РОграничение для интегральной ошибки
 #define I_MAX  1000.0f
@@ -26,21 +27,20 @@
 
 /* ===================== ГЛОБАЛЬНЫЕ ===================== */
 
-extern uint16_t left_encoder_ticks;
-extern uint16_t right_encoder_ticks;
-extern float yaw_angle;
-extern uint32_t millis_counter;
+extern volatile uint16_t left_encoder_ticks;
+extern volatile uint16_t right_encoder_ticks;
+extern volatile uint32_t sys_tick;
 
 /* ===================== ВРЕМЯ ===================== */
 
 uint32_t millis(void)
 {
-    return millis_counter;
+    return sys_tick;
 }
 
 /* ===================== ВСПОМОГАТЕЛЬНЫЕ ===================== */
 
-float constrainf(float v, float min, float max)
+int constrainf(float v, int min, int max)
 {
     if (v < min) return min;
     if (v > max) return max;
@@ -120,9 +120,9 @@ void PID_Reset(PID_t *p)
 
 /* ===================== PID НАСТРОЙКИ ===================== */
 
-PID_t pidSpeed = { 0.8f, 0.0f, 0.4f };
-PID_t pidYaw   = { 4.0f, 0.0f, 0.6f };
-PID_t pidSync  = { 2.0f, 0.0f, 0.2f };
+PID_t pidSpeed = { 1.0f, 0.0f, 0.0f };
+PID_t pidYaw   = { 10.0f, 0.0f, 0.0f };
+PID_t pidSync  = { 1.0f, 0.0f, 0.0f };
 
 /* ===================== ДВИЖЕНИЕ ПРЯМО ===================== */
 
@@ -138,7 +138,8 @@ void moveStraight(float distance_cm)
     right_encoder_ticks = 0;
 
     // Записываем угл в начальный момент времени (для выравнивания в процессе езды)
-    float startYaw = yaw_angle;
+    MPU_Update();
+    float startYaw = MPU_GetYaw();
 
     // Расчет количества тиков для достижения цели
     uint32_t targetTicks =
@@ -149,6 +150,7 @@ void moveStraight(float distance_cm)
 
     while (1)
     {
+        MPU_Debug_Print();
         // Проверяем прошло ли время
         if (millis() - lastTime < CONTROL_PERIOD_MS)
             continue;
@@ -158,9 +160,9 @@ void moveStraight(float distance_cm)
         lastTime = millis();
 
         // Считываем правый и левый энкодер, рассчитываем сколько тиков прошел робот
-        int32_t L = left_encoder_ticks;
-        int32_t R = right_encoder_ticks;
-        int32_t avg = (L + R) / 2;
+        uint16_t L = left_encoder_ticks;
+        uint16_t R = right_encoder_ticks;
+        uint16_t avg = (uint16_t)((L + R) / 2.0f);
 
         // Считаем ошибку, если она допустима прекращаем выполнение программы
         int32_t distErr = targetTicks - avg;
@@ -170,15 +172,16 @@ void moveStraight(float distance_cm)
         // Использование ПИД регуляторов для корректировки скорости колес
         // Установление базовой скорости (на основе расстояний, т.е. чем дальше от желаемой точки больше скорость, при приближении уменьшается)
         float basePWM = PID(&pidSpeed, distErr, dt);
+        MPU_Update();
         // ПИД настройки движения по заданной прямой, то есть при отклонении по гироскопу выравнивает движение
         float yawCorr = PID(&pidYaw,
-                            normalizeAngle(startYaw - yaw_angle), dt);
+                            startYaw - MPU_GetYaw(), dt);
         // ПИД контролирующий одинаковое ли расстояние прошли колеса
         float syncCorr = PID(&pidSync, L - R, dt);
 
         // Расчет результирующего ШИМ сигнала
-        float pwmL = basePWM - yawCorr - syncCorr;
-        float pwmR = basePWM + yawCorr + syncCorr;
+        float pwmL = basePWM - yawCorr; //- syncCorr;
+        float pwmR = basePWM + yawCorr; //+ syncCorr;
 
         // Проверка входит ли он в диапазон возможного ШИМ
         pwmL = constrainf(pwmL, PWM_MIN, PWM_MAX);
@@ -213,12 +216,13 @@ void turnByAngle(float angle_deg)
     right_encoder_ticks = 0;
 
     // Рассчитываем желаемый угл
-    float targetYaw = normalizeAngle(yaw_angle + angle_deg);
+    float targetYaw = normalizeAngle(MPU_GetYaw() + angle_deg);
     // Запись времени для обновления скорости раз в промежуток времени
     uint32_t lastTime = millis();
 
     while (1)
     {
+        MPU_Update();
         // Проверяем прошло ли время
         if (millis() - lastTime < CONTROL_PERIOD_MS)
             continue;
@@ -228,7 +232,7 @@ void turnByAngle(float angle_deg)
         lastTime = millis();
 
         // Считаем ошибку, если она допустима прекращаем выполнение программы
-        float angleErr = normalizeAngle(targetYaw - yaw_angle);
+        float angleErr = targetYaw - MPU_GetYaw();
         if (fabs(angleErr) <= ANGLE_EPS)
             break;
 
@@ -242,8 +246,8 @@ void turnByAngle(float angle_deg)
                          dt);
 
         // Расчет результирующего ШИМ сигнала
-        float pwmL = basePWM - sync;
-        float pwmR = basePWM + sync;
+        float pwmL = basePWM; // - sync;
+        float pwmR = basePWM; // + sync;
 
         // Проверка входит ли он в диапазон возможного ШИМ
         pwmL = constrainf(pwmL, PWM_MIN, PWM_MAX);
