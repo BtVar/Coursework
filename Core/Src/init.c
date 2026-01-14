@@ -22,11 +22,11 @@ void GPIO_Init_Ports(void)
     CLEAR_BIT(GPIOB->PUPDR, GPIO_PUPDR_PUPD5_0);           // Отключаем подтягивающий резистор PB10, регистр PUPDR
     SET_BIT(GPIOB->BSRR, GPIO_BSRR_BR5);                   // Установление на пине PB10 0, регистр GPIOx_BSRR
 
-    SET_BIT(GPIOB->MODER, GPIO_MODER_MODE8_0);              // Настройка пина PB4 на выход, регистр GPIOx_MODER
-    CLEAR_BIT(GPIOB->OTYPER, GPIO_OTYPER_OT_8);             // Установление PB4 в режим pull-push, регистр OTYPER
-    SET_BIT(GPIOB->OSPEEDR, GPIO_OSPEEDER_OSPEEDR8_0);      // Устанавливаем скорость бита PB4 (средняя), регистр OSPEEDR
-    CLEAR_BIT(GPIOB->PUPDR, GPIO_PUPDR_PUPD8_0);            // Отключаем подтягивающий резистор PB4, регистр PUPDR
-    SET_BIT(GPIOB->BSRR, GPIO_BSRR_BR8);                    // Установление на пине PB4 0, регистр GPIOx_BSRR
+    SET_BIT(GPIOB->MODER, GPIO_MODER_MODE7_0);              // Настройка пина PB4 на выход, регистр GPIOx_MODER
+    CLEAR_BIT(GPIOB->OTYPER, GPIO_OTYPER_OT_7);             // Установление PB4 в режим pull-push, регистр OTYPER
+    SET_BIT(GPIOB->OSPEEDR, GPIO_OSPEEDER_OSPEEDR7_0);      // Устанавливаем скорость бита PB4 (средняя), регистр OSPEEDR
+    CLEAR_BIT(GPIOB->PUPDR, GPIO_PUPDR_PUPD7_0);            // Отключаем подтягивающий резистор PB4, регистр PUPDR
+    SET_BIT(GPIOB->BSRR, GPIO_BSRR_BR7);                    // Установление на пине PB4 0, регистр GPIOx_BSRR
 }
 
 
@@ -67,9 +67,8 @@ void ITR_Init(void)
     // настройка EXTI регистров
     SET_BIT(EXTI->IMR, EXTI_IMR_MR8); //Настройка маскирования 8 линии 
     SET_BIT(EXTI->RTSR, EXTI_RTSR_TR8); //Настройка детектирования нарастающего фронта 8 линии 
-    //SET_BIT(EXTI->FTSR, EXTI_FTSR_TR12); //Настройка детектирования спадающего фронта 8 линии 
-    NVIC_SetPriority(EXTI9_5_IRQn, 
-    NVIC_EncodePriority(NVIC_GetPriorityGrouping(), 0, 0)); //Установка 0 приоритета прерывания для вектора EXTI9_5 
+    SET_BIT(EXTI->FTSR, EXTI_FTSR_TR8); //Настройка детектирования спадающего фронта 8 линии 
+    NVIC_SetPriority(EXTI9_5_IRQn, NVIC_EncodePriority(NVIC_GetPriorityGrouping(), 0, 0)); //Установка 0 приоритета прерывания для вектора EXTI9_5 
     NVIC_EnableIRQ(EXTI9_5_IRQn); //Включение прерывания по вектору EXTI15_10
 
     //==================================================================================================
@@ -81,7 +80,7 @@ void ITR_Init(void)
     // настройка EXTI регистров
     SET_BIT(EXTI->IMR, EXTI_IMR_MR13); //Настройка маскирования 13 линии 
     SET_BIT(EXTI->RTSR, EXTI_RTSR_TR13); //Настройка детектирования нарастающего фронта 13 линии 
-    //SET_BIT(EXTI->FTSR, EXTI_FTSR_TR13); //Настройка детектирования спадающего фронта 13 линии 
+    SET_BIT(EXTI->FTSR, EXTI_FTSR_TR13); //Настройка детектирования спадающего фронта 13 линии 
     NVIC_SetPriority(EXTI15_10_IRQn, 
     NVIC_EncodePriority(NVIC_GetPriorityGrouping(), 0, 0)); //Установка 0 приоритета прерывания для вектора EXTI15_10 
     NVIC_EnableIRQ(EXTI15_10_IRQn); //Включение прерывания по вектору EXTI15_10
@@ -132,8 +131,6 @@ void RCC_Init(void)
 
 }
 
-
-// ШИМ ЧАСТОТОЙ 50ГЦ
 void TIM1_PWM_Init(void)
 {
     // Включение тактирования периферии
@@ -141,15 +138,11 @@ void TIM1_PWM_Init(void)
     SET_BIT(RCC->APB2ENR, RCC_APB2ENR_TIM1EN);    // Включаем тактирование TIM1 (шина APB2)
 
     // Настройка выводов GPIO для PA8 и PA9
-    // Настраиваем PA8 и PA9 на альтернативную функцию (режим 10)
-    MODIFY_REG(GPIOA->MODER,
-               GPIO_MODER_MODE8 | GPIO_MODER_MODE9,
-               GPIO_MODER_MODE8_1 | GPIO_MODER_MODE9_1);
+    //настраиваю PA8 и PA9 на альтернативную функцию (режим 10)
+    MODIFY_REG(GPIOA->MODER, GPIO_MODER_MODE8 | GPIO_MODER_MODE9, GPIO_MODER_MODE8_1 | GPIO_MODER_MODE9_1);
 
-    // Назначаем альтернативную функцию 1 (TIM1) для PA8 и PA9
-    MODIFY_REG(GPIOA->AFR[1],
-               GPIO_AFRH_AFSEL8 | GPIO_AFRH_AFSEL9,
-               1UL << GPIO_AFRH_AFSEL8_Pos | 1UL << GPIO_AFRH_AFSEL9_Pos);
+    // Назначаю альтернативную функцию 1 (TIM1) для PA8 и PA9
+    MODIFY_REG(GPIOA->AFR[1],GPIO_AFRH_AFSEL8 | GPIO_AFRH_AFSEL9,1UL << GPIO_AFRH_AFSEL8_Pos | 1UL << GPIO_AFRH_AFSEL9_Pos);
 
     // Настройка таймера
     CLEAR_BIT(TIM1->CR1, TIM_CR1_CEN);            // Останавливаем таймер перед настройкой
@@ -162,14 +155,10 @@ void TIM1_PWM_Init(void)
 
     // Настройка режима ШИМ для каналов 1 и 2
     // Канал 1 (PA8): ШИМ режим 1 (110) + буферизация CCR1
-    MODIFY_REG(TIM1->CCMR1,
-               TIM_CCMR1_OC1M_Msk | TIM_CCMR1_OC1PE_Msk,
-               (6UL << TIM_CCMR1_OC1M_Pos) | TIM_CCMR1_OC1PE);
+    MODIFY_REG(TIM1->CCMR1,TIM_CCMR1_OC1M_Msk | TIM_CCMR1_OC1PE_Msk,(6UL << TIM_CCMR1_OC1M_Pos) | TIM_CCMR1_OC1PE);
 
     // Канал 2 (PA9): ШИМ режим 1 (110) + буферизация CCR2
-    MODIFY_REG(TIM1->CCMR1,
-               TIM_CCMR1_OC2M_Msk | TIM_CCMR1_OC2PE_Msk,
-               (6UL << TIM_CCMR1_OC2M_Pos) | TIM_CCMR1_OC2PE);
+    MODIFY_REG(TIM1->CCMR1,TIM_CCMR1_OC2M_Msk | TIM_CCMR1_OC2PE_Msk,(6UL << TIM_CCMR1_OC2M_Pos) | TIM_CCMR1_OC2PE);
 
     // Включение выходов для каналов 1 и 2
     SET_BIT(TIM1->BDTR, TIM_BDTR_MOE);            // Включаем главный выход (обязательно для TIM1)
@@ -185,6 +174,5 @@ void TIM1_PWM_Init(void)
     SET_BIT(TIM1->EGR, TIM_EGR_UG);               // Генерируем update event (загружаем PSC и ARR)
     SET_BIT(TIM1->CR1, TIM_CR1_CEN);              // Запускаем таймер
 }
-
 
 
