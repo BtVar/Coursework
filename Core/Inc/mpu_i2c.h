@@ -22,16 +22,20 @@
 typedef struct {
     float yaw;          //интегрированный угол
     float yaw_rate;     // текущая угловая скорость
-    float accel_x;      // текущие ускорения по оси x
-    float accel_y;      // текущие ускорения по оси y
-    float accel_z;      // текущие ускорения по оси z
+    float yaw_rate_raw; // Сырая скорость (без фильтра)
 } MPU_t;
 
+int I2C_Wait(volatile uint32_t *reg, uint32_t flag);
+void I2C_Init_HW(void);
+int I2C_Start(void);
+int I2C_Stop(void);
+int I2C_Address(uint8_t addr);
 
 bool MPU_Init(void);
 void MPU_Calibrate(void);
 void MPU_Update(void);
 void MPU_Debug_Print(void);
+int MPU_Read(uint8_t reg, uint8_t *buf, uint8_t len);
 
 float MPU_GetYaw(void);
 float MPU_GetYawRate(void);

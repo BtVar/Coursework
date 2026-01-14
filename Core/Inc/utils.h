@@ -2,12 +2,14 @@
 #define UTILS_H
 
 #include <stdint.h>
-/* ===== PID ===== */
+
+
 typedef struct {
     float kp, ki, kd;
-    float integral;
-    float lastError;
+    float i;
+    float prev;
 } PID_t;
+
 
 float PID_Update(PID_t *pid, float error, float dt);
 

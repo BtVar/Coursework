@@ -6,8 +6,8 @@ C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_
                               C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-exit.o) (__stdio_exit_handler)
 C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-fwalk.o)
                               C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-findfp.o) (_fwalk_sglue)
-C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-snprintf.o)
-                              build_F411RE/mpu_i2c.o (snprintf)
+C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-sprintf.o)
+                              build_F411RE/mpu_i2c.o (sprintf)
 C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-stdio.o)
                               C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-findfp.o) (__sread)
 C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-memset.o)
@@ -17,7 +17,7 @@ C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_
 C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-reent.o)
                               C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-closer.o) (errno)
 C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-impure.o)
-                              C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-snprintf.o) (_impure_ptr)
+                              C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-sprintf.o) (_impure_ptr)
 C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-lseekr.o)
                               C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-stdio.o) (_lseek_r)
 C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-readr.o)
@@ -37,7 +37,7 @@ C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_
 C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-mlock.o)
                               C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-freer.o) (__malloc_lock)
 C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-nano-svfprintf.o)
-                              C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-snprintf.o) (_svfprintf_r)
+                              C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-sprintf.o) (_svfprintf_r)
 C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-nano-vfprintf_i.o)
                               C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-nano-svfprintf.o) (_printf_i)
 C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-fflush.o)
@@ -131,6 +131,7 @@ Discarded input sections
  .text          0x00000000        0x0 build_F411RE/main.o
  .data          0x00000000        0x0 build_F411RE/main.o
  .bss           0x00000000        0x0 build_F411RE/main.o
+ .bss.z         0x00000000        0x1 build_F411RE/main.o
  .bss.pwm_state_pa9
                 0x00000000        0x1 build_F411RE/main.o
  .bss.pwm_state_pa8
@@ -144,101 +145,55 @@ Discarded input sections
  .text          0x00000000        0x0 build_F411RE/utils.o
  .data          0x00000000        0x0 build_F411RE/utils.o
  .bss           0x00000000        0x0 build_F411RE/utils.o
- .text.millis   0x00000000        0xc build_F411RE/utils.o
- .text.delay_ms
-                0x00000000       0x14 build_F411RE/utils.o
  .text.constrainf
                 0x00000000       0x22 build_F411RE/utils.o
- .text.Set_PWM_Right_DutyCycle
-                0x00000000       0x2c build_F411RE/utils.o
- .text.Set_PWM_Left_DutyCycle
-                0x00000000       0x2c build_F411RE/utils.o
- .text.left_wheel_direction
+ .text.normalizeAngle
+                0x00000000       0x40 build_F411RE/utils.o
+ .text.PWM_Left
+                0x00000000       0x30 build_F411RE/utils.o
+ .text.PWM_Right
+                0x00000000       0x30 build_F411RE/utils.o
+ .text.left_dir
                 0x00000000       0x34 build_F411RE/utils.o
- .text.right_wheel_direction
+ .text.right_dir
                 0x00000000       0x34 build_F411RE/utils.o
  .text.stopMotors
                 0x00000000       0x1c build_F411RE/utils.o
- .text.PID_Update
-                0x00000000       0x70 build_F411RE/utils.o
- .text.reset_PID
-                0x00000000       0x26 build_F411RE/utils.o
- .text.SpeedBuffer_Init
-                0x00000000       0x28 build_F411RE/utils.o
- .text.SpeedBuffer_Add
-                0x00000000       0x88 build_F411RE/utils.o
- .text.SpeedBuffer_GetAverage
-                0x00000000       0x2c build_F411RE/utils.o
- .text.motionLoop
-                0x00000000      0x2c4 build_F411RE/utils.o
- .text.calculatePulsesForDistance
-                0x00000000       0x2c build_F411RE/utils.o
- .text.calculatePulsesForAngle
-                0x00000000       0x40 build_F411RE/utils.o
- .text.moveForward
-                0x00000000       0x12 build_F411RE/utils.o
- .text.turnLeft
-                0x00000000       0x12 build_F411RE/utils.o
- .text.turnRight
-                0x00000000       0x12 build_F411RE/utils.o
- .bss.n         0x00000000        0x4 build_F411RE/utils.o
- .bss.speedBufferRight
-                0x00000000       0x60 build_F411RE/utils.o
- .bss.speedBufferLeft
-                0x00000000       0x60 build_F411RE/utils.o
- .bss.sync      0x00000000        0x4 build_F411RE/utils.o
- .bss.pwmR      0x00000000        0x4 build_F411RE/utils.o
- .bss.pwmL      0x00000000        0x4 build_F411RE/utils.o
- .bss.speedR    0x00000000        0x4 build_F411RE/utils.o
- .bss.speedL    0x00000000        0x4 build_F411RE/utils.o
- .bss.targetSpeed
-                0x00000000        0x4 build_F411RE/utils.o
- .bss.prevRightPath
-                0x00000000        0x4 build_F411RE/utils.o
- .bss.prevLeftPath
-                0x00000000        0x4 build_F411RE/utils.o
- .bss.rightPath
-                0x00000000        0x4 build_F411RE/utils.o
- .bss.leftPath  0x00000000        0x4 build_F411RE/utils.o
- .bss.Tar       0x00000000        0x4 build_F411RE/utils.o
- .bss.currentPulses
-                0x00000000        0x4 build_F411RE/utils.o
- .bss.posError  0x00000000        0x4 build_F411RE/utils.o
+ .text.PID      0x00000000       0x78 build_F411RE/utils.o
+ .text.PID_Reset
+                0x00000000        0x8 build_F411RE/utils.o
+ .text.moveStraight
+                0x00000000      0x1b0 build_F411RE/utils.o
+ .text.turnByAngle
+                0x00000000      0x1a8 build_F411RE/utils.o
  .data.pidSync  0x00000000       0x14 build_F411RE/utils.o
- .data.pidSpeedRight
+ .data.pidYaw   0x00000000       0x14 build_F411RE/utils.o
+ .data.pidSpeed
                 0x00000000       0x14 build_F411RE/utils.o
- .data.pidSpeedLeft
-                0x00000000       0x14 build_F411RE/utils.o
- .data.pidPosition
-                0x00000000       0x14 build_F411RE/utils.o
- .data.robotCircumference
-                0x00000000        0x4 build_F411RE/utils.o
- .data.wheelCircumference
-                0x00000000        0x4 build_F411RE/utils.o
- .debug_info    0x00000000      0xe4a build_F411RE/utils.o
- .debug_abbrev  0x00000000      0x303 build_F411RE/utils.o
- .debug_loc     0x00000000      0x633 build_F411RE/utils.o
- .debug_aranges
-                0x00000000       0xb0 build_F411RE/utils.o
- .debug_ranges  0x00000000       0xb8 build_F411RE/utils.o
- .debug_line    0x00000000      0x792 build_F411RE/utils.o
- .debug_str     0x00000000      0x571 build_F411RE/utils.o
- .comment       0x00000000       0x46 build_F411RE/utils.o
- .debug_frame   0x00000000      0x1a4 build_F411RE/utils.o
- .ARM.attributes
-                0x00000000       0x34 build_F411RE/utils.o
  .text          0x00000000        0x0 build_F411RE/uart_debug.o
  .data          0x00000000        0x0 build_F411RE/uart_debug.o
  .bss           0x00000000        0x0 build_F411RE/uart_debug.o
- .text.UART_Init
-                0x00000000       0x50 build_F411RE/uart_debug.o
+ .text.UART_SendString
+                0x00000000       0x14 build_F411RE/uart_debug.o
  .text          0x00000000        0x0 build_F411RE/mpu_i2c.o
  .data          0x00000000        0x0 build_F411RE/mpu_i2c.o
  .bss           0x00000000        0x0 build_F411RE/mpu_i2c.o
+ .text.I2C_Init_HW
+                0x00000000       0x90 build_F411RE/mpu_i2c.o
+ .text.I2C_Read
+                0x00000000       0x54 build_F411RE/mpu_i2c.o
+ .text.MPU_Write
+                0x00000000       0x52 build_F411RE/mpu_i2c.o
+ .text.MPU_Init
+                0x00000000       0x78 build_F411RE/mpu_i2c.o
+ .text.MPU_Calibrate
+                0x00000000       0x84 build_F411RE/mpu_i2c.o
  .text.MPU_GetYaw
                 0x00000000        0xc build_F411RE/mpu_i2c.o
  .text.MPU_GetYawRate
                 0x00000000        0xc build_F411RE/mpu_i2c.o
+ .bss.last_time
+                0x00000000        0x4 build_F411RE/mpu_i2c.o
  .text          0x00000000       0x14 build_F411RE/startup_stm32f411xe.o
  .data          0x00000000        0x0 build_F411RE/startup_stm32f411xe.o
  .bss           0x00000000        0x0 build_F411RE/startup_stm32f411xe.o
@@ -284,11 +239,11 @@ Discarded input sections
  .debug_frame   0x00000000       0x34 C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-fwalk.o)
  .ARM.attributes
                 0x00000000       0x34 C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-fwalk.o)
- .text          0x00000000        0x0 C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-snprintf.o)
- .data          0x00000000        0x0 C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-snprintf.o)
- .bss           0x00000000        0x0 C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-snprintf.o)
- .text._snprintf_r
-                0x00000000       0x64 C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-snprintf.o)
+ .text          0x00000000        0x0 C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-sprintf.o)
+ .data          0x00000000        0x0 C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-sprintf.o)
+ .bss           0x00000000        0x0 C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-sprintf.o)
+ .text._sprintf_r
+                0x00000000       0x3c C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-sprintf.o)
  .text          0x00000000        0x0 C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-stdio.o)
  .data          0x00000000        0x0 C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-stdio.o)
  .bss           0x00000000        0x0 C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-stdio.o)
@@ -493,7 +448,7 @@ LOAD C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard/
                 0x08000000                g_pfnVectors
                 0x08000198                        . = ALIGN (0x4)
 
-.text           0x080001a0     0x16bc
+.text           0x080001a0     0x1730
                 0x080001a0                        . = ALIGN (0x4)
  *(.text)
  .text          0x080001a0       0xa0 C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-memchr.o)
@@ -528,273 +483,265 @@ LOAD C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard/
                 0x08000644                SystemInit
  .text._sbrk    0x08000658       0x48 build_F411RE/sysmem.o
                 0x08000658                _sbrk
- .text.main     0x080006a0       0x4c build_F411RE/main.o
+ .text.main     0x080006a0       0x24 build_F411RE/main.o
                 0x080006a0                main
  .text.NVIC_EncodePriority
-                0x080006ec       0x3e build_F411RE/init.o
- *fill*         0x0800072a        0x2 
+                0x080006c4       0x3e build_F411RE/init.o
+ *fill*         0x08000702        0x2 
  .text.GPIO_Init_Ports
-                0x0800072c       0xb8 build_F411RE/init.o
-                0x0800072c                GPIO_Init_Ports
+                0x08000704       0xb8 build_F411RE/init.o
+                0x08000704                GPIO_Init_Ports
  .text.SysTick_Init
-                0x080007e4       0x18 build_F411RE/init.o
-                0x080007e4                SysTick_Init
+                0x080007bc       0x46 build_F411RE/init.o
+                0x080007bc                SysTick_Init
+ *fill*         0x08000802        0x2 
  .text.RCC_Init
-                0x080007fc      0x100 build_F411RE/init.o
-                0x080007fc                RCC_Init
+                0x08000804       0xe0 build_F411RE/init.o
+                0x08000804                RCC_Init
  .text.TIM1_PWM_Init
-                0x080008fc       0x60 build_F411RE/init.o
-                0x080008fc                TIM1_PWM_Init
+                0x080008e4       0xa8 build_F411RE/init.o
+                0x080008e4                TIM1_PWM_Init
  .text.ITR_Init
-                0x0800095c       0x28 build_F411RE/init.o
-                0x0800095c                ITR_Init
+                0x0800098c       0xe8 build_F411RE/init.o
+                0x0800098c                ITR_Init
  .text.SysTick_Handler
-                0x08000984       0x10 build_F411RE/it_handlers.o
-                0x08000984                SysTick_Handler
+                0x08000a74       0x10 build_F411RE/it_handlers.o
+                0x08000a74                SysTick_Handler
  .text.EXTI15_10_IRQHandler
-                0x08000994       0x84 build_F411RE/it_handlers.o
-                0x08000994                EXTI15_10_IRQHandler
+                0x08000a84       0x84 build_F411RE/it_handlers.o
+                0x08000a84                EXTI15_10_IRQHandler
  .text.EXTI9_5_IRQHandler
-                0x08000a18       0x3c build_F411RE/it_handlers.o
-                0x08000a18                EXTI9_5_IRQHandler
+                0x08000b08       0x3c build_F411RE/it_handlers.o
+                0x08000b08                EXTI9_5_IRQHandler
+ .text.millis   0x08000b44        0xc build_F411RE/utils.o
+                0x08000b44                millis
+ .text.UART_Init
+                0x08000b50       0x4c build_F411RE/uart_debug.o
+                0x08000b50                UART_Init
  .text.UART_SendChar
-                0x08000a54       0x14 build_F411RE/uart_debug.o
-                0x08000a54                UART_SendChar
- .text.UART_SendString
-                0x08000a68       0x14 build_F411RE/uart_debug.o
-                0x08000a68                UART_SendString
+                0x08000b9c       0x14 build_F411RE/uart_debug.o
+                0x08000b9c                UART_SendChar
  .text.I2C_Wait
-                0x08000a7c       0x1a build_F411RE/mpu_i2c.o
- *fill*         0x08000a96        0x2 
- .text.I2C_Init_HW
-                0x08000a98       0x7c build_F411RE/mpu_i2c.o
+                0x08000bb0       0x22 build_F411RE/mpu_i2c.o
+                0x08000bb0                I2C_Wait
+ *fill*         0x08000bd2        0x2 
  .text.I2C_Start
-                0x08000b14       0x20 build_F411RE/mpu_i2c.o
+                0x08000bd4       0x20 build_F411RE/mpu_i2c.o
+                0x08000bd4                I2C_Start
  .text.I2C_Stop
-                0x08000b34       0x10 build_F411RE/mpu_i2c.o
+                0x08000bf4       0x14 build_F411RE/mpu_i2c.o
+                0x08000bf4                I2C_Stop
  .text.I2C_Address
-                0x08000b44       0x28 build_F411RE/mpu_i2c.o
+                0x08000c08       0x34 build_F411RE/mpu_i2c.o
+                0x08000c08                I2C_Address
  .text.I2C_Write
-                0x08000b6c       0x34 build_F411RE/mpu_i2c.o
- .text.I2C_Read
-                0x08000ba0       0x54 build_F411RE/mpu_i2c.o
+                0x08000c3c       0x34 build_F411RE/mpu_i2c.o
+                0x08000c3c                I2C_Write
  .text.MPU_Read
-                0x08000bf4       0x54 build_F411RE/mpu_i2c.o
- .text.MPU_Write
-                0x08000c48       0x46 build_F411RE/mpu_i2c.o
- *fill*         0x08000c8e        0x2 
- .text.MPU_Init
-                0x08000c90       0x70 build_F411RE/mpu_i2c.o
-                0x08000c90                MPU_Init
- .text.MPU_Calibrate
-                0x08000d00       0x6c build_F411RE/mpu_i2c.o
-                0x08000d00                MPU_Calibrate
+                0x08000c70       0xec build_F411RE/mpu_i2c.o
+                0x08000c70                MPU_Read
  .text.MPU_Update
-                0x08000d6c       0xd4 build_F411RE/mpu_i2c.o
-                0x08000d6c                MPU_Update
+                0x08000d5c      0x15c build_F411RE/mpu_i2c.o
+                0x08000d5c                MPU_Update
  .text.MPU_Debug_Print
-                0x08000e40       0x58 build_F411RE/mpu_i2c.o
-                0x08000e40                MPU_Debug_Print
+                0x08000eb8       0x7c build_F411RE/mpu_i2c.o
+                0x08000eb8                MPU_Debug_Print
  .text.Reset_Handler
-                0x08000e98       0x50 build_F411RE/startup_stm32f411xe.o
-                0x08000e98                Reset_Handler
+                0x08000f34       0x50 build_F411RE/startup_stm32f411xe.o
+                0x08000f34                Reset_Handler
  .text.Default_Handler
-                0x08000ee8        0x2 build_F411RE/startup_stm32f411xe.o
-                0x08000ee8                RTC_Alarm_IRQHandler
-                0x08000ee8                EXTI2_IRQHandler
-                0x08000ee8                DebugMon_Handler
-                0x08000ee8                SPI4_IRQHandler
-                0x08000ee8                TIM1_CC_IRQHandler
-                0x08000ee8                DMA2_Stream5_IRQHandler
-                0x08000ee8                HardFault_Handler
-                0x08000ee8                DMA1_Stream5_IRQHandler
-                0x08000ee8                PVD_IRQHandler
-                0x08000ee8                SDIO_IRQHandler
-                0x08000ee8                TAMP_STAMP_IRQHandler
-                0x08000ee8                PendSV_Handler
-                0x08000ee8                NMI_Handler
-                0x08000ee8                EXTI3_IRQHandler
-                0x08000ee8                TIM1_UP_TIM10_IRQHandler
-                0x08000ee8                I2C3_ER_IRQHandler
-                0x08000ee8                EXTI0_IRQHandler
-                0x08000ee8                I2C2_EV_IRQHandler
-                0x08000ee8                DMA1_Stream2_IRQHandler
-                0x08000ee8                FPU_IRQHandler
-                0x08000ee8                UsageFault_Handler
-                0x08000ee8                DMA2_Stream2_IRQHandler
-                0x08000ee8                SPI1_IRQHandler
-                0x08000ee8                TIM1_BRK_TIM9_IRQHandler
-                0x08000ee8                DMA2_Stream3_IRQHandler
-                0x08000ee8                USART6_IRQHandler
-                0x08000ee8                DMA2_Stream0_IRQHandler
-                0x08000ee8                TIM4_IRQHandler
-                0x08000ee8                I2C1_EV_IRQHandler
-                0x08000ee8                DMA1_Stream6_IRQHandler
-                0x08000ee8                DMA1_Stream1_IRQHandler
-                0x08000ee8                TIM3_IRQHandler
-                0x08000ee8                RCC_IRQHandler
-                0x08000ee8                Default_Handler
-                0x08000ee8                ADC_IRQHandler
-                0x08000ee8                DMA1_Stream7_IRQHandler
-                0x08000ee8                SPI5_IRQHandler
-                0x08000ee8                TIM5_IRQHandler
-                0x08000ee8                DMA2_Stream7_IRQHandler
-                0x08000ee8                I2C3_EV_IRQHandler
-                0x08000ee8                RTC_WKUP_IRQHandler
-                0x08000ee8                SPI2_IRQHandler
-                0x08000ee8                MemManage_Handler
-                0x08000ee8                DMA1_Stream0_IRQHandler
-                0x08000ee8                SVC_Handler
-                0x08000ee8                EXTI4_IRQHandler
-                0x08000ee8                WWDG_IRQHandler
-                0x08000ee8                TIM2_IRQHandler
-                0x08000ee8                OTG_FS_WKUP_IRQHandler
-                0x08000ee8                TIM1_TRG_COM_TIM11_IRQHandler
-                0x08000ee8                EXTI1_IRQHandler
-                0x08000ee8                USART2_IRQHandler
-                0x08000ee8                I2C2_ER_IRQHandler
-                0x08000ee8                DMA2_Stream1_IRQHandler
-                0x08000ee8                FLASH_IRQHandler
-                0x08000ee8                DMA2_Stream4_IRQHandler
-                0x08000ee8                BusFault_Handler
-                0x08000ee8                USART1_IRQHandler
-                0x08000ee8                OTG_FS_IRQHandler
-                0x08000ee8                SPI3_IRQHandler
-                0x08000ee8                DMA1_Stream4_IRQHandler
-                0x08000ee8                I2C1_ER_IRQHandler
-                0x08000ee8                DMA2_Stream6_IRQHandler
-                0x08000ee8                DMA1_Stream3_IRQHandler
- *fill*         0x08000eea        0x2 
- .text.snprintf
-                0x08000eec       0x6c C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-snprintf.o)
-                0x08000eec                sniprintf
-                0x08000eec                snprintf
- .text.__errno  0x08000f58        0xc C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-errno.o)
-                0x08000f58                __errno
+                0x08000f84        0x2 build_F411RE/startup_stm32f411xe.o
+                0x08000f84                RTC_Alarm_IRQHandler
+                0x08000f84                EXTI2_IRQHandler
+                0x08000f84                DebugMon_Handler
+                0x08000f84                SPI4_IRQHandler
+                0x08000f84                TIM1_CC_IRQHandler
+                0x08000f84                DMA2_Stream5_IRQHandler
+                0x08000f84                HardFault_Handler
+                0x08000f84                DMA1_Stream5_IRQHandler
+                0x08000f84                PVD_IRQHandler
+                0x08000f84                SDIO_IRQHandler
+                0x08000f84                TAMP_STAMP_IRQHandler
+                0x08000f84                PendSV_Handler
+                0x08000f84                NMI_Handler
+                0x08000f84                EXTI3_IRQHandler
+                0x08000f84                TIM1_UP_TIM10_IRQHandler
+                0x08000f84                I2C3_ER_IRQHandler
+                0x08000f84                EXTI0_IRQHandler
+                0x08000f84                I2C2_EV_IRQHandler
+                0x08000f84                DMA1_Stream2_IRQHandler
+                0x08000f84                FPU_IRQHandler
+                0x08000f84                UsageFault_Handler
+                0x08000f84                DMA2_Stream2_IRQHandler
+                0x08000f84                SPI1_IRQHandler
+                0x08000f84                TIM1_BRK_TIM9_IRQHandler
+                0x08000f84                DMA2_Stream3_IRQHandler
+                0x08000f84                USART6_IRQHandler
+                0x08000f84                DMA2_Stream0_IRQHandler
+                0x08000f84                TIM4_IRQHandler
+                0x08000f84                I2C1_EV_IRQHandler
+                0x08000f84                DMA1_Stream6_IRQHandler
+                0x08000f84                DMA1_Stream1_IRQHandler
+                0x08000f84                TIM3_IRQHandler
+                0x08000f84                RCC_IRQHandler
+                0x08000f84                Default_Handler
+                0x08000f84                ADC_IRQHandler
+                0x08000f84                DMA1_Stream7_IRQHandler
+                0x08000f84                SPI5_IRQHandler
+                0x08000f84                TIM5_IRQHandler
+                0x08000f84                DMA2_Stream7_IRQHandler
+                0x08000f84                I2C3_EV_IRQHandler
+                0x08000f84                RTC_WKUP_IRQHandler
+                0x08000f84                SPI2_IRQHandler
+                0x08000f84                MemManage_Handler
+                0x08000f84                DMA1_Stream0_IRQHandler
+                0x08000f84                SVC_Handler
+                0x08000f84                EXTI4_IRQHandler
+                0x08000f84                WWDG_IRQHandler
+                0x08000f84                TIM2_IRQHandler
+                0x08000f84                OTG_FS_WKUP_IRQHandler
+                0x08000f84                TIM1_TRG_COM_TIM11_IRQHandler
+                0x08000f84                EXTI1_IRQHandler
+                0x08000f84                USART2_IRQHandler
+                0x08000f84                I2C2_ER_IRQHandler
+                0x08000f84                DMA2_Stream1_IRQHandler
+                0x08000f84                FLASH_IRQHandler
+                0x08000f84                DMA2_Stream4_IRQHandler
+                0x08000f84                BusFault_Handler
+                0x08000f84                USART1_IRQHandler
+                0x08000f84                OTG_FS_IRQHandler
+                0x08000f84                SPI3_IRQHandler
+                0x08000f84                DMA1_Stream4_IRQHandler
+                0x08000f84                I2C1_ER_IRQHandler
+                0x08000f84                DMA2_Stream6_IRQHandler
+                0x08000f84                DMA1_Stream3_IRQHandler
+ *fill*         0x08000f86        0x2 
+ .text.sprintf  0x08000f88       0x44 C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-sprintf.o)
+                0x08000f88                siprintf
+                0x08000f88                sprintf
+ .text.__errno  0x08000fcc        0xc C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-errno.o)
+                0x08000fcc                __errno
  .text.__libc_init_array
-                0x08000f64       0x48 C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-init.o)
-                0x08000f64                __libc_init_array
+                0x08000fd8       0x48 C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-init.o)
+                0x08000fd8                __libc_init_array
  .text.__retarget_lock_acquire_recursive
-                0x08000fac        0x2 C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-lock.o)
-                0x08000fac                __retarget_lock_acquire_recursive
+                0x08001020        0x2 C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-lock.o)
+                0x08001020                __retarget_lock_acquire_recursive
  .text.__retarget_lock_release_recursive
-                0x08000fae        0x2 C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-lock.o)
-                0x08000fae                __retarget_lock_release_recursive
- .text._free_r  0x08000fb0       0x94 C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-freer.o)
-                0x08000fb0                _free_r
+                0x08001022        0x2 C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-lock.o)
+                0x08001022                __retarget_lock_release_recursive
+ .text._free_r  0x08001024       0x94 C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-freer.o)
+                0x08001024                _free_r
  .text.sbrk_aligned
-                0x08001044       0x44 C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-mallocr.o)
+                0x080010b8       0x44 C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-mallocr.o)
  .text._malloc_r
-                0x08001088      0x100 C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-mallocr.o)
-                0x08001088                _malloc_r
+                0x080010fc      0x100 C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-mallocr.o)
+                0x080010fc                _malloc_r
  .text.__malloc_lock
-                0x08001188        0xc C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-mlock.o)
-                0x08001188                __malloc_lock
+                0x080011fc        0xc C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-mlock.o)
+                0x080011fc                __malloc_lock
  .text.__malloc_unlock
-                0x08001194        0xc C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-mlock.o)
-                0x08001194                __malloc_unlock
+                0x08001208        0xc C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-mlock.o)
+                0x08001208                __malloc_unlock
  .text.__ssputs_r
-                0x080011a0       0xb6 C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-nano-svfprintf.o)
-                0x080011a0                __ssputs_r
- *fill*         0x08001256        0x2 
+                0x08001214       0xb6 C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-nano-svfprintf.o)
+                0x08001214                __ssputs_r
+ *fill*         0x080012ca        0x2 
  .text._svfprintf_r
-                0x08001258      0x1f8 C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-nano-svfprintf.o)
-                0x08001258                _svfiprintf_r
-                0x08001258                _svfprintf_r
+                0x080012cc      0x1f8 C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-nano-svfprintf.o)
+                0x080012cc                _svfiprintf_r
+                0x080012cc                _svfprintf_r
  .text._printf_common
-                0x08001450       0xda C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-nano-vfprintf_i.o)
-                0x08001450                _printf_common
- *fill*         0x0800152a        0x2 
+                0x080014c4       0xda C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-nano-vfprintf_i.o)
+                0x080014c4                _printf_common
+ *fill*         0x0800159e        0x2 
  .text._printf_i
-                0x0800152c      0x23c C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-nano-vfprintf_i.o)
-                0x0800152c                _printf_i
- .text.memmove  0x08001768       0x34 C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-memmove.o)
-                0x08001768                memmove
- .text._sbrk_r  0x0800179c       0x20 C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-sbrkr.o)
-                0x0800179c                _sbrk_r
- .text.memcpy   0x080017bc       0x1c C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-memcpy-stub.o)
-                0x080017bc                memcpy
+                0x080015a0      0x23c C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-nano-vfprintf_i.o)
+                0x080015a0                _printf_i
+ .text.memmove  0x080017dc       0x34 C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-memmove.o)
+                0x080017dc                memmove
+ .text._sbrk_r  0x08001810       0x20 C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-sbrkr.o)
+                0x08001810                _sbrk_r
+ .text.memcpy   0x08001830       0x1c C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-memcpy-stub.o)
+                0x08001830                memcpy
  .text._realloc_r
-                0x080017d8       0x5c C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-reallocr.o)
-                0x080017d8                _realloc_r
+                0x0800184c       0x5c C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-reallocr.o)
+                0x0800184c                _realloc_r
  .text._malloc_usable_size_r
-                0x08001834       0x10 C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-msizer.o)
-                0x08001834                _malloc_usable_size_r
+                0x080018a8       0x10 C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-msizer.o)
+                0x080018a8                _malloc_usable_size_r
  *(.glue_7)
- .glue_7        0x08001844        0x0 linker stubs
+ .glue_7        0x080018b8        0x0 linker stubs
  *(.glue_7t)
- .glue_7t       0x08001844        0x0 linker stubs
+ .glue_7t       0x080018b8        0x0 linker stubs
  *(.eh_frame)
- .eh_frame      0x08001844        0x0 C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard/crtbegin.o
+ .eh_frame      0x080018b8        0x0 C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard/crtbegin.o
  *(.init)
- .init          0x08001844        0x4 C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard/crti.o
-                0x08001844                _init
- .init          0x08001848        0x8 C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard/crtn.o
+ .init          0x080018b8        0x4 C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard/crti.o
+                0x080018b8                _init
+ .init          0x080018bc        0x8 C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard/crtn.o
  *(.fini)
- .fini          0x08001850        0x4 C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard/crti.o
-                0x08001850                _fini
- .fini          0x08001854        0x8 C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard/crtn.o
-                0x0800185c                        . = ALIGN (0x4)
-                0x0800185c                        _etext = .
+ .fini          0x080018c4        0x4 C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard/crti.o
+                0x080018c4                _fini
+ .fini          0x080018c8        0x8 C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard/crtn.o
+                0x080018d0                        . = ALIGN (0x4)
+                0x080018d0                        _etext = .
 
-.vfp11_veneer   0x0800185c        0x0
- .vfp11_veneer  0x0800185c        0x0 linker stubs
+.vfp11_veneer   0x080018d0        0x0
+ .vfp11_veneer  0x080018d0        0x0 linker stubs
 
-.v4_bx          0x0800185c        0x0
- .v4_bx         0x0800185c        0x0 linker stubs
+.v4_bx          0x080018d0        0x0
+ .v4_bx         0x080018d0        0x0 linker stubs
 
-.iplt           0x0800185c        0x0
- .iplt          0x0800185c        0x0 C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard/crtbegin.o
+.iplt           0x080018d0        0x0
+ .iplt          0x080018d0        0x0 C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard/crtbegin.o
 
-.rodata         0x0800185c       0x88
-                0x0800185c                        . = ALIGN (0x4)
+.rodata         0x080018d0       0x64
+                0x080018d0                        . = ALIGN (0x4)
  *(.rodata)
  *(.rodata*)
- .rodata.main.str1.4
-                0x0800185c       0x55 build_F411RE/main.o
-                                 0x2d (size before relaxing)
  .rodata.MPU_Debug_Print.str1.4
-                0x080018b1       0x25 build_F411RE/mpu_i2c.o
+                0x080018d0       0x31 build_F411RE/mpu_i2c.o
  .rodata._svfprintf_r.str1.1
-                0x080018b1       0x33 C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-nano-svfprintf.o)
+                0x08001901       0x33 C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-nano-svfprintf.o)
                                  0x11 (size before relaxing)
  .rodata._printf_i.str1.1
-                0x080018e4       0x22 C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-nano-vfprintf_i.o)
-                0x08001908                        . = ALIGN (0x4)
+                0x08001934       0x22 C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-nano-vfprintf_i.o)
+                0x08001958                        . = ALIGN (0x4)
 
 .ARM.extab
  *(.ARM.extab* .gnu.linkonce.armextab.*)
 
-.ARM            0x080018e4        0x8
-                0x080018e4                        __exidx_start = .
+.ARM            0x08001934        0x8
+                0x08001934                        __exidx_start = .
  *(.ARM.exidx*)
- .ARM.exidx     0x080018e4        0x8 C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-memchr.o)
-                0x080018ec                        __exidx_end = .
+ .ARM.exidx     0x08001934        0x8 C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-memchr.o)
+                0x0800193c                        __exidx_end = .
 
-.rel.dyn        0x080018ec        0x0
- .rel.iplt      0x080018ec        0x0 C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard/crtbegin.o
+.rel.dyn        0x0800193c        0x0
+ .rel.iplt      0x0800193c        0x0 C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard/crtbegin.o
 
-.preinit_array  0x080018ec        0x0
-                0x080018ec                        PROVIDE (__preinit_array_start = .)
+.preinit_array  0x0800193c        0x0
+                0x0800193c                        PROVIDE (__preinit_array_start = .)
  *(.preinit_array*)
-                0x080018ec                        PROVIDE (__preinit_array_end = .)
+                0x0800193c                        PROVIDE (__preinit_array_end = .)
 
-.init_array     0x080018ec        0x4
-                0x080018ec                        PROVIDE (__init_array_start = .)
+.init_array     0x0800193c        0x4
+                0x0800193c                        PROVIDE (__init_array_start = .)
  *(SORT_BY_NAME(.init_array.*))
  *(.init_array*)
- .init_array    0x080018ec        0x4 C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard/crtbegin.o
-                0x080018f0                        PROVIDE (__init_array_end = .)
+ .init_array    0x0800193c        0x4 C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard/crtbegin.o
+                0x08001940                        PROVIDE (__init_array_end = .)
 
-.fini_array     0x080018f0        0x4
+.fini_array     0x08001940        0x4
                 [!provide]                        PROVIDE (__fini_array_start = .)
  *(SORT_BY_NAME(.fini_array.*))
  *(.fini_array*)
- .fini_array    0x080018f0        0x4 C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard/crtbegin.o
+ .fini_array    0x08001940        0x4 C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard/crtbegin.o
                 [!provide]                        PROVIDE (__fini_array_end = .)
-                0x080018f4                        _sidata = LOADADDR (.data)
+                0x08001944                        _sidata = LOADADDR (.data)
 
-.data           0x20000000       0x50 load address 0x080018f4
+.data           0x20000000       0x50 load address 0x08001944
                 0x20000000                        . = ALIGN (0x4)
                 0x20000000                        _sdata = .
  *(.data)
@@ -809,17 +756,17 @@ LOAD C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard/
                 0x20000050                        _edata = .
 
 .tm_clone_table
-                0x20000050        0x0 load address 0x08001944
+                0x20000050        0x0 load address 0x08001994
  .tm_clone_table
                 0x20000050        0x0 C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard/crtbegin.o
  .tm_clone_table
                 0x20000050        0x0 C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard/crtend.o
 
-.igot.plt       0x20000050        0x0 load address 0x08001944
+.igot.plt       0x20000050        0x0 load address 0x08001994
  .igot.plt      0x20000050        0x0 C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard/crtbegin.o
                 0x20000050                        . = ALIGN (0x4)
 
-.bss            0x20000050      0x1a0 load address 0x08001944
+.bss            0x20000050      0x1b0 load address 0x08001994
                 0x20000050                        _sbss = .
                 0x20000050                        __bss_start__ = _sbss
  *(.bss)
@@ -856,40 +803,49 @@ LOAD C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard/
                 0x20000086                left_encoder_ticks
  .bss.last_print.0
                 0x20000088        0x4 build_F411RE/mpu_i2c.o
- .bss.last_time
-                0x2000008c        0x4 build_F411RE/mpu_i2c.o
+ .bss.buffer.1  0x2000008c        0xc build_F411RE/mpu_i2c.o
+ .bss.idx.2     0x20000098        0x1 build_F411RE/mpu_i2c.o
+ *fill*         0x20000099        0x3 
+ .bss.last_update
+                0x2000009c        0x4 build_F411RE/mpu_i2c.o
+ .bss.yaw_angle
+                0x200000a0        0x4 build_F411RE/mpu_i2c.o
+ .bss.gz_filtered
+                0x200000a4        0x4 build_F411RE/mpu_i2c.o
  .bss.gyro_offset_z
-                0x20000090        0x4 build_F411RE/mpu_i2c.o
- .bss.mpu       0x20000094       0x14 build_F411RE/mpu_i2c.o
- .bss.__sf      0x200000a8      0x138 C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-findfp.o)
-                0x200000a8                __sf
- .bss.errno     0x200001e0        0x4 C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-reent.o)
-                0x200001e0                errno
+                0x200000a8        0x4 build_F411RE/mpu_i2c.o
+                0x200000a8                gyro_offset_z
+ .bss.mpu       0x200000ac        0xc build_F411RE/mpu_i2c.o
+                0x200000ac                mpu
+ .bss.__sf      0x200000b8      0x138 C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-findfp.o)
+                0x200000b8                __sf
+ .bss.errno     0x200001f0        0x4 C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-reent.o)
+                0x200001f0                errno
  .bss.__lock___malloc_recursive_mutex
-                0x200001e4        0x1 C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-lock.o)
-                0x200001e4                __lock___malloc_recursive_mutex
- *fill*         0x200001e5        0x3 
+                0x200001f4        0x1 C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-lock.o)
+                0x200001f4                __lock___malloc_recursive_mutex
+ *fill*         0x200001f5        0x3 
  .bss.__malloc_sbrk_start
-                0x200001e8        0x4 C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-mallocr.o)
-                0x200001e8                __malloc_sbrk_start
+                0x200001f8        0x4 C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-mallocr.o)
+                0x200001f8                __malloc_sbrk_start
  .bss.__malloc_free_list
-                0x200001ec        0x4 C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-mallocr.o)
-                0x200001ec                __malloc_free_list
+                0x200001fc        0x4 C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-mallocr.o)
+                0x200001fc                __malloc_free_list
  *(COMMON)
-                0x200001f0                        . = ALIGN (0x4)
-                0x200001f0                        _ebss = .
-                0x200001f0                        __bss_end__ = _ebss
+                0x20000200                        . = ALIGN (0x4)
+                0x20000200                        _ebss = .
+                0x20000200                        __bss_end__ = _ebss
 
 ._user_heap_stack
-                0x200001f0      0x600 load address 0x08001944
-                0x200001f0                        . = ALIGN (0x8)
+                0x20000200      0x600 load address 0x08001994
+                0x20000200                        . = ALIGN (0x8)
                 [!provide]                        PROVIDE (end = .)
-                0x200001f0                        PROVIDE (_end = .)
-                0x200003f0                        . = (. + _Min_Heap_Size)
- *fill*         0x200001f0      0x200 
-                0x200007f0                        . = (. + _Min_Stack_Size)
- *fill*         0x200003f0      0x400 
-                0x200007f0                        . = ALIGN (0x8)
+                0x20000200                        PROVIDE (_end = .)
+                0x20000400                        . = (. + _Min_Heap_Size)
+ *fill*         0x20000200      0x200 
+                0x20000800                        . = (. + _Min_Stack_Size)
+ *fill*         0x20000400      0x400 
+                0x20000800                        . = ALIGN (0x8)
 
 /DISCARD/
  libc.a(*)
@@ -914,88 +870,93 @@ LOAD C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard/
  .ARM.attributes
                 0x00000126       0x34 build_F411RE/it_handlers.o
  .ARM.attributes
-                0x0000015a       0x34 build_F411RE/uart_debug.o
+                0x0000015a       0x34 build_F411RE/utils.o
  .ARM.attributes
-                0x0000018e       0x34 build_F411RE/mpu_i2c.o
+                0x0000018e       0x34 build_F411RE/uart_debug.o
  .ARM.attributes
-                0x000001c2       0x21 build_F411RE/startup_stm32f411xe.o
+                0x000001c2       0x34 build_F411RE/mpu_i2c.o
  .ARM.attributes
-                0x000001e3       0x34 C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-findfp.o)
+                0x000001f6       0x21 build_F411RE/startup_stm32f411xe.o
  .ARM.attributes
-                0x00000217       0x34 C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-snprintf.o)
+                0x00000217       0x34 C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-findfp.o)
  .ARM.attributes
-                0x0000024b       0x34 C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-reent.o)
+                0x0000024b       0x34 C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-sprintf.o)
  .ARM.attributes
-                0x0000027f       0x34 C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-impure.o)
+                0x0000027f       0x34 C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-reent.o)
  .ARM.attributes
-                0x000002b3       0x34 C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-errno.o)
+                0x000002b3       0x34 C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-impure.o)
  .ARM.attributes
-                0x000002e7       0x34 C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-init.o)
+                0x000002e7       0x34 C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-errno.o)
  .ARM.attributes
-                0x0000031b       0x34 C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-lock.o)
+                0x0000031b       0x34 C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-init.o)
  .ARM.attributes
-                0x0000034f       0x34 C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-freer.o)
+                0x0000034f       0x34 C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-lock.o)
  .ARM.attributes
-                0x00000383       0x34 C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-mallocr.o)
+                0x00000383       0x34 C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-freer.o)
  .ARM.attributes
-                0x000003b7       0x34 C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-mlock.o)
+                0x000003b7       0x34 C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-mallocr.o)
  .ARM.attributes
-                0x000003eb       0x34 C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-nano-svfprintf.o)
+                0x000003eb       0x34 C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-mlock.o)
  .ARM.attributes
-                0x0000041f       0x34 C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-nano-vfprintf_i.o)
+                0x0000041f       0x34 C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-nano-svfprintf.o)
  .ARM.attributes
-                0x00000453       0x34 C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-memmove.o)
+                0x00000453       0x34 C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-nano-vfprintf_i.o)
  .ARM.attributes
-                0x00000487       0x34 C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-sbrkr.o)
+                0x00000487       0x34 C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-memmove.o)
  .ARM.attributes
-                0x000004bb       0x1c C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-memchr.o)
+                0x000004bb       0x34 C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-sbrkr.o)
  .ARM.attributes
-                0x000004d7       0x34 C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-memcpy-stub.o)
+                0x000004ef       0x1c C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-memchr.o)
  .ARM.attributes
-                0x0000050b       0x34 C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-reallocr.o)
+                0x0000050b       0x34 C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-memcpy-stub.o)
  .ARM.attributes
-                0x0000053f       0x34 C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-msizer.o)
+                0x0000053f       0x34 C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-reallocr.o)
  .ARM.attributes
-                0x00000573       0x22 C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libgcc.a(_arm_addsubdf3.o)
+                0x00000573       0x34 C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-msizer.o)
  .ARM.attributes
-                0x00000595       0x34 C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard/crtend.o
+                0x000005a7       0x22 C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libgcc.a(_arm_addsubdf3.o)
  .ARM.attributes
-                0x000005c9       0x22 C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard/crtn.o
+                0x000005c9       0x34 C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard/crtend.o
+ .ARM.attributes
+                0x000005fd       0x22 C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard/crtn.o
 OUTPUT(build_F411RE/STM32F411RE.elf elf32-littlearm)
 LOAD linker stubs
 LOAD C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc.a
 LOAD C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libm.a
 LOAD C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libgcc.a
 
-.debug_info     0x00000000     0x2b59
+.debug_info     0x00000000     0x38a8
  .debug_info    0x00000000      0x5de build_F411RE/system_stm32f4xx.o
  .debug_info    0x000005de      0x18c build_F411RE/sysmem.o
- .debug_info    0x0000076a      0x2d7 build_F411RE/main.o
- .debug_info    0x00000a41      0xe30 build_F411RE/init.o
- .debug_info    0x00001871      0x281 build_F411RE/it_handlers.o
- .debug_info    0x00001af2      0x497 build_F411RE/uart_debug.o
- .debug_info    0x00001f89      0xba0 build_F411RE/mpu_i2c.o
- .debug_info    0x00002b29       0x30 build_F411RE/startup_stm32f411xe.o
+ .debug_info    0x0000076a      0x264 build_F411RE/main.o
+ .debug_info    0x000009ce      0xecc build_F411RE/init.o
+ .debug_info    0x0000189a      0x281 build_F411RE/it_handlers.o
+ .debug_info    0x00001b1b      0xb74 build_F411RE/utils.o
+ .debug_info    0x0000268f      0x4ac build_F411RE/uart_debug.o
+ .debug_info    0x00002b3b      0xd3d build_F411RE/mpu_i2c.o
+ .debug_info    0x00003878       0x30 build_F411RE/startup_stm32f411xe.o
 
-.debug_abbrev   0x00000000      0x9e1
+.debug_abbrev   0x00000000      0xc4b
  .debug_abbrev  0x00000000      0x11b build_F411RE/system_stm32f4xx.o
  .debug_abbrev  0x0000011b       0xeb build_F411RE/sysmem.o
- .debug_abbrev  0x00000206      0x10b build_F411RE/main.o
- .debug_abbrev  0x00000311      0x216 build_F411RE/init.o
- .debug_abbrev  0x00000527       0xf2 build_F411RE/it_handlers.o
- .debug_abbrev  0x00000619      0x115 build_F411RE/uart_debug.o
- .debug_abbrev  0x0000072e      0x296 build_F411RE/mpu_i2c.o
- .debug_abbrev  0x000009c4       0x1d build_F411RE/startup_stm32f411xe.o
+ .debug_abbrev  0x00000206       0xc4 build_F411RE/main.o
+ .debug_abbrev  0x000002ca      0x21f build_F411RE/init.o
+ .debug_abbrev  0x000004e9       0xf2 build_F411RE/it_handlers.o
+ .debug_abbrev  0x000005db      0x21d build_F411RE/utils.o
+ .debug_abbrev  0x000007f8      0x10e build_F411RE/uart_debug.o
+ .debug_abbrev  0x00000906      0x328 build_F411RE/mpu_i2c.o
+ .debug_abbrev  0x00000c2e       0x1d build_F411RE/startup_stm32f411xe.o
 
-.debug_loc      0x00000000      0xa09
+.debug_loc      0x00000000     0x115c
  .debug_loc     0x00000000      0x181 build_F411RE/system_stm32f4xx.o
  .debug_loc     0x00000181       0x90 build_F411RE/sysmem.o
  .debug_loc     0x00000211       0x20 build_F411RE/main.o
  .debug_loc     0x00000231      0x206 build_F411RE/init.o
- .debug_loc     0x00000437       0x57 build_F411RE/uart_debug.o
- .debug_loc     0x0000048e      0x57b build_F411RE/mpu_i2c.o
+ .debug_loc     0x00000437      0x686 build_F411RE/utils.o
+ .debug_loc     0x00000abd       0x57 build_F411RE/uart_debug.o
+ .debug_loc     0x00000b14      0x648 build_F411RE/mpu_i2c.o
 
-.debug_aranges  0x00000000      0x1c8
+.debug_aranges  0x00000000      0x240
  .debug_aranges
                 0x00000000       0x28 build_F411RE/system_stm32f4xx.o
  .debug_aranges
@@ -1007,42 +968,47 @@ LOAD C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\
  .debug_aranges
                 0x000000b0       0x30 build_F411RE/it_handlers.o
  .debug_aranges
-                0x000000e0       0x30 build_F411RE/uart_debug.o
+                0x000000e0       0x78 build_F411RE/utils.o
  .debug_aranges
-                0x00000110       0x90 build_F411RE/mpu_i2c.o
+                0x00000158       0x30 build_F411RE/uart_debug.o
  .debug_aranges
-                0x000001a0       0x28 build_F411RE/startup_stm32f411xe.o
+                0x00000188       0x90 build_F411RE/mpu_i2c.o
+ .debug_aranges
+                0x00000218       0x28 build_F411RE/startup_stm32f411xe.o
 
-.debug_ranges   0x00000000      0x180
+.debug_ranges   0x00000000      0x238
  .debug_ranges  0x00000000       0x18 build_F411RE/system_stm32f4xx.o
  .debug_ranges  0x00000018       0x10 build_F411RE/sysmem.o
  .debug_ranges  0x00000028       0x10 build_F411RE/main.o
  .debug_ranges  0x00000038       0x38 build_F411RE/init.o
  .debug_ranges  0x00000070       0x20 build_F411RE/it_handlers.o
- .debug_ranges  0x00000090       0x20 build_F411RE/uart_debug.o
- .debug_ranges  0x000000b0       0xb0 build_F411RE/mpu_i2c.o
- .debug_ranges  0x00000160       0x20 build_F411RE/startup_stm32f411xe.o
+ .debug_ranges  0x00000090       0x98 build_F411RE/utils.o
+ .debug_ranges  0x00000128       0x20 build_F411RE/uart_debug.o
+ .debug_ranges  0x00000148       0xd0 build_F411RE/mpu_i2c.o
+ .debug_ranges  0x00000218       0x20 build_F411RE/startup_stm32f411xe.o
 
-.debug_line     0x00000000     0x1391
+.debug_line     0x00000000     0x1bc1
  .debug_line    0x00000000      0x237 build_F411RE/system_stm32f4xx.o
  .debug_line    0x00000237      0x16f build_F411RE/sysmem.o
- .debug_line    0x000003a6      0x12d build_F411RE/main.o
- .debug_line    0x000004d3      0x3e6 build_F411RE/init.o
- .debug_line    0x000008b9      0x1f1 build_F411RE/it_handlers.o
- .debug_line    0x00000aaa      0x1b3 build_F411RE/uart_debug.o
- .debug_line    0x00000c5d      0x6aa build_F411RE/mpu_i2c.o
- .debug_line    0x00001307       0x8a build_F411RE/startup_stm32f411xe.o
+ .debug_line    0x000003a6      0x117 build_F411RE/main.o
+ .debug_line    0x000004bd      0x3e4 build_F411RE/init.o
+ .debug_line    0x000008a1      0x1f1 build_F411RE/it_handlers.o
+ .debug_line    0x00000a92      0x5e7 build_F411RE/utils.o
+ .debug_line    0x00001079      0x1c0 build_F411RE/uart_debug.o
+ .debug_line    0x00001239      0x8fe build_F411RE/mpu_i2c.o
+ .debug_line    0x00001b37       0x8a build_F411RE/startup_stm32f411xe.o
 
-.debug_str      0x00000000      0xc7a
- .debug_str     0x00000000      0xc7a build_F411RE/system_stm32f4xx.o
+.debug_str      0x00000000      0xdff
+ .debug_str     0x00000000      0xdff build_F411RE/system_stm32f4xx.o
                                 0x362 (size before relaxing)
- .debug_str     0x00000c7a      0x202 build_F411RE/sysmem.o
- .debug_str     0x00000c7a      0x2c7 build_F411RE/main.o
- .debug_str     0x00000c7a      0x898 build_F411RE/init.o
- .debug_str     0x00000c7a      0x289 build_F411RE/it_handlers.o
- .debug_str     0x00000c7a      0x2ed build_F411RE/uart_debug.o
- .debug_str     0x00000c7a      0x44b build_F411RE/mpu_i2c.o
- .debug_str     0x00000c7a       0x6d build_F411RE/startup_stm32f411xe.o
+ .debug_str     0x00000dff      0x202 build_F411RE/sysmem.o
+ .debug_str     0x00000dff      0x2a5 build_F411RE/main.o
+ .debug_str     0x00000dff      0x8c6 build_F411RE/init.o
+ .debug_str     0x00000dff      0x289 build_F411RE/it_handlers.o
+ .debug_str     0x00000dff      0x390 build_F411RE/utils.o
+ .debug_str     0x00000dff      0x2ff build_F411RE/uart_debug.o
+ .debug_str     0x00000dff      0x47b build_F411RE/mpu_i2c.o
+ .debug_str     0x00000dff       0x6d build_F411RE/startup_stm32f411xe.o
 
 .comment        0x00000000       0x45
  .comment       0x00000000       0x45 build_F411RE/system_stm32f4xx.o
@@ -1051,34 +1017,36 @@ LOAD C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\
  .comment       0x00000045       0x46 build_F411RE/main.o
  .comment       0x00000045       0x46 build_F411RE/init.o
  .comment       0x00000045       0x46 build_F411RE/it_handlers.o
+ .comment       0x00000045       0x46 build_F411RE/utils.o
  .comment       0x00000045       0x46 build_F411RE/uart_debug.o
  .comment       0x00000045       0x46 build_F411RE/mpu_i2c.o
 
-.debug_frame    0x00000000      0x948
+.debug_frame    0x00000000      0xa8c
  .debug_frame   0x00000000       0x30 build_F411RE/system_stm32f4xx.o
  .debug_frame   0x00000030       0x28 build_F411RE/sysmem.o
  .debug_frame   0x00000058       0x28 build_F411RE/main.o
  .debug_frame   0x00000080       0x88 build_F411RE/init.o
  .debug_frame   0x00000108       0x40 build_F411RE/it_handlers.o
- .debug_frame   0x00000148       0x48 build_F411RE/uart_debug.o
- .debug_frame   0x00000190      0x198 build_F411RE/mpu_i2c.o
- .debug_frame   0x00000328      0x144 C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-findfp.o)
- .debug_frame   0x0000046c       0x7c C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-snprintf.o)
- .debug_frame   0x000004e8       0x38 C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-reent.o)
- .debug_frame   0x00000520       0x20 C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-errno.o)
- .debug_frame   0x00000540       0x2c C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-init.o)
- .debug_frame   0x0000056c       0xb0 C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-lock.o)
- .debug_frame   0x0000061c       0x38 C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-freer.o)
- .debug_frame   0x00000654       0x50 C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-mallocr.o)
- .debug_frame   0x000006a4       0x30 C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-mlock.o)
- .debug_frame   0x000006d4       0x90 C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-nano-svfprintf.o)
- .debug_frame   0x00000764       0x60 C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-nano-vfprintf_i.o)
- .debug_frame   0x000007c4       0x28 C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-memmove.o)
- .debug_frame   0x000007ec       0x2c C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-sbrkr.o)
- .debug_frame   0x00000818       0x28 C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-memcpy-stub.o)
- .debug_frame   0x00000840       0x3c C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-reallocr.o)
- .debug_frame   0x0000087c       0x20 C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-msizer.o)
- .debug_frame   0x0000089c       0xac C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libgcc.a(_arm_addsubdf3.o)
+ .debug_frame   0x00000148      0x144 build_F411RE/utils.o
+ .debug_frame   0x0000028c       0x48 build_F411RE/uart_debug.o
+ .debug_frame   0x000002d4      0x1a0 build_F411RE/mpu_i2c.o
+ .debug_frame   0x00000474      0x144 C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-findfp.o)
+ .debug_frame   0x000005b8       0x74 C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-sprintf.o)
+ .debug_frame   0x0000062c       0x38 C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-reent.o)
+ .debug_frame   0x00000664       0x20 C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-errno.o)
+ .debug_frame   0x00000684       0x2c C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-init.o)
+ .debug_frame   0x000006b0       0xb0 C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-lock.o)
+ .debug_frame   0x00000760       0x38 C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-freer.o)
+ .debug_frame   0x00000798       0x50 C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-mallocr.o)
+ .debug_frame   0x000007e8       0x30 C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-mlock.o)
+ .debug_frame   0x00000818       0x90 C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-nano-svfprintf.o)
+ .debug_frame   0x000008a8       0x60 C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-nano-vfprintf_i.o)
+ .debug_frame   0x00000908       0x28 C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-memmove.o)
+ .debug_frame   0x00000930       0x2c C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-sbrkr.o)
+ .debug_frame   0x0000095c       0x28 C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-memcpy-stub.o)
+ .debug_frame   0x00000984       0x3c C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-reallocr.o)
+ .debug_frame   0x000009c0       0x20 C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-msizer.o)
+ .debug_frame   0x000009e0       0xac C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libgcc.a(_arm_addsubdf3.o)
 
 .debug_line_str
                 0x00000000      0x1af
@@ -1131,24 +1099,34 @@ I2C2_ER_IRQHandler                                build_F411RE/startup_stm32f411
 I2C2_EV_IRQHandler                                build_F411RE/startup_stm32f411xe.o
 I2C3_ER_IRQHandler                                build_F411RE/startup_stm32f411xe.o
 I2C3_EV_IRQHandler                                build_F411RE/startup_stm32f411xe.o
+I2C_Address                                       build_F411RE/mpu_i2c.o
+I2C_Init_HW                                       build_F411RE/mpu_i2c.o
+I2C_Read                                          build_F411RE/mpu_i2c.o
+I2C_Start                                         build_F411RE/mpu_i2c.o
+I2C_Stop                                          build_F411RE/mpu_i2c.o
+I2C_Wait                                          build_F411RE/mpu_i2c.o
+I2C_Write                                         build_F411RE/mpu_i2c.o
 ITR_Init                                          build_F411RE/init.o
                                                   build_F411RE/main.o
 MPU_Calibrate                                     build_F411RE/mpu_i2c.o
-                                                  build_F411RE/main.o
 MPU_Debug_Print                                   build_F411RE/mpu_i2c.o
                                                   build_F411RE/main.o
 MPU_GetYaw                                        build_F411RE/mpu_i2c.o
 MPU_GetYawRate                                    build_F411RE/mpu_i2c.o
 MPU_Init                                          build_F411RE/mpu_i2c.o
-                                                  build_F411RE/main.o
+MPU_Read                                          build_F411RE/mpu_i2c.o
 MPU_Update                                        build_F411RE/mpu_i2c.o
                                                   build_F411RE/main.o
+MPU_Write                                         build_F411RE/mpu_i2c.o
 MemManage_Handler                                 build_F411RE/startup_stm32f411xe.o
 NMI_Handler                                       build_F411RE/startup_stm32f411xe.o
 OTG_FS_IRQHandler                                 build_F411RE/startup_stm32f411xe.o
 OTG_FS_WKUP_IRQHandler                            build_F411RE/startup_stm32f411xe.o
-PID_Update                                        build_F411RE/utils.o
+PID                                               build_F411RE/utils.o
+PID_Reset                                         build_F411RE/utils.o
 PVD_IRQHandler                                    build_F411RE/startup_stm32f411xe.o
+PWM_Left                                          build_F411RE/utils.o
+PWM_Right                                         build_F411RE/utils.o
 PendSV_Handler                                    build_F411RE/startup_stm32f411xe.o
 RCC_IRQHandler                                    build_F411RE/startup_stm32f411xe.o
 RCC_Init                                          build_F411RE/init.o
@@ -1163,11 +1141,6 @@ SPI3_IRQHandler                                   build_F411RE/startup_stm32f411
 SPI4_IRQHandler                                   build_F411RE/startup_stm32f411xe.o
 SPI5_IRQHandler                                   build_F411RE/startup_stm32f411xe.o
 SVC_Handler                                       build_F411RE/startup_stm32f411xe.o
-Set_PWM_Left_DutyCycle                            build_F411RE/utils.o
-Set_PWM_Right_DutyCycle                           build_F411RE/utils.o
-SpeedBuffer_Add                                   build_F411RE/utils.o
-SpeedBuffer_GetAverage                            build_F411RE/utils.o
-SpeedBuffer_Init                                  build_F411RE/utils.o
 SysTick_Handler                                   build_F411RE/it_handlers.o
 SysTick_Init                                      build_F411RE/init.o
                                                   build_F411RE/main.o
@@ -1186,12 +1159,11 @@ TIM2_IRQHandler                                   build_F411RE/startup_stm32f411
 TIM3_IRQHandler                                   build_F411RE/startup_stm32f411xe.o
 TIM4_IRQHandler                                   build_F411RE/startup_stm32f411xe.o
 TIM5_IRQHandler                                   build_F411RE/startup_stm32f411xe.o
-Tar                                               build_F411RE/utils.o
 UART_Init                                         build_F411RE/uart_debug.o
-UART_SendChar                                     build_F411RE/uart_debug.o
-UART_SendString                                   build_F411RE/uart_debug.o
-                                                  build_F411RE/mpu_i2c.o
                                                   build_F411RE/main.o
+UART_SendChar                                     build_F411RE/uart_debug.o
+                                                  build_F411RE/mpu_i2c.o
+UART_SendString                                   build_F411RE/uart_debug.o
 USART1_IRQHandler                                 build_F411RE/startup_stm32f411xe.o
 USART2_IRQHandler                                 build_F411RE/startup_stm32f411xe.o
 USART6_IRQHandler                                 build_F411RE/startup_stm32f411xe.o
@@ -1333,7 +1305,7 @@ _impure_ptr                                       C:/SysGCC/arm-eabi/bin/../lib/
                                                   C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-fflush.o)
                                                   C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-errno.o)
                                                   C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-reent.o)
-                                                  C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-snprintf.o)
+                                                  C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-sprintf.o)
 _init                                             C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard/crti.o
                                                   C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-init.o)
 _isatty                                           build_F411RE/syscalls.o
@@ -1369,14 +1341,14 @@ _sbrk_r                                           C:/SysGCC/arm-eabi/bin/../lib/
 _sbss                                             build_F411RE/startup_stm32f411xe.o
 _sdata                                            build_F411RE/startup_stm32f411xe.o
 _sidata                                           build_F411RE/startup_stm32f411xe.o
-_sniprintf_r                                      C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-snprintf.o)
-_snprintf_r                                       C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-snprintf.o)
+_siprintf_r                                       C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-sprintf.o)
+_sprintf_r                                        C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-sprintf.o)
 _stack_init                                       C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard/crt0.o
 _start                                            C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard/crt0.o
 _stat                                             build_F411RE/syscalls.o
 _svfiprintf_r                                     C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-nano-svfprintf.o)
 _svfprintf_r                                      C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-nano-svfprintf.o)
-                                                  C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-snprintf.o)
+                                                  C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-sprintf.o)
 _times                                            build_F411RE/syscalls.o
 _unlink                                           build_F411RE/syscalls.o
 _wait                                             build_F411RE/syscalls.o
@@ -1387,11 +1359,7 @@ _write_r                                          C:/SysGCC/arm-eabi/bin/../lib/
 atexit                                            C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard/crt0.o
 button_delay_counter                              build_F411RE/main.o
                                                   build_F411RE/it_handlers.o
-calculatePulsesForAngle                           build_F411RE/utils.o
-calculatePulsesForDistance                        build_F411RE/utils.o
 constrainf                                        build_F411RE/utils.o
-currentPulses                                     build_F411RE/utils.o
-delay_ms                                          build_F411RE/utils.o
 environ                                           build_F411RE/syscalls.o
 errno                                             C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-reent.o)
                                                   C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-sbrkr.o)
@@ -1403,15 +1371,16 @@ exit                                              C:/SysGCC/arm-eabi/bin/../lib/
                                                   C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard/crt0.o
 fflush                                            C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-fflush.o)
 g_pfnVectors                                      build_F411RE/startup_stm32f411xe.o
+gyro_offset_z                                     build_F411RE/mpu_i2c.o
 hardware_init_hook                                C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard/crt0.o
 initialise_monitor_handles                        build_F411RE/syscalls.o
-leftPath                                          build_F411RE/utils.o
+last_time                                         build_F411RE/mpu_i2c.o
 left_delay_counter                                build_F411RE/main.o
                                                   build_F411RE/it_handlers.o
+left_dir                                          build_F411RE/utils.o
 left_encoder_ticks                                build_F411RE/main.o
                                                   build_F411RE/utils.o
                                                   build_F411RE/it_handlers.o
-left_wheel_direction                              build_F411RE/utils.o
 main                                              build_F411RE/main.o
                                                   build_F411RE/startup_stm32f411xe.o
                                                   C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard/crt0.o
@@ -1427,48 +1396,32 @@ memset                                            C:/SysGCC/arm-eabi/bin/../lib/
                                                   C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-findfp.o)
                                                   C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard/crt0.o
 millis                                            build_F411RE/utils.o
-millis_counter                                    build_F411RE/main.o
                                                   build_F411RE/mpu_i2c.o
+millis_counter                                    build_F411RE/main.o
                                                   build_F411RE/utils.o
-motionLoop                                        build_F411RE/utils.o
-moveForward                                       build_F411RE/utils.o
-n                                                 build_F411RE/utils.o
-pidPosition                                       build_F411RE/utils.o
-pidSpeedLeft                                      build_F411RE/utils.o
-pidSpeedRight                                     build_F411RE/utils.o
+moveStraight                                      build_F411RE/utils.o
+mpu                                               build_F411RE/mpu_i2c.o
+normalizeAngle                                    build_F411RE/utils.o
+pidSpeed                                          build_F411RE/utils.o
 pidSync                                           build_F411RE/utils.o
-posError                                          build_F411RE/utils.o
-prevLeftPath                                      build_F411RE/utils.o
-prevRightPath                                     build_F411RE/utils.o
-pwmL                                              build_F411RE/utils.o
-pwmR                                              build_F411RE/utils.o
+pidYaw                                            build_F411RE/utils.o
 pwm_state_pa8                                     build_F411RE/main.o
 pwm_state_pa9                                     build_F411RE/main.o
-reset_PID                                         build_F411RE/utils.o
-rightPath                                         build_F411RE/utils.o
 right_delay_counter                               build_F411RE/main.o
                                                   build_F411RE/it_handlers.o
+right_dir                                         build_F411RE/utils.o
 right_encoder_ticks                               build_F411RE/main.o
                                                   build_F411RE/utils.o
                                                   build_F411RE/it_handlers.o
-right_wheel_direction                             build_F411RE/utils.o
-robotCircumference                                build_F411RE/utils.o
-sniprintf                                         C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-snprintf.o)
-snprintf                                          C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-snprintf.o)
-                                                  build_F411RE/mpu_i2c.o
+siprintf                                          C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-sprintf.o)
 software_init_hook                                C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard/crt0.o
-speedBufferLeft                                   build_F411RE/utils.o
-speedBufferRight                                  build_F411RE/utils.o
-speedL                                            build_F411RE/utils.o
-speedR                                            build_F411RE/utils.o
+sprintf                                           C:/SysGCC/arm-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-sprintf.o)
+                                                  build_F411RE/mpu_i2c.o
 status_button                                     build_F411RE/main.o
                                                   build_F411RE/it_handlers.o
 stopMotors                                        build_F411RE/utils.o
-sync                                              build_F411RE/utils.o
 sys_tick                                          build_F411RE/main.o
-                                                  build_F411RE/utils.o
                                                   build_F411RE/it_handlers.o
-targetSpeed                                       build_F411RE/utils.o
-turnLeft                                          build_F411RE/utils.o
-turnRight                                         build_F411RE/utils.o
-wheelCircumference                                build_F411RE/utils.o
+turnByAngle                                       build_F411RE/utils.o
+yaw_angle                                         build_F411RE/utils.o
+z                                                 build_F411RE/main.o
