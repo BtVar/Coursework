@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\parni\AppData\Local\Temp\ccfVsrba.s 			page 1
+ARM GAS  C:\Users\parni\AppData\Local\Temp\cceN2JP6.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -37,78 +37,75 @@ ARM GAS  C:\Users\parni\AppData\Local\Temp\ccfVsrba.s 			page 1
    7:Core/Src/it_handlers.c **** extern uint32_t left_delay_counter;
    8:Core/Src/it_handlers.c **** extern uint32_t right_delay_counter;
    9:Core/Src/it_handlers.c **** extern uint16_t button_delay_counter;
-  10:Core/Src/it_handlers.c **** extern uint32_t mpu_delay_counter;
-  11:Core/Src/it_handlers.c **** 
-  12:Core/Src/it_handlers.c **** extern volatile uint32_t sys_tick;
-  13:Core/Src/it_handlers.c **** 
-  14:Core/Src/it_handlers.c **** extern bool status_button;
-  15:Core/Src/it_handlers.c **** 
-  16:Core/Src/it_handlers.c **** void SysTick_Handler(void)
-  17:Core/Src/it_handlers.c **** {
-  29              		.loc 1 17 1 view -0
+  10:Core/Src/it_handlers.c **** 
+  11:Core/Src/it_handlers.c **** extern volatile uint32_t sys_tick;
+  12:Core/Src/it_handlers.c **** 
+  13:Core/Src/it_handlers.c **** extern volatile bool status_button;
+  14:Core/Src/it_handlers.c **** 
+  15:Core/Src/it_handlers.c **** void SysTick_Handler(void)
+  16:Core/Src/it_handlers.c **** {
+  29              		.loc 1 16 1 view -0
   30              		.cfi_startproc
   31              		@ args = 0, pretend = 0, frame = 0
   32              		@ frame_needed = 0, uses_anonymous_args = 0
   33              		@ link register save eliminated.
-  18:Core/Src/it_handlers.c ****     sys_tick++;
-  34              		.loc 1 18 5 view .LVU1
-  35              		.loc 1 18 13 is_stmt 0 view .LVU2
+  17:Core/Src/it_handlers.c ****     sys_tick++;
+  34              		.loc 1 17 5 view .LVU1
+  35              		.loc 1 17 13 is_stmt 0 view .LVU2
   36 0000 0B4A     		ldr	r2, .L5
   37 0002 1368     		ldr	r3, [r2]
   38 0004 0133     		adds	r3, r3, #1
   39 0006 1360     		str	r3, [r2]
-  19:Core/Src/it_handlers.c **** 
-ARM GAS  C:\Users\parni\AppData\Local\Temp\ccfVsrba.s 			page 2
+  18:Core/Src/it_handlers.c **** 
+  19:Core/Src/it_handlers.c ****     if (left_delay_counter > 0)
+ARM GAS  C:\Users\parni\AppData\Local\Temp\cceN2JP6.s 			page 2
 
 
-  20:Core/Src/it_handlers.c ****     if (left_delay_counter > 0)
-  40              		.loc 1 20 5 is_stmt 1 view .LVU3
-  41              		.loc 1 20 28 is_stmt 0 view .LVU4
+  40              		.loc 1 19 5 is_stmt 1 view .LVU3
+  41              		.loc 1 19 28 is_stmt 0 view .LVU4
   42 0008 0A4B     		ldr	r3, .L5+4
   43 000a 1B68     		ldr	r3, [r3]
-  44              		.loc 1 20 8 view .LVU5
+  44              		.loc 1 19 8 view .LVU5
   45 000c 13B1     		cbz	r3, .L2
-  21:Core/Src/it_handlers.c ****         left_delay_counter--;
-  46              		.loc 1 21 9 is_stmt 1 view .LVU6
-  47              		.loc 1 21 27 is_stmt 0 view .LVU7
+  20:Core/Src/it_handlers.c ****         left_delay_counter--;
+  46              		.loc 1 20 9 is_stmt 1 view .LVU6
+  47              		.loc 1 20 27 is_stmt 0 view .LVU7
   48 000e 013B     		subs	r3, r3, #1
   49 0010 084A     		ldr	r2, .L5+4
   50 0012 1360     		str	r3, [r2]
   51              	.L2:
-  22:Core/Src/it_handlers.c **** 
-  23:Core/Src/it_handlers.c ****     if (right_delay_counter > 0)
-  52              		.loc 1 23 5 is_stmt 1 view .LVU8
-  53              		.loc 1 23 29 is_stmt 0 view .LVU9
+  21:Core/Src/it_handlers.c **** 
+  22:Core/Src/it_handlers.c ****     if (right_delay_counter > 0)
+  52              		.loc 1 22 5 is_stmt 1 view .LVU8
+  53              		.loc 1 22 29 is_stmt 0 view .LVU9
   54 0014 084B     		ldr	r3, .L5+8
   55 0016 1B68     		ldr	r3, [r3]
-  56              		.loc 1 23 8 view .LVU10
+  56              		.loc 1 22 8 view .LVU10
   57 0018 13B1     		cbz	r3, .L3
-  24:Core/Src/it_handlers.c ****         right_delay_counter--;
-  58              		.loc 1 24 9 is_stmt 1 view .LVU11
-  59              		.loc 1 24 28 is_stmt 0 view .LVU12
+  23:Core/Src/it_handlers.c ****         right_delay_counter--;
+  58              		.loc 1 23 9 is_stmt 1 view .LVU11
+  59              		.loc 1 23 28 is_stmt 0 view .LVU12
   60 001a 013B     		subs	r3, r3, #1
   61 001c 064A     		ldr	r2, .L5+8
   62 001e 1360     		str	r3, [r2]
   63              	.L3:
-  25:Core/Src/it_handlers.c **** 
-  26:Core/Src/it_handlers.c ****     if (button_delay_counter > 0)
-  64              		.loc 1 26 5 is_stmt 1 view .LVU13
-  65              		.loc 1 26 30 is_stmt 0 view .LVU14
+  24:Core/Src/it_handlers.c **** 
+  25:Core/Src/it_handlers.c ****     if (button_delay_counter > 0)
+  64              		.loc 1 25 5 is_stmt 1 view .LVU13
+  65              		.loc 1 25 30 is_stmt 0 view .LVU14
   66 0020 064B     		ldr	r3, .L5+12
   67 0022 1B88     		ldrh	r3, [r3]
-  68              		.loc 1 26 8 view .LVU15
+  68              		.loc 1 25 8 view .LVU15
   69 0024 13B1     		cbz	r3, .L1
-  27:Core/Src/it_handlers.c ****         button_delay_counter--;
-  70              		.loc 1 27 9 is_stmt 1 view .LVU16
-  71              		.loc 1 27 29 is_stmt 0 view .LVU17
+  26:Core/Src/it_handlers.c ****         button_delay_counter--;
+  70              		.loc 1 26 9 is_stmt 1 view .LVU16
+  71              		.loc 1 26 29 is_stmt 0 view .LVU17
   72 0026 013B     		subs	r3, r3, #1
   73 0028 044A     		ldr	r2, .L5+12
   74 002a 1380     		strh	r3, [r2]	@ movhi
   75              	.L1:
-  28:Core/Src/it_handlers.c **** 
-  29:Core/Src/it_handlers.c ****     
-  30:Core/Src/it_handlers.c **** }
-  76              		.loc 1 30 1 view .LVU18
+  27:Core/Src/it_handlers.c **** }
+  76              		.loc 1 27 1 view .LVU18
   77 002c 7047     		bx	lr
   78              	.L6:
   79 002e 00BF     		.align	2
@@ -118,136 +115,136 @@ ARM GAS  C:\Users\parni\AppData\Local\Temp\ccfVsrba.s 			page 1
   83 0038 00000000 		.word	right_delay_counter
   84 003c 00000000 		.word	button_delay_counter
   85              		.cfi_endproc
-ARM GAS  C:\Users\parni\AppData\Local\Temp\ccfVsrba.s 			page 3
-
-
   86              	.LFE130:
   88              		.section	.text.EXTI15_10_IRQHandler,"ax",%progbits
   89              		.align	1
+ARM GAS  C:\Users\parni\AppData\Local\Temp\cceN2JP6.s 			page 3
+
+
   90              		.global	EXTI15_10_IRQHandler
   91              		.syntax unified
   92              		.thumb
   93              		.thumb_func
   95              	EXTI15_10_IRQHandler:
   96              	.LFB131:
-  31:Core/Src/it_handlers.c **** 
-  32:Core/Src/it_handlers.c **** void EXTI15_10_IRQHandler(void)
-  33:Core/Src/it_handlers.c **** {
-  97              		.loc 1 33 1 is_stmt 1 view -0
+  28:Core/Src/it_handlers.c **** 
+  29:Core/Src/it_handlers.c **** void EXTI15_10_IRQHandler(void)
+  30:Core/Src/it_handlers.c **** {
+  97              		.loc 1 30 1 is_stmt 1 view -0
   98              		.cfi_startproc
   99              		@ args = 0, pretend = 0, frame = 0
  100              		@ frame_needed = 0, uses_anonymous_args = 0
  101              		@ link register save eliminated.
-  34:Core/Src/it_handlers.c ****     // Обработчик прерываний с правого энкодера PC12
-  35:Core/Src/it_handlers.c ****     if (READ_BIT(EXTI->PR, EXTI_PR_PR12))
- 102              		.loc 1 35 5 view .LVU20
- 103              		.loc 1 35 9 is_stmt 0 view .LVU21
+  31:Core/Src/it_handlers.c ****     // Обработчик прерываний с правого энкодера PC12
+  32:Core/Src/it_handlers.c ****     if (READ_BIT(EXTI->PR, EXTI_PR_PR12))
+ 102              		.loc 1 32 5 view .LVU20
+ 103              		.loc 1 32 9 is_stmt 0 view .LVU21
  104 0000 1A4B     		ldr	r3, .L12
  105 0002 5B69     		ldr	r3, [r3, #20]
- 106              		.loc 1 35 8 view .LVU22
+ 106              		.loc 1 32 8 view .LVU22
  107 0004 13F4805F 		tst	r3, #4096
  108 0008 15D0     		beq	.L8
-  36:Core/Src/it_handlers.c ****     {
-  37:Core/Src/it_handlers.c ****         if (READ_BIT(GPIOC->IDR, GPIO_IDR_ID12))
- 109              		.loc 1 37 9 is_stmt 1 view .LVU23
- 110              		.loc 1 37 13 is_stmt 0 view .LVU24
+  33:Core/Src/it_handlers.c ****     {
+  34:Core/Src/it_handlers.c ****         if (READ_BIT(GPIOC->IDR, GPIO_IDR_ID12))
+ 109              		.loc 1 34 9 is_stmt 1 view .LVU23
+ 110              		.loc 1 34 13 is_stmt 0 view .LVU24
  111 000a 194B     		ldr	r3, .L12+4
  112 000c 1B69     		ldr	r3, [r3, #16]
- 113              		.loc 1 37 12 view .LVU25
+ 113              		.loc 1 34 12 view .LVU25
  114 000e 13F4805F 		tst	r3, #4096
  115 0012 0BD0     		beq	.L9
-  38:Core/Src/it_handlers.c ****         {
-  39:Core/Src/it_handlers.c ****             if (right_delay_counter == 0)
- 116              		.loc 1 39 13 is_stmt 1 view .LVU26
- 117              		.loc 1 39 37 is_stmt 0 view .LVU27
+  35:Core/Src/it_handlers.c ****         {
+  36:Core/Src/it_handlers.c ****             if (right_delay_counter == 0)
+ 116              		.loc 1 36 13 is_stmt 1 view .LVU26
+ 117              		.loc 1 36 37 is_stmt 0 view .LVU27
  118 0014 174B     		ldr	r3, .L12+8
  119 0016 1B68     		ldr	r3, [r3]
- 120              		.loc 1 39 16 view .LVU28
+ 120              		.loc 1 36 16 view .LVU28
  121 0018 43B9     		cbnz	r3, .L9
-  40:Core/Src/it_handlers.c ****             {
-  41:Core/Src/it_handlers.c ****                 right_encoder_ticks++;
- 122              		.loc 1 41 17 is_stmt 1 view .LVU29
- 123              		.loc 1 41 36 is_stmt 0 view .LVU30
+  37:Core/Src/it_handlers.c ****             {
+  38:Core/Src/it_handlers.c ****                 right_encoder_ticks++;
+ 122              		.loc 1 38 17 is_stmt 1 view .LVU29
+ 123              		.loc 1 38 36 is_stmt 0 view .LVU30
  124 001a 174A     		ldr	r2, .L12+12
  125 001c 1388     		ldrh	r3, [r2]
  126 001e 9BB2     		uxth	r3, r3
  127 0020 0133     		adds	r3, r3, #1
  128 0022 9BB2     		uxth	r3, r3
  129 0024 1380     		strh	r3, [r2]	@ movhi
-  42:Core/Src/it_handlers.c ****                 right_delay_counter = 1;
- 130              		.loc 1 42 17 is_stmt 1 view .LVU31
- 131              		.loc 1 42 37 is_stmt 0 view .LVU32
+  39:Core/Src/it_handlers.c ****                 right_delay_counter = 1;
+ 130              		.loc 1 39 17 is_stmt 1 view .LVU31
+ 131              		.loc 1 39 37 is_stmt 0 view .LVU32
  132 0026 134B     		ldr	r3, .L12+8
-ARM GAS  C:\Users\parni\AppData\Local\Temp\ccfVsrba.s 			page 4
-
-
  133 0028 0122     		movs	r2, #1
  134 002a 1A60     		str	r2, [r3]
  135              	.L9:
-  43:Core/Src/it_handlers.c ****             }
-  44:Core/Src/it_handlers.c ****         }
-  45:Core/Src/it_handlers.c **** 
-  46:Core/Src/it_handlers.c ****         SET_BIT(EXTI->PR, EXTI_PR_PR12);
- 136              		.loc 1 46 9 is_stmt 1 view .LVU33
+ARM GAS  C:\Users\parni\AppData\Local\Temp\cceN2JP6.s 			page 4
+
+
+  40:Core/Src/it_handlers.c ****             }
+  41:Core/Src/it_handlers.c ****         }
+  42:Core/Src/it_handlers.c **** 
+  43:Core/Src/it_handlers.c ****         SET_BIT(EXTI->PR, EXTI_PR_PR12);
+ 136              		.loc 1 43 9 is_stmt 1 view .LVU33
  137 002c 0F4A     		ldr	r2, .L12
  138 002e 5369     		ldr	r3, [r2, #20]
  139 0030 43F48053 		orr	r3, r3, #4096
  140 0034 5361     		str	r3, [r2, #20]
  141              	.L8:
-  47:Core/Src/it_handlers.c ****     }
-  48:Core/Src/it_handlers.c **** 
-  49:Core/Src/it_handlers.c ****     // Обработчик прерываний с кнопки PC13
-  50:Core/Src/it_handlers.c ****     if (READ_BIT(EXTI->PR, EXTI_PR_PR13))
- 142              		.loc 1 50 5 view .LVU34
- 143              		.loc 1 50 9 is_stmt 0 view .LVU35
+  44:Core/Src/it_handlers.c ****     }
+  45:Core/Src/it_handlers.c **** 
+  46:Core/Src/it_handlers.c ****     // Обработчик прерываний с кнопки PC13
+  47:Core/Src/it_handlers.c ****     if (READ_BIT(EXTI->PR, EXTI_PR_PR13))
+ 142              		.loc 1 47 5 view .LVU34
+ 143              		.loc 1 47 9 is_stmt 0 view .LVU35
  144 0036 0D4B     		ldr	r3, .L12
  145 0038 5B69     		ldr	r3, [r3, #20]
- 146              		.loc 1 50 8 view .LVU36
+ 146              		.loc 1 47 8 view .LVU36
  147 003a 13F4005F 		tst	r3, #8192
  148 003e 14D0     		beq	.L7
-  51:Core/Src/it_handlers.c ****     {
-  52:Core/Src/it_handlers.c ****         if (((READ_BIT(GPIOC->IDR, GPIO_IDR_ID13) != 0)) && (button_delay_counter == 0))
- 149              		.loc 1 52 9 is_stmt 1 view .LVU37
- 150              		.loc 1 52 15 is_stmt 0 view .LVU38
+  48:Core/Src/it_handlers.c ****     {
+  49:Core/Src/it_handlers.c ****         if (((READ_BIT(GPIOC->IDR, GPIO_IDR_ID13) == 0)) && (button_delay_counter == 0))
+ 149              		.loc 1 49 9 is_stmt 1 view .LVU37
+ 150              		.loc 1 49 15 is_stmt 0 view .LVU38
  151 0040 0B4B     		ldr	r3, .L12+4
  152 0042 1B69     		ldr	r3, [r3, #16]
- 153              		.loc 1 52 12 view .LVU39
+ 153              		.loc 1 49 12 view .LVU39
  154 0044 13F4005F 		tst	r3, #8192
- 155 0048 0AD0     		beq	.L11
- 156              		.loc 1 52 83 discriminator 1 view .LVU40
+ 155 0048 0AD1     		bne	.L11
+ 156              		.loc 1 49 83 discriminator 1 view .LVU40
  157 004a 0C4B     		ldr	r3, .L12+16
  158 004c 1B88     		ldrh	r3, [r3]
- 159              		.loc 1 52 58 discriminator 1 view .LVU41
+ 159              		.loc 1 49 58 discriminator 1 view .LVU41
  160 004e 3BB9     		cbnz	r3, .L11
-  53:Core/Src/it_handlers.c ****         {
-  54:Core/Src/it_handlers.c ****             button_delay_counter = 100;
- 161              		.loc 1 54 13 is_stmt 1 view .LVU42
- 162              		.loc 1 54 34 is_stmt 0 view .LVU43
+  50:Core/Src/it_handlers.c ****         {
+  51:Core/Src/it_handlers.c ****             button_delay_counter = 100;
+ 161              		.loc 1 51 13 is_stmt 1 view .LVU42
+ 162              		.loc 1 51 34 is_stmt 0 view .LVU43
  163 0050 0A4B     		ldr	r3, .L12+16
  164 0052 6422     		movs	r2, #100
  165 0054 1A80     		strh	r2, [r3]	@ movhi
-  55:Core/Src/it_handlers.c ****             status_button = !status_button;
- 166              		.loc 1 55 13 is_stmt 1 view .LVU44
+  52:Core/Src/it_handlers.c ****             status_button = !status_button;
+ 166              		.loc 1 52 13 is_stmt 1 view .LVU44
  167 0056 0A4A     		ldr	r2, .L12+20
  168 0058 1378     		ldrb	r3, [r2]	@ zero_extendqisi2
  169 005a 83F00103 		eor	r3, r3, #1
- 170              		.loc 1 55 27 is_stmt 0 view .LVU45
+ 170              		.loc 1 52 27 is_stmt 0 view .LVU45
  171 005e 1370     		strb	r3, [r2]
  172              	.L11:
-  56:Core/Src/it_handlers.c ****         }
-  57:Core/Src/it_handlers.c ****         SET_BIT(EXTI->PR, EXTI_PR_PR13);
- 173              		.loc 1 57 9 is_stmt 1 view .LVU46
+  53:Core/Src/it_handlers.c ****         }
+  54:Core/Src/it_handlers.c ****         SET_BIT(EXTI->PR, EXTI_PR_PR13);
+ 173              		.loc 1 54 9 is_stmt 1 view .LVU46
  174 0060 024A     		ldr	r2, .L12
-ARM GAS  C:\Users\parni\AppData\Local\Temp\ccfVsrba.s 			page 5
-
-
  175 0062 5369     		ldr	r3, [r2, #20]
  176 0064 43F40053 		orr	r3, r3, #8192
  177 0068 5361     		str	r3, [r2, #20]
+ARM GAS  C:\Users\parni\AppData\Local\Temp\cceN2JP6.s 			page 5
+
+
  178              	.L7:
-  58:Core/Src/it_handlers.c ****     }
-  59:Core/Src/it_handlers.c **** }
- 179              		.loc 1 59 1 is_stmt 0 view .LVU47
+  55:Core/Src/it_handlers.c ****     }
+  56:Core/Src/it_handlers.c **** }
+ 179              		.loc 1 56 1 is_stmt 0 view .LVU47
  180 006a 7047     		bx	lr
  181              	.L13:
  182              		.align	2
@@ -268,62 +265,62 @@ ARM GAS  C:\Users\parni\AppData\Local\Temp\ccfVsrba.s 			page 1
  198              		.thumb_func
  200              	EXTI9_5_IRQHandler:
  201              	.LFB132:
-  60:Core/Src/it_handlers.c **** 
-  61:Core/Src/it_handlers.c **** // Обработчик прерываний с левого энкодера PC8
-  62:Core/Src/it_handlers.c **** void EXTI9_5_IRQHandler(void)
-  63:Core/Src/it_handlers.c **** {
- 202              		.loc 1 63 1 is_stmt 1 view -0
+  57:Core/Src/it_handlers.c **** 
+  58:Core/Src/it_handlers.c **** // Обработчик прерываний с левого энкодера PC8
+  59:Core/Src/it_handlers.c **** void EXTI9_5_IRQHandler(void)
+  60:Core/Src/it_handlers.c **** {
+ 202              		.loc 1 60 1 is_stmt 1 view -0
  203              		.cfi_startproc
  204              		@ args = 0, pretend = 0, frame = 0
  205              		@ frame_needed = 0, uses_anonymous_args = 0
  206              		@ link register save eliminated.
-  64:Core/Src/it_handlers.c ****     if (READ_BIT(EXTI->PR, EXTI_PR_PR8))
- 207              		.loc 1 64 5 view .LVU49
- 208              		.loc 1 64 9 is_stmt 0 view .LVU50
+  61:Core/Src/it_handlers.c ****     if (READ_BIT(EXTI->PR, EXTI_PR_PR8))
+ 207              		.loc 1 61 5 view .LVU49
+ 208              		.loc 1 61 9 is_stmt 0 view .LVU50
  209 0000 0B4B     		ldr	r3, .L17
  210 0002 5B69     		ldr	r3, [r3, #20]
- 211              		.loc 1 64 8 view .LVU51
+ 211              		.loc 1 61 8 view .LVU51
  212 0004 13F4807F 		tst	r3, #256
  213 0008 10D0     		beq	.L14
-  65:Core/Src/it_handlers.c ****     {
-  66:Core/Src/it_handlers.c ****         if (left_delay_counter == 0)
- 214              		.loc 1 66 9 is_stmt 1 view .LVU52
- 215              		.loc 1 66 32 is_stmt 0 view .LVU53
+  62:Core/Src/it_handlers.c ****     {
+  63:Core/Src/it_handlers.c ****         if (left_delay_counter == 0)
+ 214              		.loc 1 63 9 is_stmt 1 view .LVU52
+ 215              		.loc 1 63 32 is_stmt 0 view .LVU53
  216 000a 0A4B     		ldr	r3, .L17+4
  217 000c 1B68     		ldr	r3, [r3]
- 218              		.loc 1 66 12 view .LVU54
+ 218              		.loc 1 63 12 view .LVU54
  219 000e 43B9     		cbnz	r3, .L16
-  67:Core/Src/it_handlers.c ****         {
-  68:Core/Src/it_handlers.c ****             left_encoder_ticks++;
- 220              		.loc 1 68 13 is_stmt 1 view .LVU55
- 221              		.loc 1 68 31 is_stmt 0 view .LVU56
+  64:Core/Src/it_handlers.c ****         {
+  65:Core/Src/it_handlers.c ****             left_encoder_ticks++;
+ 220              		.loc 1 65 13 is_stmt 1 view .LVU55
+ 221              		.loc 1 65 31 is_stmt 0 view .LVU56
  222 0010 094A     		ldr	r2, .L17+8
-ARM GAS  C:\Users\parni\AppData\Local\Temp\ccfVsrba.s 			page 6
-
-
  223 0012 1388     		ldrh	r3, [r2]
  224 0014 9BB2     		uxth	r3, r3
  225 0016 0133     		adds	r3, r3, #1
+ARM GAS  C:\Users\parni\AppData\Local\Temp\cceN2JP6.s 			page 6
+
+
  226 0018 9BB2     		uxth	r3, r3
  227 001a 1380     		strh	r3, [r2]	@ movhi
-  69:Core/Src/it_handlers.c ****             left_delay_counter = 1;
- 228              		.loc 1 69 13 is_stmt 1 view .LVU57
- 229              		.loc 1 69 32 is_stmt 0 view .LVU58
+  66:Core/Src/it_handlers.c ****             left_delay_counter = 1;
+ 228              		.loc 1 66 13 is_stmt 1 view .LVU57
+ 229              		.loc 1 66 32 is_stmt 0 view .LVU58
  230 001c 054B     		ldr	r3, .L17+4
  231 001e 0122     		movs	r2, #1
  232 0020 1A60     		str	r2, [r3]
  233              	.L16:
-  70:Core/Src/it_handlers.c ****         }
-  71:Core/Src/it_handlers.c ****         SET_BIT(EXTI->PR, EXTI_PR_PR8);
- 234              		.loc 1 71 9 is_stmt 1 view .LVU59
+  67:Core/Src/it_handlers.c ****         }
+  68:Core/Src/it_handlers.c ****         SET_BIT(EXTI->PR, EXTI_PR_PR8);
+ 234              		.loc 1 68 9 is_stmt 1 view .LVU59
  235 0022 034A     		ldr	r2, .L17
  236 0024 5369     		ldr	r3, [r2, #20]
  237 0026 43F48073 		orr	r3, r3, #256
  238 002a 5361     		str	r3, [r2, #20]
  239              	.L14:
-  72:Core/Src/it_handlers.c ****     }
-  73:Core/Src/it_handlers.c **** }
- 240              		.loc 1 73 1 is_stmt 0 view .LVU60
+  69:Core/Src/it_handlers.c ****     }
+  70:Core/Src/it_handlers.c **** }
+ 240              		.loc 1 70 1 is_stmt 0 view .LVU60
  241 002c 7047     		bx	lr
  242              	.L18:
  243 002e 00BF     		.align	2
@@ -339,20 +336,20 @@ ARM GAS  C:\Users\parni\AppData\Local\Temp\ccfVsrba.s 			page 1
  254              		.file 3 "C:/SysGCC/arm-eabi/arm-none-eabi/include/sys/_stdint.h"
  255              		.file 4 "Core/Inc/..\\..\\CMSIS\\Devices\\STM32F4xx\\Inc\\STM32F411xE\\stm32f411xe.h"
  256              		.file 5 "Core/Inc/it_handlers.h"
-ARM GAS  C:\Users\parni\AppData\Local\Temp\ccfVsrba.s 			page 7
+ARM GAS  C:\Users\parni\AppData\Local\Temp\cceN2JP6.s 			page 7
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 it_handlers.c
-C:\Users\parni\AppData\Local\Temp\ccfVsrba.s:21     .text.SysTick_Handler:00000000 $t
-C:\Users\parni\AppData\Local\Temp\ccfVsrba.s:27     .text.SysTick_Handler:00000000 SysTick_Handler
-C:\Users\parni\AppData\Local\Temp\ccfVsrba.s:81     .text.SysTick_Handler:00000030 $d
-C:\Users\parni\AppData\Local\Temp\ccfVsrba.s:89     .text.EXTI15_10_IRQHandler:00000000 $t
-C:\Users\parni\AppData\Local\Temp\ccfVsrba.s:95     .text.EXTI15_10_IRQHandler:00000000 EXTI15_10_IRQHandler
-C:\Users\parni\AppData\Local\Temp\ccfVsrba.s:184    .text.EXTI15_10_IRQHandler:0000006c $d
-C:\Users\parni\AppData\Local\Temp\ccfVsrba.s:194    .text.EXTI9_5_IRQHandler:00000000 $t
-C:\Users\parni\AppData\Local\Temp\ccfVsrba.s:200    .text.EXTI9_5_IRQHandler:00000000 EXTI9_5_IRQHandler
-C:\Users\parni\AppData\Local\Temp\ccfVsrba.s:245    .text.EXTI9_5_IRQHandler:00000030 $d
+C:\Users\parni\AppData\Local\Temp\cceN2JP6.s:21     .text.SysTick_Handler:00000000 $t
+C:\Users\parni\AppData\Local\Temp\cceN2JP6.s:27     .text.SysTick_Handler:00000000 SysTick_Handler
+C:\Users\parni\AppData\Local\Temp\cceN2JP6.s:81     .text.SysTick_Handler:00000030 $d
+C:\Users\parni\AppData\Local\Temp\cceN2JP6.s:89     .text.EXTI15_10_IRQHandler:00000000 $t
+C:\Users\parni\AppData\Local\Temp\cceN2JP6.s:95     .text.EXTI15_10_IRQHandler:00000000 EXTI15_10_IRQHandler
+C:\Users\parni\AppData\Local\Temp\cceN2JP6.s:184    .text.EXTI15_10_IRQHandler:0000006c $d
+C:\Users\parni\AppData\Local\Temp\cceN2JP6.s:194    .text.EXTI9_5_IRQHandler:00000000 $t
+C:\Users\parni\AppData\Local\Temp\cceN2JP6.s:200    .text.EXTI9_5_IRQHandler:00000000 EXTI9_5_IRQHandler
+C:\Users\parni\AppData\Local\Temp\cceN2JP6.s:245    .text.EXTI9_5_IRQHandler:00000030 $d
 
 UNDEFINED SYMBOLS
 sys_tick

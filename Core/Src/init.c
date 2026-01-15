@@ -2,7 +2,7 @@
 
 void GPIO_Init_Ports(void)
 {
-    SET_BIT(RCC->AHB1ENR, RCC_AHB1ENR_GPIOBEN);             // Включение тактирования GPIOB
+    SET_BIT(RCC->AHB1ENR, RCC_AHB1ENR_GPIOBEN | RCC_AHB1ENR_GPIOBEN);             // Включение тактирования GPIOB
     
     SET_BIT(GPIOB->MODER, GPIO_MODER_MODE10_0);             // Настройка пина PB10 на выход, регистр GPIOx_MODER
     CLEAR_BIT(GPIOB->OTYPER, GPIO_OTYPER_OT_10);            // Установление PB10 в режим pull-push, регистр OTYPER
@@ -27,6 +27,8 @@ void GPIO_Init_Ports(void)
     SET_BIT(GPIOB->OSPEEDR, GPIO_OSPEEDER_OSPEEDR7_0);      // Устанавливаем скорость бита PB4 (средняя), регистр OSPEEDR
     CLEAR_BIT(GPIOB->PUPDR, GPIO_PUPDR_PUPD7_0);            // Отключаем подтягивающий резистор PB4, регистр PUPDR
     SET_BIT(GPIOB->BSRR, GPIO_BSRR_BR7);                    // Установление на пине PB4 0, регистр GPIOx_BSRR
+
+    SET_BIT(GPIOC->PUPDR, GPIO_PUPDR_PUPDR13_0);
 }
 
 void SysTick_Init(void)
@@ -159,7 +161,7 @@ void ITR_Init(void)     // инициализация прерываний по 
     // настройка EXTI регистров
     SET_BIT(EXTI->IMR, EXTI_IMR_MR8); //Настройка маскирования 8 линии 
     SET_BIT(EXTI->RTSR, EXTI_RTSR_TR8); //Настройка детектирования нарастающего фронта 8 линии 
-    SET_BIT(EXTI->FTSR, EXTI_FTSR_TR12); //Настройка детектирования спадающего фронта 8 линии 
+    SET_BIT(EXTI->FTSR, EXTI_FTSR_TR8); //Настройка детектирования спадающего фронта 8 линии 
     NVIC_SetPriority(EXTI9_5_IRQn, 
     NVIC_EncodePriority(NVIC_GetPriorityGrouping(), 0, 0)); //Установка 0 приоритета прерывания для вектора EXTI9_5 
     NVIC_EnableIRQ(EXTI9_5_IRQn); //Включение прерывания по вектору EXTI15_10

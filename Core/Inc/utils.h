@@ -29,6 +29,7 @@ float normalizeAngle(float angle);
 
 /* ===== ВРЕМЯ ===== */
 uint32_t millis(void);
+void delay_ms(uint32_t ms);
 
 int constrainf(float x, int min, int max);
 #endif 

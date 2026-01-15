@@ -13,11 +13,11 @@
 #define CONTROL_PERIOD_MS 10
 
 #define POSITION_EPS 2
-#define ANGLE_EPS    1.0f
+#define ANGLE_EPS    0.5f
 
-#define PWM_MAX 650
-#define PWM_MIN 620
-#define PWM_DEADZONE 620
+#define PWM_MAX 660 //650
+#define PWM_MIN 620 //620
+#define PWM_DEADZONE 600
 
 // РОграничение для интегральной ошибки
 #define I_MAX  1000.0f
@@ -36,6 +36,12 @@ extern volatile uint32_t sys_tick;
 uint32_t millis(void)
 {
     return sys_tick;
+}
+
+void delay_ms(uint32_t ms)
+{
+    uint32_t start = millis();
+    while ((uint32_t)(millis() - start) < ms);
 }
 
 /* ===================== ВСПОМОГАТЕЛЬНЫЕ ===================== */
@@ -120,14 +126,26 @@ void PID_Reset(PID_t *p)
 
 /* ===================== PID НАСТРОЙКИ ===================== */
 
-PID_t pidSpeed = { 1.0f, 0.0f, 0.0f };
-PID_t pidYaw   = { 10.0f, 0.0f, 0.0f };
+PID_t pidSpeed = { 100.0f, 10.0f, 5.0f };
+PID_t pidYaw   = { 1500.0f, 10.0f, 60.0f };
 PID_t pidSync  = { 1.0f, 0.0f, 0.0f };
 
 /* ===================== ДВИЖЕНИЕ ПРЯМО ===================== */
 
 void moveStraight(float distance_cm)
 {
+    pidSpeed.kp = 1000.0f;
+    pidSpeed.ki = 10.0f;
+    pidSpeed.kd = 5.0f;
+
+    pidYaw.kp   = 1000.0f;
+    pidYaw.ki   = 10.0f;
+    pidYaw.kd   = 100.0f;
+
+    pidSync.kp  = 1.0f;
+    pidSync.ki  = 0.0f;
+    pidSync.kd  = 0.0f;
+
     // Обнуляем ПИД регуляторы
     PID_Reset(&pidSpeed);
     PID_Reset(&pidYaw);
@@ -180,8 +198,8 @@ void moveStraight(float distance_cm)
         float syncCorr = PID(&pidSync, L - R, dt);
 
         // Расчет результирующего ШИМ сигнала
-        float pwmL = basePWM - yawCorr; //- syncCorr;
-        float pwmR = basePWM + yawCorr; //+ syncCorr;
+        float pwmL = basePWM - yawCorr - syncCorr;
+        float pwmR = basePWM + yawCorr + syncCorr;
 
         // Проверка входит ли он в диапазон возможного ШИМ
         pwmL = constrainf(pwmL, PWM_MIN, PWM_MAX);
@@ -200,12 +218,26 @@ void moveStraight(float distance_cm)
 
     // Останавливаем моторы робота
     stopMotors();
+    MPU_Update();
+    turnByAngle(startYaw - MPU_GetYaw());
 }
 
 /* ===================== ПОВОРОТ НА МЕСТЕ ===================== */
 
 void turnByAngle(float angle_deg)
 {
+
+    pidSpeed.kp = 1.0f;
+    pidSpeed.ki = 1.0f;
+    pidSpeed.kd = 0.0f;
+
+    pidYaw.kp   = 2.0f;
+    pidYaw.ki   = 1.0f;
+    pidYaw.kd   = 1.0f;
+
+    pidSync.kp  = 1.0f;
+    pidSync.ki  = 0.0f;
+    pidSync.kd  = 0.0f;
     // Обнуляем ПИД регуляторы
     PID_Reset(&pidSpeed);
     PID_Reset(&pidYaw);
@@ -216,7 +248,7 @@ void turnByAngle(float angle_deg)
     right_encoder_ticks = 0;
 
     // Рассчитываем желаемый угл
-    float targetYaw = normalizeAngle(MPU_GetYaw() + angle_deg);
+    float targetYaw = MPU_GetYaw() + angle_deg;
     // Запись времени для обновления скорости раз в промежуток времени
     uint32_t lastTime = millis();
 
@@ -246,8 +278,8 @@ void turnByAngle(float angle_deg)
                          dt);
 
         // Расчет результирующего ШИМ сигнала
-        float pwmL = basePWM; // - sync;
-        float pwmR = basePWM; // + sync;
+        float pwmL = basePWM - sync;
+        float pwmR = basePWM + sync;
 
         // Проверка входит ли он в диапазон возможного ШИМ
         pwmL = constrainf(pwmL, PWM_MIN, PWM_MAX);

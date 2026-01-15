@@ -11,6 +11,7 @@ uint32_t last_time = 0;          // время последнего обновл
 static float gz_filtered = 0.0f;
 static float yaw_angle = 0.0f;
 static uint32_t last_update = 0; 
+extern bool status_button;
 
 #define I2C_TIMEOUT 10000       // таймаут ожидания флага I2C
 
@@ -278,8 +279,8 @@ void MPU_Debug_Print(void)          // вывод данных MPU6050 в UART
         last_print = millis();
 
         char buf[80];
-        sprintf(buf, "Yaw: %6.1f° | Rate: %6.2f°/s | Offset: %6.3f\r\n",
-                mpu.yaw, mpu.yaw_rate, gyro_offset_z);
+        sprintf(buf, "Yaw: %6.1f° | Rate: %d°/s | Offset: %6.3f\r\n",
+                mpu.yaw, status_button, gyro_offset_z);
         
         // Предполагаем, что есть UART_SendString
         for(int i = 0; buf[i]; i++) {

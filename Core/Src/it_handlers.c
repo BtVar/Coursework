@@ -7,11 +7,10 @@ extern volatile uint16_t right_encoder_ticks;
 extern uint32_t left_delay_counter;
 extern uint32_t right_delay_counter;
 extern uint16_t button_delay_counter;
-extern uint32_t mpu_delay_counter;
 
 extern volatile uint32_t sys_tick;
 
-extern bool status_button;
+extern volatile bool status_button;
 
 void SysTick_Handler(void)
 {
@@ -23,10 +22,8 @@ void SysTick_Handler(void)
     if (right_delay_counter > 0)
         right_delay_counter--;
 
-    if (mpu_delay_counter > 0)
+    if (button_delay_counter > 0)
         button_delay_counter--;
-
-    
 }
 
 void EXTI15_10_IRQHandler(void)
@@ -49,7 +46,7 @@ void EXTI15_10_IRQHandler(void)
     // Обработчик прерываний с кнопки PC13
     if (READ_BIT(EXTI->PR, EXTI_PR_PR13))
     {
-        if (((READ_BIT(GPIOC->IDR, GPIO_IDR_ID13) != 0)) && (button_delay_counter == 0))
+        if (((READ_BIT(GPIOC->IDR, GPIO_IDR_ID13) == 0)) && (button_delay_counter == 0))
         {
             button_delay_counter = 100;
             status_button = !status_button;
