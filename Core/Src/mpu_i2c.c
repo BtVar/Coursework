@@ -185,7 +185,7 @@ void MPU_Calibrate(void)        // калибровка гироскопа MPU60
     float sum = 0.0f;
     uint16_t samples = 0;
 
-    for (int i = 0; i < 1000; i++) 
+    for (int i = 0; i < 2000; i++) 
     {
 
         uint8_t data_z[2];
@@ -196,7 +196,7 @@ void MPU_Calibrate(void)        // калибровка гироскопа MPU60
 
         // Небольшая задержка
         uint32_t wait_start = millis();
-        while ((uint32_t)(millis() - wait_start) < 5);  // 1 мс
+        while ((uint32_t)(millis() - wait_start) < 1);  // 1 мс
 
     }
 
