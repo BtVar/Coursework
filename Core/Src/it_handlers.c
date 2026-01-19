@@ -36,7 +36,7 @@ void EXTI15_10_IRQHandler(void)
             if (right_delay_counter == 0)
             {
                 right_encoder_ticks++;
-                right_delay_counter = 1;
+                right_delay_counter = 5;
             }
         }
 
@@ -63,7 +63,7 @@ void EXTI9_5_IRQHandler(void)
         if (left_delay_counter == 0)
         {
             left_encoder_ticks++;
-            left_delay_counter = 1;
+            left_delay_counter = 5;
         }
         SET_BIT(EXTI->PR, EXTI_PR_PR8);
     }

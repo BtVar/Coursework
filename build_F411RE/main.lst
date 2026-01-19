@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\parni\AppData\Local\Temp\ccV8fsgM.s 			page 1
+ARM GAS  C:\Users\lenovo\AppData\Local\Temp\ccoSo5dJ.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -57,8 +57,8 @@ ARM GAS  C:\Users\parni\AppData\Local\Temp\ccV8fsgM.s 			page 1
    3:Core/Src/main.c **** #include "uart_debug.h"
    4:Core/Src/main.c **** #include "mpu_i2c.h"
    5:Core/Src/main.c **** 
-   6:Core/Src/main.c **** #define WHO_AM_I_REG        0x75
-ARM GAS  C:\Users\parni\AppData\Local\Temp\ccV8fsgM.s 			page 2
+   6:Core/Src/main.c **** #define WHO_AM_I_REG 0x75
+ARM GAS  C:\Users\lenovo\AppData\Local\Temp\ccoSo5dJ.s 			page 2
 
 
    7:Core/Src/main.c **** 
@@ -75,9 +75,11 @@ ARM GAS  C:\Users\parni\AppData\Local\Temp\ccV8fsgM.s 			page 1
   18:Core/Src/main.c **** 
   19:Core/Src/main.c **** uint8_t z;
   20:Core/Src/main.c **** 
-  21:Core/Src/main.c **** int main(void)
-  22:Core/Src/main.c **** {
-  42              		.loc 1 22 1 view -0
+  21:Core/Src/main.c **** 
+  22:Core/Src/main.c **** 
+  23:Core/Src/main.c **** int main(void)
+  24:Core/Src/main.c **** {
+  42              		.loc 1 24 1 view -0
   43              		.cfi_startproc
   44              		@ Volatile: function does not return.
   45              		@ args = 0, pretend = 0, frame = 0
@@ -87,228 +89,218 @@ ARM GAS  C:\Users\parni\AppData\Local\Temp\ccV8fsgM.s 			page 1
   49              		.cfi_def_cfa_offset 8
   50              		.cfi_offset 3, -8
   51              		.cfi_offset 14, -4
-  23:Core/Src/main.c **** 
-  24:Core/Src/main.c ****     RCC_Init();
-  52              		.loc 1 24 5 view .LVU1
+  25:Core/Src/main.c **** 
+  26:Core/Src/main.c ****     RCC_Init();
+  52              		.loc 1 26 5 view .LVU1
   53 0002 FFF7FEFF 		bl	RCC_Init
   54              	.LVL0:
-  25:Core/Src/main.c ****     GPIO_Init_Ports();
-  55              		.loc 1 25 5 view .LVU2
+  27:Core/Src/main.c ****     GPIO_Init_Ports();
+  55              		.loc 1 27 5 view .LVU2
   56 0006 FFF7FEFF 		bl	GPIO_Init_Ports
   57              	.LVL1:
-  26:Core/Src/main.c ****     SysTick_Init();
-  58              		.loc 1 26 5 view .LVU3
+  28:Core/Src/main.c ****     SysTick_Init();
+  58              		.loc 1 28 5 view .LVU3
   59 000a FFF7FEFF 		bl	SysTick_Init
   60              	.LVL2:
-  27:Core/Src/main.c ****     TIM1_PWM_Init();
-  61              		.loc 1 27 5 view .LVU4
+  29:Core/Src/main.c ****     TIM1_PWM_Init();
+  61              		.loc 1 29 5 view .LVU4
   62 000e FFF7FEFF 		bl	TIM1_PWM_Init
   63              	.LVL3:
-  28:Core/Src/main.c ****     ITR_Init();
-  64              		.loc 1 28 5 view .LVU5
+  30:Core/Src/main.c ****     ITR_Init();
+  64              		.loc 1 30 5 view .LVU5
   65 0012 FFF7FEFF 		bl	ITR_Init
   66              	.LVL4:
-  29:Core/Src/main.c ****     I2C_Init_HW();
-  67              		.loc 1 29 5 view .LVU6
+  31:Core/Src/main.c ****     I2C_Init_HW();
+  67              		.loc 1 31 5 view .LVU6
   68 0016 FFF7FEFF 		bl	I2C_Init_HW
   69              	.LVL5:
-  30:Core/Src/main.c ****     UART_Init();
-  70              		.loc 1 30 5 view .LVU7
+  32:Core/Src/main.c ****     UART_Init();
+  70              		.loc 1 32 5 view .LVU7
   71 001a FFF7FEFF 		bl	UART_Init
   72              	.LVL6:
-  31:Core/Src/main.c **** 
-  32:Core/Src/main.c ****     UART_SendString("UART OK\r\n");
-ARM GAS  C:\Users\parni\AppData\Local\Temp\ccV8fsgM.s 			page 3
+ARM GAS  C:\Users\lenovo\AppData\Local\Temp\ccoSo5dJ.s 			page 3
 
 
-  73              		.loc 1 32 5 view .LVU8
-  74 001e 1448     		ldr	r0, .L7
+  33:Core/Src/main.c **** 
+  34:Core/Src/main.c ****     UART_SendString("UART OK\r\n");
+  73              		.loc 1 34 5 view .LVU8
+  74 001e 1048     		ldr	r0, .L7
   75 0020 FFF7FEFF 		bl	UART_SendString
   76              	.LVL7:
-  33:Core/Src/main.c ****     if (MPU_Init() != 0) {
-  77              		.loc 1 33 5 view .LVU9
-  78              		.loc 1 33 9 is_stmt 0 view .LVU10
+  35:Core/Src/main.c ****     if (MPU_Init() != 0)
+  77              		.loc 1 35 5 view .LVU9
+  78              		.loc 1 35 9 is_stmt 0 view .LVU10
   79 0024 FFF7FEFF 		bl	MPU_Init
   80              	.LVL8:
-  81              		.loc 1 33 8 discriminator 1 view .LVU11
+  81              		.loc 1 35 8 discriminator 1 view .LVU11
   82 0028 18B1     		cbz	r0, .L2
-  34:Core/Src/main.c ****         UART_SendString("MPU NOT FOUND\r\n");
-  83              		.loc 1 34 9 is_stmt 1 view .LVU12
-  84 002a 1248     		ldr	r0, .L7+4
+  36:Core/Src/main.c ****     {
+  37:Core/Src/main.c ****         UART_SendString("MPU NOT FOUND\r\n");
+  83              		.loc 1 37 9 is_stmt 1 view .LVU12
+  84 002a 0E48     		ldr	r0, .L7+4
   85 002c FFF7FEFF 		bl	UART_SendString
   86              	.LVL9:
   87              	.L3:
-  35:Core/Src/main.c ****         while (1);
-  88              		.loc 1 35 9 view .LVU13
-  89              		.loc 1 35 15 view .LVU14
+  38:Core/Src/main.c ****         while (1)
+  88              		.loc 1 38 9 view .LVU13
+  89              		.loc 1 38 15 view .LVU14
   90 0030 FEE7     		b	.L3
   91              	.L2:
-  36:Core/Src/main.c ****     }
-  37:Core/Src/main.c **** 
-  38:Core/Src/main.c ****     UART_SendString("MPU OK\r\n");
-  92              		.loc 1 38 5 view .LVU15
-  93 0032 1148     		ldr	r0, .L7+8
+  39:Core/Src/main.c ****             ;
+  40:Core/Src/main.c ****     }
+  41:Core/Src/main.c **** 
+  42:Core/Src/main.c ****     UART_SendString("MPU OK\r\n");
+  92              		.loc 1 42 5 view .LVU15
+  93 0032 0D48     		ldr	r0, .L7+8
   94 0034 FFF7FEFF 		bl	UART_SendString
   95              	.LVL10:
-  39:Core/Src/main.c **** 
-  40:Core/Src/main.c ****     MPU_Calibrate();
-  96              		.loc 1 40 5 view .LVU16
+  43:Core/Src/main.c **** 
+  44:Core/Src/main.c ****     MPU_Calibrate();
+  96              		.loc 1 44 5 view .LVU16
   97 0038 FFF7FEFF 		bl	MPU_Calibrate
   98              	.LVL11:
-  41:Core/Src/main.c ****     UART_SendString("MPU CALIBRATED\r\n");
-  99              		.loc 1 41 5 view .LVU17
- 100 003c 0F48     		ldr	r0, .L7+12
+  45:Core/Src/main.c ****     UART_SendString("MPU CALIBRATED\r\n");
+  99              		.loc 1 45 5 view .LVU17
+ 100 003c 0B48     		ldr	r0, .L7+12
  101 003e FFF7FEFF 		bl	UART_SendString
  102              	.LVL12:
  103              	.L4:
-  42:Core/Src/main.c ****     //moveStraight(50.0f);
-  43:Core/Src/main.c ****     //turnByAngle(90.0f);
-  44:Core/Src/main.c ****     //moveStraight(50.0f);
-  45:Core/Src/main.c ****     //turnByAngle(-24.0f);
-  46:Core/Src/main.c ****     
-  47:Core/Src/main.c ****     while (1)
- 104              		.loc 1 47 5 view .LVU18
-  48:Core/Src/main.c ****     {
-  49:Core/Src/main.c ****         if (status_button)
- 105              		.loc 1 49 9 view .LVU19
- 106              		.loc 1 49 13 is_stmt 0 view .LVU20
- 107 0042 0F4B     		ldr	r3, .L7+16
+  46:Core/Src/main.c ****     // moveStraight(50.0f);
+  47:Core/Src/main.c ****     // turnByAngle(90.0f);
+  48:Core/Src/main.c ****     // moveStraight(50.0f);
+  49:Core/Src/main.c ****     // turnByAngle(-24.0f);
+  50:Core/Src/main.c **** 
+  51:Core/Src/main.c ****     while (1)
+ 104              		.loc 1 51 5 view .LVU18
+  52:Core/Src/main.c ****     {
+  53:Core/Src/main.c ****         if (status_button)
+ 105              		.loc 1 53 9 view .LVU19
+ 106              		.loc 1 53 13 is_stmt 0 view .LVU20
+ 107 0042 0B4B     		ldr	r3, .L7+16
  108 0044 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
- 109              		.loc 1 49 12 view .LVU21
+ARM GAS  C:\Users\lenovo\AppData\Local\Temp\ccoSo5dJ.s 			page 4
+
+
+ 109              		.loc 1 53 12 view .LVU21
  110 0046 002B     		cmp	r3, #0
  111 0048 FBD0     		beq	.L4
-  50:Core/Src/main.c ****         {
-ARM GAS  C:\Users\parni\AppData\Local\Temp\ccV8fsgM.s 			page 4
-
-
-  51:Core/Src/main.c ****             delay_ms(1000);
- 112              		.loc 1 51 13 is_stmt 1 view .LVU22
+  54:Core/Src/main.c ****         {
+  55:Core/Src/main.c ****             delay_ms(1000);
+ 112              		.loc 1 55 13 is_stmt 1 view .LVU22
  113 004a 4FF47A70 		mov	r0, #1000
  114 004e FFF7FEFF 		bl	delay_ms
  115              	.LVL13:
-  52:Core/Src/main.c ****             MPU_Debug_Print();
- 116              		.loc 1 52 13 view .LVU23
- 117 0052 FFF7FEFF 		bl	MPU_Debug_Print
+  56:Core/Src/main.c ****             // MPU_Debug_Print();
+  57:Core/Src/main.c **** 
+  58:Core/Src/main.c ****             // turnByAngle(120.0f);
+  59:Core/Src/main.c ****             Traject();
+ 116              		.loc 1 59 13 view .LVU23
+ 117 0052 FFF7FEFF 		bl	Traject
  118              	.LVL14:
-  53:Core/Src/main.c **** 
-  54:Core/Src/main.c ****             turnByAngle(23.5f);
- 119              		.loc 1 54 13 view .LVU24
- 120 0056 9FED0B0A 		vldr.32	s0, .L7+20
- 121 005a FFF7FEFF 		bl	turnByAngle
- 122              	.LVL15:
-  55:Core/Src/main.c ****             MPU_Debug_Print();
- 123              		.loc 1 55 13 view .LVU25
- 124 005e FFF7FEFF 		bl	MPU_Debug_Print
- 125              	.LVL16:
-  56:Core/Src/main.c ****             // moveStraight(60.0f);
-  57:Core/Src/main.c ****             delay_ms(2000);
- 126              		.loc 1 57 13 view .LVU26
- 127 0062 4FF4FA60 		mov	r0, #2000
- 128 0066 FFF7FEFF 		bl	delay_ms
- 129              	.LVL17:
-  58:Core/Src/main.c ****             MPU_Debug_Print();
- 130              		.loc 1 58 13 view .LVU27
- 131 006a FFF7FEFF 		bl	MPU_Debug_Print
- 132              	.LVL18:
- 133 006e E8E7     		b	.L4
- 134              	.L8:
- 135              		.align	2
- 136              	.L7:
- 137 0070 00000000 		.word	.LC0
- 138 0074 0C000000 		.word	.LC1
- 139 0078 1C000000 		.word	.LC2
- 140 007c 28000000 		.word	.LC3
- 141 0080 00000000 		.word	status_button
- 142 0084 0000BC41 		.word	1102839808
- 143              		.cfi_endproc
- 144              	.LFE130:
- 146              		.global	z
- 147              		.section	.bss.z,"aw",%nobits
- 150              	z:
- 151 0000 00       		.space	1
- 152              		.global	status_button
- 153              		.section	.bss.status_button,"aw",%nobits
- 156              	status_button:
- 157 0000 00       		.space	1
- 158              		.global	button_delay_counter
- 159              		.section	.bss.button_delay_counter,"aw",%nobits
- 160              		.align	1
- 163              	button_delay_counter:
- 164 0000 0000     		.space	2
- 165              		.global	sys_tick
- 166              		.section	.bss.sys_tick,"aw",%nobits
- 167              		.align	2
-ARM GAS  C:\Users\parni\AppData\Local\Temp\ccV8fsgM.s 			page 5
+  60:Core/Src/main.c ****             status_button = 0;
+ 119              		.loc 1 60 13 view .LVU24
+ 120              		.loc 1 60 27 is_stmt 0 view .LVU25
+ 121 0056 064B     		ldr	r3, .L7+16
+ 122 0058 0022     		movs	r2, #0
+ 123 005a 1A70     		strb	r2, [r3]
+ 124 005c F1E7     		b	.L4
+ 125              	.L8:
+ 126 005e 00BF     		.align	2
+ 127              	.L7:
+ 128 0060 00000000 		.word	.LC0
+ 129 0064 0C000000 		.word	.LC1
+ 130 0068 1C000000 		.word	.LC2
+ 131 006c 28000000 		.word	.LC3
+ 132 0070 00000000 		.word	status_button
+ 133              		.cfi_endproc
+ 134              	.LFE130:
+ 136              		.global	z
+ 137              		.section	.bss.z,"aw",%nobits
+ 140              	z:
+ 141 0000 00       		.space	1
+ 142              		.global	status_button
+ 143              		.section	.bss.status_button,"aw",%nobits
+ 146              	status_button:
+ 147 0000 00       		.space	1
+ 148              		.global	button_delay_counter
+ 149              		.section	.bss.button_delay_counter,"aw",%nobits
+ 150              		.align	1
+ 153              	button_delay_counter:
+ 154 0000 0000     		.space	2
+ 155              		.global	sys_tick
+ 156              		.section	.bss.sys_tick,"aw",%nobits
+ 157              		.align	2
+ 160              	sys_tick:
+ 161 0000 00000000 		.space	4
+ 162              		.global	right_delay_counter
+ 163              		.section	.bss.right_delay_counter,"aw",%nobits
+ 164              		.align	2
+ 167              	right_delay_counter:
+ 168 0000 00000000 		.space	4
+ 169              		.global	left_delay_counter
+ARM GAS  C:\Users\lenovo\AppData\Local\Temp\ccoSo5dJ.s 			page 5
 
 
- 170              	sys_tick:
- 171 0000 00000000 		.space	4
- 172              		.global	right_delay_counter
- 173              		.section	.bss.right_delay_counter,"aw",%nobits
- 174              		.align	2
- 177              	right_delay_counter:
- 178 0000 00000000 		.space	4
- 179              		.global	left_delay_counter
- 180              		.section	.bss.left_delay_counter,"aw",%nobits
- 181              		.align	2
- 184              	left_delay_counter:
- 185 0000 00000000 		.space	4
- 186              		.global	right_encoder_ticks
- 187              		.section	.bss.right_encoder_ticks,"aw",%nobits
- 188              		.align	1
- 191              	right_encoder_ticks:
- 192 0000 0000     		.space	2
- 193              		.global	left_encoder_ticks
- 194              		.section	.bss.left_encoder_ticks,"aw",%nobits
- 195              		.align	1
- 198              	left_encoder_ticks:
- 199 0000 0000     		.space	2
- 200              		.global	pwm_state_pa9
- 201              		.section	.bss.pwm_state_pa9,"aw",%nobits
- 204              	pwm_state_pa9:
- 205 0000 00       		.space	1
- 206              		.global	pwm_state_pa8
- 207              		.section	.bss.pwm_state_pa8,"aw",%nobits
- 210              	pwm_state_pa8:
- 211 0000 00       		.space	1
- 212              		.text
- 213              	.Letext0:
- 214              		.file 2 "C:/SysGCC/arm-eabi/arm-none-eabi/include/machine/_default_types.h"
- 215              		.file 3 "C:/SysGCC/arm-eabi/arm-none-eabi/include/sys/_stdint.h"
- 216              		.file 4 "Core/Inc/it_handlers.h"
- 217              		.file 5 "Core/Inc/utils.h"
- 218              		.file 6 "Core/Inc/mpu_i2c.h"
- 219              		.file 7 "Core/Inc/uart_debug.h"
- 220              		.file 8 "Core/Inc/init.h"
-ARM GAS  C:\Users\parni\AppData\Local\Temp\ccV8fsgM.s 			page 6
+ 170              		.section	.bss.left_delay_counter,"aw",%nobits
+ 171              		.align	2
+ 174              	left_delay_counter:
+ 175 0000 00000000 		.space	4
+ 176              		.global	right_encoder_ticks
+ 177              		.section	.bss.right_encoder_ticks,"aw",%nobits
+ 178              		.align	1
+ 181              	right_encoder_ticks:
+ 182 0000 0000     		.space	2
+ 183              		.global	left_encoder_ticks
+ 184              		.section	.bss.left_encoder_ticks,"aw",%nobits
+ 185              		.align	1
+ 188              	left_encoder_ticks:
+ 189 0000 0000     		.space	2
+ 190              		.global	pwm_state_pa9
+ 191              		.section	.bss.pwm_state_pa9,"aw",%nobits
+ 194              	pwm_state_pa9:
+ 195 0000 00       		.space	1
+ 196              		.global	pwm_state_pa8
+ 197              		.section	.bss.pwm_state_pa8,"aw",%nobits
+ 200              	pwm_state_pa8:
+ 201 0000 00       		.space	1
+ 202              		.text
+ 203              	.Letext0:
+ 204              		.file 2 "C:/Private/Study/DMPT/Tools/xpack-arm-none-eabi-gcc-13.2.1-1.1/arm-none-eabi/include/mach
+ 205              		.file 3 "C:/Private/Study/DMPT/Tools/xpack-arm-none-eabi-gcc-13.2.1-1.1/arm-none-eabi/include/sys/
+ 206              		.file 4 "Core/Inc/it_handlers.h"
+ 207              		.file 5 "Core/Inc/utils.h"
+ 208              		.file 6 "Core/Inc/uart_debug.h"
+ 209              		.file 7 "Core/Inc/mpu_i2c.h"
+ 210              		.file 8 "Core/Inc/init.h"
+ARM GAS  C:\Users\lenovo\AppData\Local\Temp\ccoSo5dJ.s 			page 6
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 main.c
-C:\Users\parni\AppData\Local\Temp\ccV8fsgM.s:21     .rodata.main.str1.4:00000000 $d
-C:\Users\parni\AppData\Local\Temp\ccV8fsgM.s:34     .text.main:00000000 $t
-C:\Users\parni\AppData\Local\Temp\ccV8fsgM.s:40     .text.main:00000000 main
-C:\Users\parni\AppData\Local\Temp\ccV8fsgM.s:137    .text.main:00000070 $d
-C:\Users\parni\AppData\Local\Temp\ccV8fsgM.s:156    .bss.status_button:00000000 status_button
-C:\Users\parni\AppData\Local\Temp\ccV8fsgM.s:150    .bss.z:00000000 z
-C:\Users\parni\AppData\Local\Temp\ccV8fsgM.s:151    .bss.z:00000000 $d
-C:\Users\parni\AppData\Local\Temp\ccV8fsgM.s:157    .bss.status_button:00000000 $d
-C:\Users\parni\AppData\Local\Temp\ccV8fsgM.s:163    .bss.button_delay_counter:00000000 button_delay_counter
-C:\Users\parni\AppData\Local\Temp\ccV8fsgM.s:160    .bss.button_delay_counter:00000000 $d
-C:\Users\parni\AppData\Local\Temp\ccV8fsgM.s:170    .bss.sys_tick:00000000 sys_tick
-C:\Users\parni\AppData\Local\Temp\ccV8fsgM.s:167    .bss.sys_tick:00000000 $d
-C:\Users\parni\AppData\Local\Temp\ccV8fsgM.s:177    .bss.right_delay_counter:00000000 right_delay_counter
-C:\Users\parni\AppData\Local\Temp\ccV8fsgM.s:174    .bss.right_delay_counter:00000000 $d
-C:\Users\parni\AppData\Local\Temp\ccV8fsgM.s:184    .bss.left_delay_counter:00000000 left_delay_counter
-C:\Users\parni\AppData\Local\Temp\ccV8fsgM.s:181    .bss.left_delay_counter:00000000 $d
-C:\Users\parni\AppData\Local\Temp\ccV8fsgM.s:191    .bss.right_encoder_ticks:00000000 right_encoder_ticks
-C:\Users\parni\AppData\Local\Temp\ccV8fsgM.s:188    .bss.right_encoder_ticks:00000000 $d
-C:\Users\parni\AppData\Local\Temp\ccV8fsgM.s:198    .bss.left_encoder_ticks:00000000 left_encoder_ticks
-C:\Users\parni\AppData\Local\Temp\ccV8fsgM.s:195    .bss.left_encoder_ticks:00000000 $d
-C:\Users\parni\AppData\Local\Temp\ccV8fsgM.s:204    .bss.pwm_state_pa9:00000000 pwm_state_pa9
-C:\Users\parni\AppData\Local\Temp\ccV8fsgM.s:205    .bss.pwm_state_pa9:00000000 $d
-C:\Users\parni\AppData\Local\Temp\ccV8fsgM.s:210    .bss.pwm_state_pa8:00000000 pwm_state_pa8
-C:\Users\parni\AppData\Local\Temp\ccV8fsgM.s:211    .bss.pwm_state_pa8:00000000 $d
+C:\Users\lenovo\AppData\Local\Temp\ccoSo5dJ.s:21     .rodata.main.str1.4:00000000 $d
+C:\Users\lenovo\AppData\Local\Temp\ccoSo5dJ.s:34     .text.main:00000000 $t
+C:\Users\lenovo\AppData\Local\Temp\ccoSo5dJ.s:40     .text.main:00000000 main
+C:\Users\lenovo\AppData\Local\Temp\ccoSo5dJ.s:128    .text.main:00000060 $d
+C:\Users\lenovo\AppData\Local\Temp\ccoSo5dJ.s:146    .bss.status_button:00000000 status_button
+C:\Users\lenovo\AppData\Local\Temp\ccoSo5dJ.s:140    .bss.z:00000000 z
+C:\Users\lenovo\AppData\Local\Temp\ccoSo5dJ.s:141    .bss.z:00000000 $d
+C:\Users\lenovo\AppData\Local\Temp\ccoSo5dJ.s:147    .bss.status_button:00000000 $d
+C:\Users\lenovo\AppData\Local\Temp\ccoSo5dJ.s:153    .bss.button_delay_counter:00000000 button_delay_counter
+C:\Users\lenovo\AppData\Local\Temp\ccoSo5dJ.s:150    .bss.button_delay_counter:00000000 $d
+C:\Users\lenovo\AppData\Local\Temp\ccoSo5dJ.s:160    .bss.sys_tick:00000000 sys_tick
+C:\Users\lenovo\AppData\Local\Temp\ccoSo5dJ.s:157    .bss.sys_tick:00000000 $d
+C:\Users\lenovo\AppData\Local\Temp\ccoSo5dJ.s:167    .bss.right_delay_counter:00000000 right_delay_counter
+C:\Users\lenovo\AppData\Local\Temp\ccoSo5dJ.s:164    .bss.right_delay_counter:00000000 $d
+C:\Users\lenovo\AppData\Local\Temp\ccoSo5dJ.s:174    .bss.left_delay_counter:00000000 left_delay_counter
+C:\Users\lenovo\AppData\Local\Temp\ccoSo5dJ.s:171    .bss.left_delay_counter:00000000 $d
+C:\Users\lenovo\AppData\Local\Temp\ccoSo5dJ.s:181    .bss.right_encoder_ticks:00000000 right_encoder_ticks
+C:\Users\lenovo\AppData\Local\Temp\ccoSo5dJ.s:178    .bss.right_encoder_ticks:00000000 $d
+C:\Users\lenovo\AppData\Local\Temp\ccoSo5dJ.s:188    .bss.left_encoder_ticks:00000000 left_encoder_ticks
+C:\Users\lenovo\AppData\Local\Temp\ccoSo5dJ.s:185    .bss.left_encoder_ticks:00000000 $d
+C:\Users\lenovo\AppData\Local\Temp\ccoSo5dJ.s:194    .bss.pwm_state_pa9:00000000 pwm_state_pa9
+C:\Users\lenovo\AppData\Local\Temp\ccoSo5dJ.s:195    .bss.pwm_state_pa9:00000000 $d
+C:\Users\lenovo\AppData\Local\Temp\ccoSo5dJ.s:200    .bss.pwm_state_pa8:00000000 pwm_state_pa8
+C:\Users\lenovo\AppData\Local\Temp\ccoSo5dJ.s:201    .bss.pwm_state_pa8:00000000 $d
 
 UNDEFINED SYMBOLS
 RCC_Init
@@ -322,5 +314,4 @@ UART_SendString
 MPU_Init
 MPU_Calibrate
 delay_ms
-MPU_Debug_Print
-turnByAngle
+Traject
