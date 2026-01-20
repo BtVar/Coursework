@@ -11,7 +11,7 @@ typedef struct {
 } PID_t;
 
 
-float PID_Update(PID_t *pid, float error, float dt);
+float PID(PID_t *p, float err, float dt);
 
 /* ===== МОТОРЫ ===== */
 void stopMotors(void);

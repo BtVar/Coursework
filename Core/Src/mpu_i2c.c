@@ -1,10 +1,9 @@
 #include "mpu_i2c.h"
-#include "uart_debug.h"
 #include "utils.h"
 #include <stdio.h>
 
 
-MPU_t mpu;               // структура данных MPU6050
+MPU_t mpu;                       // структура данных MPU6050
 float gyro_offset_z = 0.0f;      // смещение гироскопа по оси Z
 uint32_t last_time = 0;          // время последнего обновления
 
@@ -57,7 +56,7 @@ void I2C_Init_HW(void)
 
 int I2C_Start(void)
 {
-    I2C1->CR1 |= I2C_CR1_START;         //генерация стартового условия
+    I2C1->CR1 |= I2C_CR1_START;                 //генерация стартового условия
     return I2C_Wait(&I2C1->SR1, I2C_SR1_SB);    //ожидание установки флага SB
 }
 
@@ -157,7 +156,6 @@ bool MPU_Init(void)// инициализация MPU6050
     if (who != 0x68 && who != 0x98)
         return 1;
 
-
     // Ждём 100 мс
     uint32_t start = millis();
     while ((uint32_t)(millis() - start) < 100);
@@ -167,8 +165,6 @@ bool MPU_Init(void)// инициализация MPU6050
     MPU_Write(MPU_SMPLRT_DIV, 0x00);
     MPU_Write(MPU_CONFIG, 0x01);    // посмотреть подробнее что за частота, лучше использовать 44гц
     MPU_Write(MPU_GYRO_CONFIG, 0x00);
-
-
 
     gz_filtered = 0.0f;
     yaw_angle = 0.0f;
@@ -180,8 +176,6 @@ bool MPU_Init(void)// инициализация MPU6050
 
 void MPU_Calibrate(void)        // калибровка гироскопа MPU6050
 {
-
-
     float sum = 0.0f;
     uint16_t samples = 0;
 
@@ -206,7 +200,6 @@ void MPU_Calibrate(void)        // калибровка гироскопа MPU60
 
     // Сброс фильтра
     gz_filtered = 0.0f;
-
 }
 
 void MPU_Update(void)       // обновление данных MPU6050
@@ -260,31 +253,9 @@ void MPU_Update(void)       // обновление данных MPU6050
 
 }
 
-float MPU_GetYaw(void)      // получение интегрированного угла
+float MPU_GetYaw(void)              // получение интегрированного угла
 {
     return mpu.yaw;
 }
 
-float MPU_GetYawRate(void)          // получение угловой скорости
-{
-    return mpu.yaw_rate;
-}
 
-void MPU_Debug_Print(void)          // вывод данных MPU6050 в UART
-{
-    static uint32_t last_print = 0;
-    
-    // Выводим раз в 500 мс
-    if ((uint32_t)(millis() - last_print) > 1000) {
-        last_print = millis();
-
-        char buf[80];
-        sprintf(buf, "Yaw: %6.1f° | Rate: %d°/s | Offset: %6.3f\r\n",
-                mpu.yaw, status_button, gyro_offset_z);
-        
-        // Предполагаем, что есть UART_SendString
-        for(int i = 0; buf[i]; i++) {
-            UART_SendChar(buf[i]);  // Или ваша функция отправки
-        }
-    }
-}

@@ -138,7 +138,6 @@ Core/Src/main.c \
 Core/Src/init.c \
 Core/Src/it_handlers.c \
 Core/Src/mpu_i2c.c \
-Core/Src/uart_debug.c \
 Core/Src/utils.c 
 
 # ASM sources

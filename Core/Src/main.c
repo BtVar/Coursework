@@ -1,6 +1,5 @@
 #include "init.h" // Подключаем заголовочный файл с объявлениями функций
 #include "utils.h"
-#include "uart_debug.h"
 #include "mpu_i2c.h"
 
 #define WHO_AM_I_REG 0x75
@@ -16,8 +15,6 @@ volatile uint32_t sys_tick = 0;
 uint16_t button_delay_counter = 0;
 volatile bool status_button = 0;
 
-uint8_t z;
-
 
 
 int main(void)
@@ -29,33 +26,14 @@ int main(void)
     TIM1_PWM_Init();
     ITR_Init();
     I2C_Init_HW();
-    UART_Init();
-
-    UART_SendString("UART OK\r\n");
-    if (MPU_Init() != 0)
-    {
-        UART_SendString("MPU NOT FOUND\r\n");
-        while (1)
-            ;
-    }
-
-    UART_SendString("MPU OK\r\n");
 
     MPU_Calibrate();
-    UART_SendString("MPU CALIBRATED\r\n");
-    // moveStraight(50.0f);
-    // turnByAngle(90.0f);
-    // moveStraight(50.0f);
-    // turnByAngle(-24.0f);
 
     while (1)
     {
         if (status_button)
         {
             delay_ms(1000);
-            // MPU_Debug_Print();
-
-            // turnByAngle(120.0f);
             Traject();
             status_button = 0;
         }

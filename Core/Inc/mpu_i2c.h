@@ -34,7 +34,6 @@ int I2C_Address(uint8_t addr);
 bool MPU_Init(void);
 void MPU_Calibrate(void);
 void MPU_Update(void);
-void MPU_Debug_Print(void);
 int MPU_Read(uint8_t reg, uint8_t *buf, uint8_t len);
 
 float MPU_GetYaw(void);

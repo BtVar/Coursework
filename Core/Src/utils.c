@@ -44,8 +44,7 @@ uint32_t millis(void)
 void delay_ms(uint32_t ms)
 {
     uint32_t start = millis();
-    while ((uint32_t)(millis() - start) < ms)
-        ;
+    while ((uint32_t)(millis() - start) < ms);
 }
 
 /* ===================== ВСПОМОГАТЕЛЬНЫЕ ===================== */
@@ -137,108 +136,14 @@ void PID_Reset(PID_t *p)
 /* ===================== PID НАСТРОЙКИ ===================== */
 // ПИДЫ ДЛЯ ПРЯМОЙ ЕЗДЫ
 PID_t pidSpeed = {13.7f, 1.9f, 0.1f}; // Начните с малого Kp
-PID_t pidYaw = {250.0f, 0.0f, 8.15f};
-PID_t pidSync = {2.0f, 0.0f, 0.0f};
-
-PID_t pidSpeedang = {13.7f, 1.9f, 0.1f}; // Начните с малого Kp
-PID_t pidYawang = {27.8f, 0.0f, 1.15f};
-PID_t pidSyncang = {10.0f, 1.0f, 0.5f};
+PID_t pidYaw = {27.8f, 0.0f, 1.15f};
+PID_t pidSync = {10.0f, 1.0f, 0.5f};
 /* ===================== ДВИЖЕНИЕ ПРЯМО ===================== */
 
 void moveStraight(float distance_cm)
 {
-    // Обнуляем ПИД регуляторы
-    PID_Reset(&pidSpeed);
-    PID_Reset(&pidYaw);
-    PID_Reset(&pidSync);
-
-    // Обнуляем энкодеры
-    left_encoder_ticks = 0;
-    right_encoder_ticks = 0;
-
-    // Записываем угл в начальный момент времени (для выравнивания в процессе езды)
-    MPU_Update();
-    float startYaw = MPU_GetYaw();
-
-    // Расчет количества тиков для достижения цели
-    uint32_t targetTicks =
-        (distance_cm * 10.0f / (2 * PI * WHEEL_DIAMETER)) * PULSES_PER_REV;
-
-    // Запись времени для обновления скорости раз в промежуток времени
-    uint32_t lastTime = millis();
-
-    while (1)
-    {
-        MPU_Debug_Print();
-        // Проверяем прошло ли время
-        if (millis() - lastTime < CONTROL_PERIOD_MS)
-            continue;
-
-        // Записываем сколько времени прошло
-        float dt = (millis() - lastTime) / 1000.0f;
-        lastTime = millis();
-
-        // Считываем правый и левый энкодер, рассчитываем сколько тиков прошел робот
-        uint16_t L = left_encoder_ticks;
-        uint16_t R = right_encoder_ticks;
-        uint16_t avg = (uint16_t)((L + R) / 2.0f);
-
-        // Считаем ошибку, если она допустима прекращаем выполнение программы
-        int32_t distErr = targetTicks - avg;
-        if (abs(distErr) <= POSITION_EPS)
-            break;
-
-        // Использование ПИД регуляторов для корректировки скорости колес
-        // Установление базовой скорости (на основе расстояний, т.е. чем дальше от желаемой точки больше скорость, при приближении уменьшается)
-        float basePWM = PID(&pidSpeed, distErr, dt);
-        MPU_Update();
-        // ПИД настройки движения по заданной прямой, то есть при отклонении по гироскопу выравнивает движение
-        float yawCorr = PID(&pidYaw,
-                            startYaw - MPU_GetYaw(), dt);
-        // ПИД контролирующий одинаковое ли расстояние прошли колеса
-        float syncCorr = PID(&pidSync, L - R, dt);
-
-        // Расчет результирующего ШИМ сигнала
-        float pwmL = basePWM - yawCorr - syncCorr;
-        float pwmR = basePWM + yawCorr + syncCorr;
-
-        // Проверка входит ли он в диапазон возможного ШИМ
-        
-        pwmL = constrainf(pwmL, PWM_MIN, PWM_MAX);
-        pwmR = constrainf(pwmR, PWM_MIN, PWM_MAX);
-
-        // if (avg <= 10)
-        // {
-        //     pwmL = constrainf(pwmL, PWM_MIN, 670);
-        //     pwmR = constrainf(pwmR, PWM_MIN, 670);
-        // }
-        // Если ШИМ меньше того при котором робот начинает медленно двигаться, то задаем минимальный ШИМ для движения
-        // if (pwmL > 0 && pwmL < PWM_DEADZONE)
-        //     pwmL = PWM_DEADZONE;
-        // if (pwmR > 0 && pwmR < PWM_DEADZONE)
-        //     pwmR = PWM_DEADZONE;
-
-        // Задаем направления и скорости моторов
-
-        left_dir(1);
-        right_dir(1);
-        PWM_Left(pwmL);
-        PWM_Right(pwmR);
-    }
-
-    // Останавливаем моторы робота
-    stopMotors();
-    MPU_Update();
-    // turnByAngle(startYaw - MPU_GetYaw());
-}
-
-
-
-void moveStraight2(float distance_cm)
-{
 
     // Обнуляем ПИД регуляторы
-    PID_Reset(&pidSpeed);
     PID_Reset(&pidYaw);
     PID_Reset(&pidSync);
 
@@ -261,7 +166,6 @@ void moveStraight2(float distance_cm)
 
     while (1)
     {
-        MPU_Debug_Print();
         // Проверяем прошло ли время
         if (millis() - lastTime < CONTROL_PERIOD_MS)
             continue;
@@ -297,10 +201,6 @@ void moveStraight2(float distance_cm)
         float dt = (millis() - lastTime) / 1000.0f;
         lastTime = millis();
 
-        // Использование ПИД регуляторов для корректировки скорости колес
-        // Установление базовой скорости (на основе расстояний, т.е. чем дальше от желаемой точки больше скорость, при приближении уменьшается)
-        
-
 
         // ПИД настройки движения по заданной прямой, то есть при отклонении по гироскопу выравнивает движение
         MPU_Update();
@@ -332,8 +232,6 @@ void moveStraight2(float distance_cm)
                 pwmL = pwmL/k;
             }
         }
-        // pwmL = constrainf(pwmL, MIN_PWM, MAX_PWM);
-        // pwmR = constrainf(pwmR, MIN_PWM, MAX_PWM);
 
         left_dir(1);
         right_dir(1);
@@ -354,9 +252,9 @@ void turnByAngle(float angle_deg)
 {
 
     // Обнуляем ПИД регуляторы
-    PID_Reset(&pidSpeedang);
-    PID_Reset(&pidYawang);
-    PID_Reset(&pidSyncang);
+    PID_Reset(&pidSpeed);
+    PID_Reset(&pidYaw);
+    PID_Reset(&pidSync);
 
     // Обнуляем энкодеры
     __disable_irq();
@@ -387,11 +285,11 @@ void turnByAngle(float angle_deg)
             break;
 
         // ПИД по углу с помощью гироскопа
-        float omega = PID(&pidYawang, angleErr, dt);
+        float omega = PID(&pidYaw, angleErr, dt);
         // Задаем скорость через ошибку по углу (положению) (т.е. при приближении к желаемому углу замедляемся)
-        float basePWM = PID(&pidSpeedang, fabs(omega), dt);
+        float basePWM = PID(&pidSpeed, fabs(omega), dt);
         // ПИД для прохождения колесами одинакового расстояния (чтобы робот вращался на месте)
-        float sync = PID(&pidSyncang,
+        float sync = PID(&pidSync,
                          left_encoder_ticks - right_encoder_ticks,
                          dt);
 
@@ -434,56 +332,56 @@ void Traject()
 {
     MPU_Calibrate();
     MPU_Update();
-    moveStraight2(57.0f);
+    moveStraight(60.0f);
     delay_ms(200);
 
     MPU_Update();
     turnByAngle(-120.0f );
 
     MPU_Calibrate();
-    moveStraight2(59.0f);
+    moveStraight(60.0f);
     delay_ms(200);
 
     MPU_Update();
-    turnByAngle(-23.0f);
+    turnByAngle(-24.0f);
 
     MPU_Calibrate();
-    moveStraight2(48.0f);
+    moveStraight(50.0f);
     delay_ms(200);
 
     MPU_Update();
-    turnByAngle(71.0f);
+    turnByAngle(72.0f);
 
     MPU_Calibrate();
-    moveStraight2(48.0f);
+    moveStraight(50.0f);
     delay_ms(200);
 
     MPU_Update();
-    turnByAngle(71.0f);
+    turnByAngle(72.0f);
 
     MPU_Calibrate();
-    moveStraight2(47.0f);
+    moveStraight(50.0f);
     delay_ms(200);
 
     MPU_Update();
-    turnByAngle(70.0f);
+    turnByAngle(72.0f);
 
     MPU_Calibrate();
-    moveStraight2(49.0f);
+    moveStraight(50.0f);
     delay_ms(200);
 
     MPU_Update();
-    turnByAngle(70.0f);
+    turnByAngle(72.0f);
 
     MPU_Calibrate();
-    moveStraight2(47.0f);
+    moveStraight(50.0f);
     delay_ms(200);
 
     MPU_Update();
-    turnByAngle(-26.0f);
+    turnByAngle(-24.0f);
 
     MPU_Calibrate();
-    moveStraight2(57.0f);
+    moveStraight(60.0f);
     delay_ms(200);
 
     MPU_Update();
