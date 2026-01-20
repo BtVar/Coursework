@@ -17,7 +17,6 @@
 
 #define PWM_MAX 700 // 650
 #define PWM_MIN 620 // 620
-#define PWM_DEADZONE 600
 
 // РОграничение для интегральной ошибки
 #define I_MAX 2000.0f
@@ -180,6 +179,11 @@ void moveStraight(float distance_cm)
 
         int32_t distErr = targetTicks - avg;
 
+        if (abs(distErr) <= POSITION_EPS)
+        {
+            break;
+        }
+
         float basePWM = 630;
 
         if (distErr < 150)
@@ -189,12 +193,6 @@ void moveStraight(float distance_cm)
         else if (distErr < 50)
         {
             basePWM = 615;
-        }
-
-        if (abs(distErr) <= POSITION_EPS)
-        {
-            MAX_PWM = PWM_MAX;
-            break;
         }
 
         // Записываем сколько времени прошло
@@ -214,24 +212,8 @@ void moveStraight(float distance_cm)
         float pwmR = basePWM + yawCorr + syncCorr;
 
         // Проверка входит ли он в диапазон возможного ШИМ
-        if(pwmL > pwmR)
-        {
-            if (pwmL > MAX_PWM)
-            {
-                float k = pwmL/MAX_PWM;
-                pwmL = MAX_PWM;
-                pwmR = pwmR/k;
-            }
-        }
-        if(pwmR > pwmL)
-        {
-            if (pwmR > MAX_PWM)
-            {
-                float k = pwmR/MAX_PWM;
-                pwmR = MAX_PWM;
-                pwmL = pwmL/k;
-            }
-        }
+        pwmL = constrainf(pwmL, PWM_MIN, 650);
+        pwmR = constrainf(pwmR, PWM_MIN, 650);
 
         left_dir(1);
         right_dir(1);
@@ -300,12 +282,6 @@ void turnByAngle(float angle_deg)
         // Проверка входит ли он в диапазон возможного ШИМ
         pwmL = constrainf(pwmL, PWM_MIN, 650);
         pwmR = constrainf(pwmR, PWM_MIN, 650);
-
-        // Если ШИМ меньше того при котором робот начинает медленно двигаться, то задаем минимальный ШИМ для движения
-        if (pwmL > 0 && pwmL < PWM_DEADZONE)
-            pwmL = PWM_DEADZONE;
-        if (pwmR > 0 && pwmR < PWM_DEADZONE)
-            pwmR = PWM_DEADZONE;
 
         // Задаем направления и скорости моторов
         if (omega > 0)
